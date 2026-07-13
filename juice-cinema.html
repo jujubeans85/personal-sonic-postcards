@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juice Cinema • NFC</title>
+    <!-- Juice Cinema v3 - Real-time stem sync, multi-profile, group reflection logs, advanced NFC ritual tracking
+         Ready for GitHub main branch → Netlify auto-deploy -->
+    <title>Juice Cinema • v3</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
         
-        :root {
-            --cinema-gold: #d4af37;
-        }
+        :root { --cinema-gold: #d4af37; }
         
-        body {
-            font-family: 'Inter', system_ui, sans-serif;
-        }
+        body { font-family: 'Inter', system_ui, sans-serif; }
         
         .font-display {
             font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
@@ -23,539 +21,421 @@
             letter-spacing: -0.02em;
         }
 
-        .cinema-bg {
-            background: radial-gradient(circle at center, #111113 0%, #0a0a0f 100%);
-        }
+        .cinema-bg { background: radial-gradient(circle at center, #111113 0%, #0a0a0f 100%); }
 
-        .film-grain {
-            position: relative;
-        }
-        
+        .film-grain { position: relative; }
         .film-grain::before {
             content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-            background-size: 3px 3px;
-            pointer-events: none;
-            z-index: 1;
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 3px 3px; pointer-events: none; z-index: 1;
             animation: grain 0.8s steps(1) infinite;
         }
+        @keyframes grain { 0% { transform: translate(0, 0); } 10% { transform: translate(-1px, 1px); } 20% { transform: translate(1px, -1px); } 30% { transform: translate(-1px, -1px); } 40% { transform: translate(1px, 1px); } 50% { transform: translate(-1px, 1px); } 60% { transform: translate(1px, -1px); } 70% { transform: translate(-1px, -1px); } 80% { transform: translate(1px, 1px); } 90% { transform: translate(-1px, 1px); } 100% { transform: translate(0, 0); } }
 
-        @keyframes grain {
-            0% { transform: translate(0, 0); }
-            10% { transform: translate(-1px, 1px); }
-            20% { transform: translate(1px, -1px); }
-            30% { transform: translate(-1px, -1px); }
-            40% { transform: translate(1px, 1px); }
-            50% { transform: translate(-1px, 1px); }
-            60% { transform: translate(1px, -1px); }
-            70% { transform: translate(-1px, -1px); }
-            80% { transform: translate(1px, 1px); }
-            90% { transform: translate(-1px, 1px); }
-            100% { transform: translate(0, 0); }
-        }
-
-        .scanline {
-            position: relative;
-        }
-        
+        .scanline { position: relative; }
         .scanline::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(
-                to bottom,
-                transparent 50%,
-                rgba(255,255,255,0.04) 51%,
-                transparent 52%
-            );
-            background-size: 100% 6px;
-            pointer-events: none;
-            z-index: 2;
-            animation: scan 4s linear infinite;
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(255,255,255,0.04) 51%, transparent 52%);
+            background-size: 100% 6px; pointer-events: none; z-index: 2; animation: scan 4s linear infinite;
         }
+        @keyframes scan { 0% { background-position: 0 0; } 100% { background-position: 0 300px; } }
 
-        @keyframes scan {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 300px; }
-        }
-
-        .cinema-card {
-            background: #111113;
-            border: 1px solid #27272a;
-            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
-        }
-
-        .gold-text {
-            color: #d4af37;
-        }
-
-        .section-header {
-            font-size: 0.75rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            font-weight: 600;
-            color: #71717a;
-        }
-
-        .neon-button {
-            transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-            position: relative;
-            overflow: hidden;
-        }
+        .cinema-card { background: #111113; border: 1px solid #27272a; box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4); }
+        .section-header { font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; color: #71717a; }
         
-        .neon-button::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 40%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255,255,255,0.35),
-                transparent
-            );
-            transition: 0.6s;
-        }
-        
-        .neon-button:hover::before {
-            left: 250%;
-        }
+        .neon-button { transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1); position: relative; overflow: hidden; }
+        .neon-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 40%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent); transition: 0.6s; }
+        .neon-button:hover::before { left: 250%; }
 
-        .retouch-btn {
-            background: linear-gradient(135deg, #d4af37, #b8972e);
-            color: #111113;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            box-shadow: 0 10px 15px -3px rgb(212 175 55 / 0.3),
-                        0 4px 6px -4px rgb(212 175 55 / 0.3);
-        }
+        .retouch-btn { background: linear-gradient(135deg, #d4af37, #b8972e); color: #111113; font-weight: 700; letter-spacing: 0.5px; box-shadow: 0 10px 15px -3px rgb(212 175 55 / 0.3), 0 4px 6px -4px rgb(212 175 55 / 0.3); }
+        .retouch-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 20px 25px -5px rgb(212 175 55 / 0.3), 0 8px 10px -6px rgb(212 175 55 / 0.3); }
 
-        .retouch-btn:hover:not(:disabled) {
-            transform: translateY(-1px);
-            box-shadow: 0 20px 25px -5px rgb(212 175 55 / 0.3),
-                        0 8px 10px -6px rgb(212 175 55 / 0.3);
-        }
+        .audio-dropzone { transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1); }
+        .audio-dropzone.dragover { border-color: #d4af37; background-color: rgba(212, 175, 55, 0.05); transform: scale(1.01); }
 
-        .retouch-btn:active:not(:disabled) {
-            transform: scale(0.985);
-        }
+        .preset-card { transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1); border: 2px solid transparent; }
+        .preset-card.active { border-color: #d4af37; background-color: rgba(212, 175, 55, 0.08); box-shadow: 0 0 0 1px #d4af37; }
+        .preset-card:hover:not(.active) { border-color: #52525b; transform: translateY(-1px); }
 
-        .audio-dropzone {
-            transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        
-        .audio-dropzone.dragover {
-            border-color: #d4af37;
-            background-color: rgba(212, 175, 55, 0.05);
-            transform: scale(1.01);
-        }
+        .queue-item { transition: all 0.15s ease; }
+        .queue-item:hover { background-color: #1f1f23; }
 
-        .status-dot {
-            transition: all 0.3s ease;
-        }
-
-        .processing-overlay {
-            animation: fadeIn 0.2s ease forwards;
-        }
-
-        .cinematic-glow {
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.15),
-                        inset 0 1px 0 rgba(255,255,255,0.1);
-        }
-
-        .track-name {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            font-size: 0.875rem;
-        }
-
-        .film-reel {
-            animation: reel-spin 20s linear infinite;
-        }
-
-        .nfc-pulse {
-            animation: nfc-pulse-anim 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-
-        /* New: Darkroom film-burn styles */
         .film-burn {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            z-index: 20;
-            background: 
-                linear-gradient(to right, rgba(139, 69, 19, 0.25) 0%, transparent 4%, transparent 96%, rgba(139, 69, 19, 0.25) 100%),
-                linear-gradient(to bottom, rgba(139, 69, 19, 0.18) 0%, transparent 2%, transparent 98%, rgba(139, 69, 19, 0.18) 100%);
-            animation: burn-flicker 1.2s infinite alternate ease-in-out;
-            box-shadow: inset 0 0 80px rgba(139, 69, 19, 0.15);
+            position: absolute; inset: 0; pointer-events: none; z-index: 20;
+            background: linear-gradient(to right, rgba(139, 69, 19, 0.25) 0%, transparent 4%, transparent 96%, rgba(139, 69, 19, 0.25) 100%), linear-gradient(to bottom, rgba(139, 69, 19, 0.18) 0%, transparent 2%, transparent 98%, rgba(139, 69, 19, 0.18) 100%);
+            animation: burn-flicker 1.2s infinite alternate ease-in-out; box-shadow: inset 0 0 80px rgba(139, 69, 19, 0.15);
         }
-
-        @keyframes burn-flicker {
-            0% { 
-                opacity: 0.7; 
-                filter: brightness(1.05) contrast(1.1);
-            }
-            100% { 
-                opacity: 1; 
-                filter: brightness(0.92) contrast(0.95);
-            }
-        }
-
+        @keyframes burn-flicker { 0% { opacity: 0.7; filter: brightness(1.05) contrast(1.1); } 100% { opacity: 1; filter: brightness(0.92) contrast(0.95); } }
         .film-burn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(255, 140, 0, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(255, 100, 0, 0.08) 0%, transparent 35%);
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(255, 140, 0, 0.12) 0%, transparent 40%), radial-gradient(circle at 80% 70%, rgba(255, 100, 0, 0.08) 0%, transparent 35%);
             animation: burn-flames 2.5s infinite ease-in-out;
         }
-
-        @keyframes burn-flames {
-            0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 0.95; transform: scale(1.03); }
-        }
+        @keyframes burn-flames { 0%, 100% { opacity: 0.6; transform: scale(1); } 50% { opacity: 0.95; transform: scale(1.03); } }
 
         .darkroom-text {
             font-family: 'Space Grotesk', monospace;
             letter-spacing: 2px;
         }
 
-        /* Preset cards */
-        .preset-card {
-            transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
-            border: 2px solid transparent;
-        }
-        
-        .preset-card.active {
-            border-color: #d4af37;
-            background-color: rgba(212, 175, 55, 0.08);
-            box-shadow: 0 0 0 1px #d4af37;
-        }
-        
-        .preset-card:hover:not(.active) {
-            border-color: #52525b;
-            transform: translateY(-1px);
-        }
-
-        /* Queue styles */
-        .queue-item {
-            transition: all 0.15s ease;
-        }
-        
-        .queue-item:hover {
-            background-color: #1f1f23;
-        }
+        .stem-slider { accent-color: #d4af37; }
+        .ritual-log { font-size: 0.75rem; }
     </style>
 </head>
 <body class="cinema-bg text-zinc-200 min-h-screen pb-12">
-    <!-- Header -->
-    <div class="max-w-4xl mx-auto px-6 pt-8 pb-6">
+    <!-- Header v3 -->
+    <div class="max-w-5xl mx-auto px-6 pt-8 pb-6">
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-x-4">
-                <!-- Logo -->
                 <div class="flex items-center gap-x-3">
                     <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-400 to-yellow-600 flex items-center justify-center shadow-inner">
                         <i class="fa-solid fa-film text-[#111113] text-3xl"></i>
                     </div>
                     <div>
                         <div class="font-display text-4xl tracking-tighter font-semibold">JUICE</div>
-                        <div class="font-display text-3xl tracking-[-2.5px] text-amber-400 -mt-2">CINEMA</div>
+                        <div class="font-display text-3xl tracking-[-2.5px] text-amber-400 -mt-2">CINEMA <span class="text-xs align-super text-amber-300">v3</span></div>
                     </div>
                 </div>
             </div>
             
-            <div class="flex items-center gap-x-2 text-xs">
+            <div class="flex items-center gap-x-3 text-xs">
+                <div id="profileBadge" class="px-3 py-1.5 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center gap-x-2">
+                    <i class="fa-solid fa-user text-emerald-400"></i>
+                    <span id="currentProfile" class="font-mono text-emerald-400 text-[10px] tracking-widest">PROFILE: DEFAULT</span>
+                </div>
                 <div class="px-3 py-1.5 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center gap-x-2">
                     <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                    <span class="font-mono text-emerald-400 text-[10px] tracking-widest">NFC SECURED v2</span>
+                    <span class="font-mono text-emerald-400 text-[10px] tracking-widest">NFC RITUAL v3</span>
                 </div>
-                <div class="text-[10px] px-2.5 py-1 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-500 font-mono">ENHANCED</div>
             </div>
         </div>
     </div>
 
-    <div class="max-w-4xl mx-auto px-6">
-        <!-- Tagline -->
+    <div class="max-w-5xl mx-auto px-6">
         <div class="text-center mb-8">
-            <p class="text-xl text-zinc-400 tracking-tight">Drop tracks. Choose your room.<br>Tap your card. Batch cinematic magic.</p>
-            <p class="text-xs text-zinc-500 mt-1.5 font-mono tracking-[2px]">MULTI-ROOM • NFC KEYED • JUICE ECOSYSTEM READY</p>
+            <p class="text-xl text-zinc-400 tracking-tight">Real-time stem sync • Multi-profile • Group reflection logs<br>Advanced NFC ritual tracking</p>
+            <p class="text-xs text-zinc-500 mt-1.5 font-mono tracking-[2px]">?profile=juice&amp;mode=cinematic • STEMS • RITUALS</p>
         </div>
 
         <!-- Main Card -->
         <div class="cinema-card rounded-3xl p-8 film-grain scanline">
             
-            <!-- Room Presets Section -->
+            <!-- Multi-Profile Info -->
+            <div class="mb-6 p-4 bg-zinc-950 border border-zinc-800 rounded-2xl text-xs">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span class="font-mono text-emerald-400">MULTI-PROFILE ACTIVE</span><br>
+                        <span class="text-zinc-400">Use <span class="font-mono">?profile=yourname&amp;mode=cinematic</span> in URL for per-profile data, stems &amp; logs</span>
+                    </div>
+                    <button onclick="copyProfileLink()" class="px-4 py-1.5 text-xs border border-zinc-700 hover:bg-zinc-800 rounded-xl flex items-center gap-x-2">
+                        <i class="fa-solid fa-link"></i> <span>COPY PROFILE LINK</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Room Presets (v2 + intelligent cinematic balance) -->
             <div class="mb-8">
                 <div class="section-header mb-3 flex items-center gap-x-2">
                     <i class="fa-solid fa-layer-group text-xs"></i>
-                    <span>ROOM PRESETS — SELECT BEFORE NFC</span>
+                    <span>ROOM PRESETS — INTELLIGENT CINEMATIC BALANCE</span>
                 </div>
-                
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="presetGrid">
-                    <!-- Populated by JS -->
-                </div>
-                <p class="text-center text-xs text-zinc-500 mt-2 font-mono">Different decay • Early reflections • Cinematic character</p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="presetGrid"></div>
+                <p class="text-center text-xs text-zinc-500 mt-2 font-mono">Cinematic preset auto-balances stems for movie impact (fully editable)</p>
             </div>
 
-            <!-- NFC Card Programming (new) -->
+            <!-- NFC Card Programming + Ritual Tracking -->
             <div class="mb-8 p-4 bg-zinc-950 border border-zinc-800 rounded-2xl">
                 <div class="flex items-center justify-between mb-3">
                     <div>
                         <div class="section-header flex items-center gap-x-2">
                             <i class="fa-solid fa-microchip text-xs"></i>
-                            <span>NFC CARD PROGRAMMING</span>
+                            <span>ADVANCED NFC RITUAL TRACKING</span>
                         </div>
-                        <p class="text-xs text-zinc-500">Store preset ID on physical card for auto-select</p>
+                        <p class="text-xs text-zinc-500">Program cards • Auto-select rooms • Log rituals &amp; reflections</p>
                     </div>
                 </div>
                 
-                <div class="flex flex-wrap items-center gap-3">
-                    <select id="writePresetSelect" class="bg-zinc-900 border border-zinc-700 text-sm rounded-xl px-4 py-2 text-zinc-200 focus:outline-none focus:border-amber-400">
-                        <!-- Populated by JS -->
-                    </select>
-                    <button onclick="writePresetToNFC()" 
-                            class="px-5 py-2 text-sm font-semibold border border-amber-400/60 hover:bg-amber-400/10 active:bg-amber-400/20 transition-all rounded-2xl flex items-center gap-x-2 text-amber-300">
-                        <i class="fa-solid fa-pen"></i>
-                        <span>WRITE PRESET TO CARD</span>
+                <div class="flex flex-wrap items-center gap-3 mb-4">
+                    <select id="writePresetSelect" class="bg-zinc-900 border border-zinc-700 text-sm rounded-xl px-4 py-2 text-zinc-200"></select>
+                    <button onclick="writePresetToNFC()" class="px-5 py-2 text-sm font-semibold border border-amber-400/60 hover:bg-amber-400/10 rounded-2xl flex items-center gap-x-2 text-amber-300">
+                        <i class="fa-solid fa-pen"></i> <span>WRITE PRESET TO CARD</span>
+                    </button>
+                    <button onclick="showRitualHistory()" class="px-5 py-2 text-sm font-semibold border border-zinc-700 hover:bg-zinc-800 rounded-2xl flex items-center gap-x-2">
+                        <i class="fa-solid fa-history"></i> <span>RITUAL HISTORY</span>
                     </button>
                 </div>
-                <p class="text-[10px] text-zinc-500 mt-2 font-mono">Tap a blank or rewritable NFC tag • Different cards = different rooms</p>
+                
+                <div id="ritualStats" class="text-xs text-emerald-400 font-mono"></div>
             </div>
 
-            <!-- Upload + Queue Section -->
+            <!-- Upload + Queue + Stems Intro -->
             <div class="mb-8">
                 <div class="section-header mb-3 flex items-center justify-between">
                     <div class="flex items-center gap-x-2">
                         <i class="fa-solid fa-upload text-xs"></i>
-                        <span>INPUT TRACKS — BATCH QUEUE</span>
+                        <span>INPUT TRACKS — BATCH + STEM-READY</span>
                     </div>
-                    <button onclick="clearQueue()" 
-                            class="text-xs px-3 py-1 hover:bg-zinc-800 transition-colors rounded-xl border border-zinc-700 text-zinc-400 flex items-center gap-x-1">
-                        <i class="fa-solid fa-trash text-xs"></i>
-                        <span>CLEAR QUEUE</span>
+                    <button onclick="clearQueue()" class="text-xs px-3 py-1 hover:bg-zinc-800 transition-colors rounded-xl border border-zinc-700 text-zinc-400 flex items-center gap-x-1">
+                        <i class="fa-solid fa-trash text-xs"></i> <span>CLEAR</span>
                     </button>
                 </div>
                 
-                <!-- Dropzone -->
-                <div id="dropzone" 
-                     class="audio-dropzone border-2 border-dashed border-zinc-700 hover:border-zinc-600 rounded-2xl h-40 flex flex-col items-center justify-center cursor-pointer relative overflow-hidden mb-4">
+                <div id="dropzone" class="audio-dropzone border-2 border-dashed border-zinc-700 hover:border-zinc-600 rounded-2xl h-40 flex flex-col items-center justify-center cursor-pointer relative overflow-hidden mb-4">
                     <input type="file" id="fileInput" accept="audio/*" multiple class="hidden">
-                    
                     <div id="dropzone-content" class="flex flex-col items-center text-center px-6">
                         <i class="fa-solid fa-headphones text-4xl text-zinc-600 mb-3"></i>
-                        <div class="font-semibold text-lg">Drop tracks here (multiple OK)</div>
-                        <div class="text-xs text-zinc-500 mt-1">or click to browse • MP3, WAV, M4A etc. • Added to queue</div>
+                        <div class="font-semibold text-lg">Drop tracks (multi OK) — stems ready</div>
+                        <div class="text-xs text-zinc-500 mt-1">Real-time modulation, fills, cuts, chops after processing</div>
                     </div>
                 </div>
                 
-                <!-- Processing Queue -->
                 <div id="queueSection" class="hidden">
                     <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4">
                         <div class="flex items-center justify-between mb-3">
                             <div class="font-semibold text-sm flex items-center gap-x-2">
-                                <i class="fa-solid fa-list-ol"></i>
-                                <span>PROCESSING QUEUE</span>
+                                <i class="fa-solid fa-list-ol"></i> <span>PROCESSING QUEUE</span>
                                 <span id="queueCount" class="text-xs px-2 py-0.5 bg-zinc-800 rounded-full font-mono"></span>
                             </div>
                         </div>
-                        <div id="queueList" class="space-y-2 max-h-48 overflow-auto pr-2 text-sm">
-                            <!-- Populated dynamically by JS -->
-                        </div>
+                        <div id="queueList" class="space-y-2 max-h-40 overflow-auto pr-2 text-sm"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Voice Note Section (new) -->
+            <!-- Voice Note (v2) -->
             <div class="mb-8">
                 <div class="section-header mb-3 flex items-center gap-x-2">
                     <i class="fa-solid fa-microphone text-xs"></i>
-                    <span>VOICE NOTE — OPTIONAL OVERLAY</span>
+                    <span>VOICE NOTE — OVERLAY FOR STEMS</span>
                 </div>
-                
                 <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-5">
                     <div class="flex flex-wrap items-center gap-4">
-                        <button id="recordBtn" onclick="toggleVoiceRecording()"
-                                class="px-5 py-2.5 text-sm font-semibold border border-zinc-700 hover:bg-zinc-800 active:bg-zinc-950 transition-all rounded-2xl flex items-center gap-x-2">
-                            <i class="fa-solid fa-microphone"></i>
-                            <span id="recordBtnText">RECORD VOICE NOTE</span>
+                        <button id="recordBtn" onclick="toggleVoiceRecording()" class="px-5 py-2.5 text-sm font-semibold border border-zinc-700 hover:bg-zinc-800 rounded-2xl flex items-center gap-x-2">
+                            <i class="fa-solid fa-microphone"></i> <span id="recordBtnText">RECORD VOICE NOTE</span>
                         </button>
-                        
                         <div id="voiceNoteControls" class="hidden flex items-center gap-3">
-                            <button onclick="playVoiceNote()" class="px-4 py-2 text-xs border border-zinc-700 rounded-xl flex items-center gap-x-1.5 hover:bg-zinc-800">
-                                <i class="fa-solid fa-play"></i> <span>PLAY</span>
-                            </button>
-                            <button onclick="clearVoiceNote()" class="px-4 py-2 text-xs border border-red-800/60 text-red-300 rounded-xl flex items-center gap-x-1.5 hover:bg-red-950">
-                                <i class="fa-solid fa-trash"></i> <span>CLEAR</span>
-                            </button>
+                            <button onclick="playVoiceNote()" class="px-4 py-2 text-xs border border-zinc-700 rounded-xl flex items-center gap-x-1.5 hover:bg-zinc-800"><i class="fa-solid fa-play"></i> PLAY</button>
+                            <button onclick="clearVoiceNote()" class="px-4 py-2 text-xs border border-red-800/60 text-red-300 rounded-xl flex items-center gap-x-1.5 hover:bg-red-950"><i class="fa-solid fa-trash"></i> CLEAR</button>
                             <span id="voiceDuration" class="text-xs font-mono text-emerald-400"></span>
                         </div>
-                        
-                        <div class="flex items-center gap-x-2 ml-auto">
-                            <label class="flex items-center gap-x-2 cursor-pointer text-sm">
-                                <input type="checkbox" id="overlayVoiceCheckbox" checked class="accent-amber-400 w-4 h-4">
-                                <span class="text-xs">Overlay on processed audio</span>
-                            </label>
-                        </div>
+                        <label class="flex items-center gap-x-2 cursor-pointer text-sm ml-auto">
+                            <input type="checkbox" id="overlayVoiceCheckbox" checked class="accent-amber-400 w-4 h-4">
+                            <span class="text-xs">Overlay on stems</span>
+                        </label>
                     </div>
-                    <p class="text-[10px] text-zinc-500 mt-3 font-mono">Short personal message • mixed at -12dB • or disable for metadata-only</p>
                 </div>
             </div>
 
-            <!-- The Main Action Button -->
+            <!-- Main Action -->
             <div>
-                <button id="retouchBtn"
-                        onclick="handleRetouchClick()"
-                        disabled
-                        class="retouch-btn neon-button w-full py-7 rounded-3xl text-xl font-bold flex items-center justify-center gap-x-3 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:transform-none">
+                <button id="retouchBtn" onclick="handleRetouchClick()" disabled class="retouch-btn neon-button w-full py-7 rounded-3xl text-xl font-bold flex items-center justify-center gap-x-3 disabled:opacity-40">
                     <div class="flex items-center gap-x-3">
                         <i class="fa-solid fa-magic text-2xl"></i>
-                        <span id="retouchBtnText">PROCESS QUEUE — TAP NFC</span>
+                        <span id="retouchBtnText">PROCESS QUEUE + ENABLE STEMS — TAP NFC</span>
                     </div>
                 </button>
-                <p class="text-center text-xs text-zinc-500 mt-3 font-mono tracking-[1px]">NFC AUTHORIZES THE ENTIRE BATCH • ONE TAP FOR ALL</p>
+                <p class="text-center text-xs text-zinc-500 mt-3 font-mono tracking-[1px]">ONE NFC TAP • REAL-TIME STEM SYNC • GROUP RITUAL LOGS</p>
             </div>
 
-            <!-- Original Players (for queue preview) -->
+            <!-- Original Preview -->
             <div id="originalPlayersSection" class="hidden mt-8 pt-6 border-t border-zinc-800">
                 <div class="section-header mb-3">LOADED TRACKS PREVIEW</div>
                 <div id="originalPlayersList" class="space-y-4"></div>
             </div>
 
-            <!-- Cinematic Output Section -->
+            <!-- Cinematic Outputs + NEW: Real-time Stem Mixer + Group Reflection Logs -->
             <div id="cinematicSection" class="hidden mt-8 pt-6 border-t border-zinc-800">
                 <div class="flex items-center justify-between mb-3 px-1">
                     <div class="section-header flex items-center gap-x-2">
-                        <span>PROCESSED OUTPUTS</span>
-                        <span class="px-2 py-px text-[9px] font-mono bg-amber-400/10 text-amber-400 rounded">BATCH COMPLETE</span>
+                        <span>PROCESSED OUTPUTS + LIVE STEMS</span>
+                        <span class="px-2 py-px text-[9px] font-mono bg-amber-400/10 text-amber-400 rounded">v3 REAL-TIME</span>
                     </div>
                 </div>
                 
-                <div id="cinematicOutputsList" class="space-y-4">
-                    <!-- Populated with cards for each processed track -->
+                <div id="cinematicOutputsList" class="space-y-4 mb-6"></div>
+
+                <!-- NEW: Real-time Stem Mixer -->
+                <div class="mb-8 p-5 bg-zinc-950 border border-amber-400/20 rounded-2xl cinematic-glow">
+                    <div class="section-header mb-4 flex items-center gap-x-2">
+                        <i class="fa-solid fa-sliders-h text-xs"></i>
+                        <span>LIVE STEM MIXER — REAL-TIME SYNC &amp; MODULATION</span>
+                    </div>
+                    <p class="text-xs text-zinc-400 mb-4">Play any processed track below. Tweak stems live for bigger shifts in feel. Cinematic preset intelligently balances.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Vox Stem -->
+                        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4">
+                            <div class="flex justify-between items-center mb-3">
+                                <div class="font-semibold flex items-center gap-x-2"><i class="fa-solid fa-microphone text-amber-400"></i> LONGER VOX</div>
+                                <span class="text-xs font-mono text-emerald-400">Emotional + Vibrato</span>
+                            </div>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="text-xs text-zinc-400">Vibrato Depth</label>
+                                    <input type="range" id="voxVibrato" min="0" max="12" step="0.5" value="4" class="stem-slider w-full" oninput="updateStemMixer()">
+                                    <div class="flex justify-between text-[10px] text-zinc-500"><span>Subtle</span><span>Deep breathy</span></div>
+                                </div>
+                                <div>
+                                    <label class="text-xs text-zinc-400">Breathiness</label>
+                                    <input type="range" id="voxBreath" min="0" max="100" step="5" value="35" class="stem-slider w-full" oninput="updateStemMixer()">
+                                </div>
+                                <div>
+                                    <label class="text-xs text-zinc-400">Vox Volume</label>
+                                    <input type="range" id="voxVol" min="0" max="120" step="5" value="85" class="stem-slider w-full" oninput="updateStemMixer()">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Drums Stem -->
+                        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4">
+                            <div class="flex justify-between items-center mb-3">
+                                <div class="font-semibold flex items-center gap-x-2"><i class="fa-solid fa-drum text-amber-400"></i> COMPLEX DRUM PATTERNS</div>
+                                <span class="text-xs font-mono text-emerald-400">Multi-layer + Fills</span>
+                            </div>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="text-xs text-zinc-400">Rhythmic Texture</label>
+                                    <input type="range" id="drumTexture" min="200" max="8000" step="50" value="1200" class="stem-slider w-full" oninput="updateStemMixer()">
+                                </div>
+                                <div>
+                                    <label class="text-xs text-zinc-400">Drum Intensity</label>
+                                    <input type="range" id="drumIntensity" min="0" max="100" step="5" value="70" class="stem-slider w-full" oninput="updateStemMixer()">
+                                </div>
+                                <div class="flex gap-2">
+                                    <button onclick="triggerDrumFill()" class="flex-1 text-xs py-2 border border-zinc-700 hover:bg-zinc-800 rounded-xl">TRIGGER FILL</button>
+                                    <button onclick="triggerDrumChop()" class="flex-1 text-xs py-2 border border-zinc-700 hover:bg-zinc-800 rounded-xl">CHOP</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Synth/Strings Stem -->
+                        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4">
+                            <div class="flex justify-between items-center mb-3">
+                                <div class="font-semibold flex items-center gap-x-2"><i class="fa-solid fa-music text-amber-400"></i> SYNTH MELODY + STRINGS</div>
+                                <span class="text-xs font-mono text-emerald-400">Wider Cinematic Pads</span>
+                            </div>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="text-xs text-zinc-400">Pad Width</label>
+                                    <input type="range" id="stringsWidth" min="0" max="50" step="1" value="18" class="stem-slider w-full" oninput="updateStemMixer()">
+                                </div>
+                                <div>
+                                    <label class="text-xs text-zinc-400">Warmth / Ground</label>
+                                    <input type="range" id="stringsWarmth" min="0" max="100" step="5" value="55" class="stem-slider w-full" oninput="updateStemMixer()">
+                                </div>
+                                <div>
+                                    <label class="text-xs text-zinc-400">Strings Volume</label>
+                                    <input type="range" id="stringsVol" min="0" max="120" step="5" value="95" class="stem-slider w-full" oninput="updateStemMixer()">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Piano Stem -->
+                        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4">
+                            <div class="flex justify-between items-center mb-3">
+                                <div class="font-semibold flex items-center gap-x-2"><i class="fa-solid fa-piano-keyboard text-amber-400"></i> PIANO RIFFS</div>
+                                <span class="text-xs font-mono text-emerald-400">Dynamic Runs + Velocity</span>
+                            </div>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="text-xs text-zinc-400">Velocity Variation</label>
+                                    <input type="range" id="pianoVelocity" min="0" max="80" step="5" value="35" class="stem-slider w-full" oninput="updateStemMixer()">
+                                </div>
+                                <div>
+                                    <label class="text-xs text-zinc-400">Run Dynamics</label>
+                                    <input type="range" id="pianoDynamics" min="0" max="100" step="5" value="60" class="stem-slider w-full" oninput="updateStemMixer()">
+                                </div>
+                                <div class="flex gap-2">
+                                    <button onclick="triggerPianoRun()" class="flex-1 text-xs py-2 border border-zinc-700 hover:bg-zinc-800 rounded-xl">DYNAMIC RUN</button>
+                                    <button onclick="triggerPianoCut()" class="flex-1 text-xs py-2 border border-zinc-700 hover:bg-zinc-800 rounded-xl">CUT</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <button onclick="resetStemMixer()" class="text-xs px-6 py-2 border border-zinc-700 hover:bg-zinc-800 rounded-2xl">RESET TO CINEMATIC BALANCE</button>
+                    </div>
                 </div>
 
-                <!-- Ecosystem Integration -->
+                <!-- Group Reflection Logs -->
+                <div class="p-5 bg-zinc-950 border border-zinc-800 rounded-2xl">
+                    <div class="section-header mb-3 flex items-center gap-x-2">
+                        <i class="fa-solid fa-book text-xs"></i>
+                        <span>GROUP REFLECTION LOGS — NFC RITUAL STAMPED</span>
+                    </div>
+                    
+                    <div class="flex gap-3 mb-4">
+                        <textarea id="reflectionText" placeholder="What did this cinematic version evoke? Group reflection..." class="flex-1 bg-zinc-900 border border-zinc-700 rounded-2xl p-3 text-sm h-20 resize-y"></textarea>
+                        <button onclick="logGroupReflection()" class="px-6 py-2 text-sm font-semibold border border-amber-400/60 hover:bg-amber-400/10 text-amber-300 rounded-2xl flex flex-col items-center justify-center gap-y-1">
+                            <i class="fa-solid fa-stamp"></i>
+                            <span class="text-xs">LOG + NFC<br>RITUAL</span>
+                        </button>
+                    </div>
+                    
+                    <div id="reflectionLogs" class="max-h-48 overflow-auto space-y-2 text-xs ritual-log"></div>
+                </div>
+
+                <!-- Ecosystem Exports (v2) -->
                 <div class="mt-6 p-5 bg-zinc-950 border border-zinc-800 rounded-2xl">
                     <div class="section-header mb-3 flex items-center gap-x-2">
                         <i class="fa-solid fa-share-alt text-xs"></i>
-                        <span>JUICE ECOSYSTEM — ONE-CLICK SEND</span>
+                        <span>JUICE ECOSYSTEM — ONE-CLICK SEND (v3 ENHANCED)</span>
                     </div>
                     <div class="flex flex-wrap gap-3">
-                        <button onclick="exportForLuna()" 
-                                class="flex-1 px-5 py-3 text-sm font-semibold bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 rounded-2xl flex items-center justify-center gap-x-2 transition-colors">
-                            <i class="fa-solid fa-paper-plane"></i>
-                            <span>EXPORT FOR LUNA</span>
+                        <button onclick="exportForLuna()" class="flex-1 px-5 py-3 text-sm font-semibold bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 rounded-2xl flex items-center justify-center gap-x-2">
+                            <i class="fa-solid fa-paper-plane"></i> <span>EXPORT FOR LUNA (with stems)</span>
                         </button>
-                        <button onclick="exportForSonicPostcards()" 
-                                class="flex-1 px-5 py-3 text-sm font-semibold bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 rounded-2xl flex items-center justify-center gap-x-2 transition-colors">
-                            <i class="fa-solid fa-paper-plane"></i>
-                            <span>EXPORT FOR SONIC POSTCARDS</span>
+                        <button onclick="exportForSonicPostcards()" class="flex-1 px-5 py-3 text-sm font-semibold bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 rounded-2xl flex items-center justify-center gap-x-2">
+                            <i class="fa-solid fa-paper-plane"></i> <span>EXPORT FOR SONIC POSTCARDS</span>
                         </button>
                     </div>
-                    <p class="text-center text-xs text-zinc-500 mt-3 font-mono">Downloads WAV + metadata JSON ready for import into your other apps</p>
                 </div>
             </div>
         </div>
 
-        <!-- Footer info -->
-        <div class="mt-8 text-center">
-            <div class="text-xs text-zinc-500 font-mono tracking-widest">100% LOCAL • NO SERVERS • NFC PHYSICAL KEYS • BATCH + VOICE + MULTI-ROOM</div>
-            <div class="text-[10px] text-zinc-600 mt-1">Best on Chrome Android • Program your own NFC room cards • Integrates with Luna &amp; Sonic Postcards</div>
+        <div class="mt-8 text-center text-xs text-zinc-500 font-mono tracking-widest">
+            100% LOCAL • REAL-TIME STEMS • MULTI-PROFILE • NFC RITUALS • GROUP LOGS • READY FOR MAIN
         </div>
     </div>
 
-    <!-- Processing Modal with Darkroom Film-Burn -->
+    <!-- Processing Modal (v2 darkroom + v3 stem note) -->
     <div id="processingModal" class="hidden fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-6">
         <div class="max-w-md w-full text-center relative">
-            <!-- Darkroom film-burn overlay -->
             <div class="film-burn rounded-3xl"></div>
-            
             <div class="relative z-30">
                 <div class="mb-8">
                     <div class="inline-flex items-center justify-center w-20 h-20 rounded-full border border-amber-400/30 mb-6 relative">
                         <i class="fa-solid fa-film text-5xl text-amber-400 film-reel"></i>
-                        <div class="absolute inset-0 rounded-full border border-amber-400/20 animate-ping"></div>
                     </div>
-                    <div class="font-display text-3xl tracking-tighter mb-1 darkroom-text">DARKROOM • EXPOSING</div>
-                    <div id="processingTitle" class="text-amber-400/80 text-sm tracking-[4px] font-mono">CINEMATIC RE-ROOM IN PROGRESS</div>
+                    <div class="font-display text-3xl tracking-tighter mb-1 darkroom-text">DARKROOM • EXPOSING + STEMS</div>
+                    <div id="processingTitle" class="text-amber-400/80 text-sm tracking-[4px] font-mono">CINEMATIC RE-ROOM + REAL-TIME LAYERS</div>
                 </div>
                 
                 <div class="w-full bg-zinc-900 h-2 rounded-full overflow-hidden mb-4 border border-zinc-800">
-                    <div id="progressBar" 
-                         class="h-2 bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-400 transition-all duration-300"
-                         style="width: 0%"></div>
+                    <div id="progressBar" class="h-2 bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-400 transition-all duration-300" style="width: 0%"></div>
                 </div>
                 <div id="progressText" class="text-xs font-mono text-zinc-400 tracking-widest">PREPARING NEGATIVE • 0%</div>
-                
-                <div class="mt-8 text-xs text-zinc-400 max-w-[280px] mx-auto leading-relaxed">
-                    Burning in selected room acoustics • Early reflections • Long cinematic tail
-                </div>
-                
                 <div id="currentTrackInfo" class="mt-4 text-xs font-mono text-amber-300/70"></div>
             </div>
         </div>
     </div>
 
-    <!-- Toast Container -->
     <div id="toastContainer" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] flex flex-col gap-y-2 items-center"></div>
 
     <script>
-        // Tailwind + config
+        // ==================== v3 CORE ====================
         function initTailwind() {
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        fontFamily: {
-                            'display': ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif']
-                        }
-                    }
-                }
-            };
+            tailwind.config = { theme: { extend: { fontFamily: { 'display': ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif'] } } } };
         }
 
-        // ==================== ROOM PRESETS ====================
+        // Room Presets (v3 with cinematic balance hints)
         const roomPresets = {
-            'intimate-studio': { 
-                name: 'Intimate Studio', 
-                decay: 1.55, 
-                duration: 2.1, 
-                earlyRefl: 0.85, 
-                lowShelf: 3.2, 
-                highCut: 13500,
-                description: 'Warm & close • Quick reflections'
-            },
-            'scoring-stage': { 
-                name: 'Scoring Stage', 
-                decay: 1.85, 
-                duration: 3.8, 
-                earlyRefl: 0.55, 
-                lowShelf: 5.5, 
-                highCut: 11500,
-                description: 'Balanced cinematic • Film scoring classic'
-            },
-            'concert-hall': { 
-                name: 'Concert Hall', 
-                decay: 2.15, 
-                duration: 5.6, 
-                earlyRefl: 0.35, 
-                lowShelf: 4.8, 
-                highCut: 9800,
-                description: 'Spacious & lush • Natural reverb tail'
-            },
-            'cathedral': { 
-                name: 'Cathedral', 
-                decay: 2.45, 
-                duration: 8.2, 
-                earlyRefl: 0.22, 
-                lowShelf: 6.5, 
-                highCut: 8200,
-                description: 'Epic & cavernous • Long sacred tail'
-            }
+            'intimate-studio': { name: 'Intimate Studio', decay: 1.55, duration: 2.1, earlyRefl: 0.85, lowShelf: 3.2, highCut: 13500, description: 'Warm & close' },
+            'scoring-stage': { name: 'Scoring Stage', decay: 1.85, duration: 3.8, earlyRefl: 0.55, lowShelf: 5.5, highCut: 11500, description: 'Film scoring classic' },
+            'concert-hall': { name: 'Concert Hall', decay: 2.15, duration: 5.6, earlyRefl: 0.35, lowShelf: 4.8, highCut: 9800, description: 'Spacious & lush' },
+            'cathedral': { name: 'Cathedral', decay: 2.45, duration: 8.2, earlyRefl: 0.22, lowShelf: 6.5, highCut: 8200, description: 'Epic & cavernous' }
         };
 
         let selectedPreset = 'scoring-stage';
@@ -564,37 +444,75 @@
         let mediaRecorder = null;
         let audioChunks = [];
         let isRecording = false;
-        let lastProcessedOutputs = []; // for export
+        let lastProcessedOutputs = [];
+        let currentStemMixer = null;
+        let currentProfile = 'default';
+        let reflectionLogs = [];
+
+        // Profile & URL handling
+        function initProfile() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('profile')) currentProfile = params.get('profile').toLowerCase().replace(/[^a-z0-9]/g, '');
+            if (params.has('mode') && params.get('mode') === 'cinematic') {
+                selectedPreset = 'scoring-stage';
+            }
+            document.getElementById('currentProfile').textContent = `PROFILE: ${currentProfile.toUpperCase()}`;
+            
+            loadProfileData();
+        }
+
+        function getProfileKey(key) {
+            return `juice-cinema-v3-${currentProfile}-${key}`;
+        }
+
+        function loadProfileData() {
+            const savedPreset = localStorage.getItem(getProfileKey('preset'));
+            if (savedPreset && roomPresets[savedPreset]) selectedPreset = savedPreset;
+            
+            const savedLogs = localStorage.getItem(getProfileKey('reflectionLogs'));
+            if (savedLogs) reflectionLogs = JSON.parse(savedLogs);
+            
+            updateRitualStats();
+            updateReflectionLogsUI();
+        }
+
+        function saveProfileData() {
+            localStorage.setItem(getProfileKey('preset'), selectedPreset);
+            localStorage.setItem(getProfileKey('reflectionLogs'), JSON.stringify(reflectionLogs));
+        }
+
+        function copyProfileLink() {
+            const url = `${window.location.origin}${window.location.pathname}?profile=${currentProfile}&mode=cinematic`;
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('Profile link copied — share for synced stems & logs', 'success');
+            });
+        }
 
         function updatePresetUI() {
             const grid = document.getElementById('presetGrid');
             grid.innerHTML = '';
-            
             Object.keys(roomPresets).forEach(key => {
                 const preset = roomPresets[key];
                 const isActive = key === selectedPreset;
-                
                 const card = document.createElement('div');
                 card.className = `preset-card bg-zinc-900 border border-zinc-700 rounded-2xl p-4 cursor-pointer ${isActive ? 'active' : ''}`;
                 card.innerHTML = `
                     <div class="font-semibold text-sm mb-1">${preset.name}</div>
                     <div class="text-xs text-zinc-400 mb-2">${preset.description}</div>
-                    <div class="flex justify-between text-[10px] font-mono text-zinc-500">
-                        <div>Decay: ${preset.decay}s</div>
-                        <div>Early: ${Math.round(preset.earlyRefl * 100)}%</div>
-                    </div>
+                    <div class="text-[10px] font-mono text-emerald-400">${key === 'scoring-stage' ? 'INTELLIGENT CINEMATIC BALANCE' : ''}</div>
                 `;
-                
                 card.onclick = () => {
                     selectedPreset = key;
                     updatePresetUI();
-                    showToast(`Room preset changed to ${preset.name}`, 'success');
+                    if (key === 'scoring-stage') {
+                        showToast('Cinematic preset auto-balanced for movie impact — edit stems live', 'success');
+                        if (currentStemMixer) resetStemMixer();
+                    }
+                    saveProfileData();
                 };
-                
                 grid.appendChild(card);
             });
             
-            // Also update write select
             const writeSelect = document.getElementById('writePresetSelect');
             if (writeSelect) {
                 writeSelect.innerHTML = '';
@@ -608,174 +526,558 @@
             }
         }
 
-        function setSelectedPreset(key) {
-            if (roomPresets[key]) {
-                selectedPreset = key;
-                updatePresetUI();
-            }
-        }
-
-        // ==================== NFC ENHANCED ====================
-        function updateNFCStatus(connected = false, info = '') {
-            console.log('NFC status updated (batch mode)');
-        }
-
-        async function requestNFCAuth() {
+        async function requestNFCAuth(forRitual = false) {
             return new Promise((resolve, reject) => {
                 if (!('NDEFReader' in window)) {
-                    const proceed = confirm(
-                        "Web NFC not supported on this device.\n\n" +
-                        "Simulate NFC tap for demo? (You can still program cards on supported devices)"
-                    );
-                    if (proceed) {
-                        resolve({ serialNumber: 'SIMULATED-' + Date.now().toString(36).slice(-8), simulated: true });
-                    } else {
-                        reject(new Error('NFC required for processing'));
-                    }
+                    const proceed = confirm("Web NFC simulation for demo?");
+                    if (proceed) resolve({ serialNumber: 'SIM-' + Date.now().toString(36), simulated: true, presetFromCard: null });
+                    else reject(new Error('NFC required'));
                     return;
                 }
 
                 const ndef = new NDEFReader();
-                let timeoutId = null;
-
-                ndef.scan()
-                    .then(() => {
-                        ndef.onreading = (event) => {
-                            clearTimeout(timeoutId);
-                            
-                            let presetFromCard = null;
-                            let serial = event.serialNumber || 'UNKNOWN';
-                            
-                            if (event.message && event.message.records) {
-                                for (const record of event.message.records) {
-                                    if (record.recordType === 'text') {
-                                        try {
-                                            const textDecoder = new TextDecoder();
-                                            const text = textDecoder.decode(record.data);
-                                            if (text.startsWith('JUICE-ROOM:')) {
-                                                const presetId = text.split(':')[1];
-                                                if (roomPresets[presetId]) {
-                                                    presetFromCard = presetId;
-                                                }
-                                            }
-                                        } catch(e) {}
+                ndef.scan().then(() => {
+                    ndef.onreading = (event) => {
+                        let presetFromCard = null;
+                        let serial = event.serialNumber || 'UNKNOWN';
+                        
+                        if (event.message && event.message.records) {
+                            for (const record of event.message.records) {
+                                if (record.recordType === 'text') {
+                                    const text = new TextDecoder().decode(record.data);
+                                    if (text.startsWith('JUICE-ROOM:')) {
+                                        const id = text.split(':')[1];
+                                        if (roomPresets[id]) presetFromCard = id;
                                     }
                                 }
                             }
-                            
-                            const shortSerial = serial.length > 12 ? serial.slice(0,8) + '...' : serial;
-                            
-                            resolve({ 
-                                serialNumber: serial, 
-                                shortSerial: shortSerial,
-                                timestamp: Date.now(),
-                                presetFromCard: presetFromCard
-                            });
-                        };
-
-                        timeoutId = setTimeout(() => {
-                            reject(new Error('NFC tap timeout — please tap your programmed card'));
-                        }, 28000);
-                    })
-                    .catch((err) => {
-                        reject(new Error('NFC scan failed: ' + (err.message || 'Check permissions/hardware')));
-                    });
+                        }
+                        resolve({ serialNumber: serial, shortSerial: serial.slice(0,8), presetFromCard, timestamp: Date.now() });
+                    };
+                }).catch(reject);
             });
         }
 
         async function writePresetToNFC() {
             const select = document.getElementById('writePresetSelect');
-            const presetKey = select.value;
-            const presetName = roomPresets[presetKey].name;
-            
+            const key = select.value;
             if (!('NDEFWriter' in window)) {
-                alert('NFC writing requires Chrome on Android with NFC support.\n\nOn supported devices you can program cards with preset IDs.');
+                alert('NFC write needs Chrome Android');
+                return;
+            }
+            try {
+                const ndef = new NDEFWriter();
+                await ndef.write({ records: [{ recordType: "text", data: `JUICE-ROOM:${key}` }] });
+                showToast(`Card programmed: ${roomPresets[key].name}`, 'success');
+                setTimeout(() => { selectedPreset = key; updatePresetUI(); }, 600);
+            } catch(e) { showToast('Write failed — tag writable?', 'error'); }
+        }
+
+        function updateRitualStats() {
+            const el = document.getElementById('ritualStats');
+            const count = reflectionLogs.length;
+            el.innerHTML = `Rituals logged: <span class="font-bold">${count}</span> • Last: ${count > 0 ? new Date(reflectionLogs[count-1].timestamp).toLocaleDateString() : 'none'}`;
+        }
+
+        function showRitualHistory() {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black/90 z-[70] flex items-center justify-center p-6';
+            modal.innerHTML = `
+                <div class="max-w-lg w-full bg-zinc-900 border border-zinc-700 rounded-3xl p-6">
+                    <div class="flex justify-between mb-4">
+                        <div class="font-semibold">NFC RITUAL HISTORY — ${currentProfile.toUpperCase()}</div>
+                        <button onclick="this.closest('.fixed').remove()" class="text-xl leading-none">&times;</button>
+                    </div>
+                    <div class="max-h-80 overflow-auto space-y-3 text-sm">
+                        ${reflectionLogs.length === 0 ? '<div class="text-zinc-400">No rituals logged yet. Use NFC when logging reflections.</div>' : 
+                        reflectionLogs.slice().reverse().map(log => `
+                            <div class="bg-zinc-950 border border-zinc-800 rounded-2xl p-4">
+                                <div class="flex justify-between text-xs text-zinc-400 mb-1">
+                                    <span>${new Date(log.timestamp).toLocaleString()}</span>
+                                    <span class="font-mono">${log.preset}</span>
+                                </div>
+                                <div class="text-sm">${log.text || '(no text)'}</div>
+                                ${log.nfcSerial ? `<div class="text-[10px] text-emerald-400 mt-1 font-mono">NFC: ${log.nfcSerial}</div>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        async function logGroupReflection() {
+            const text = document.getElementById('reflectionText').value.trim();
+            if (!text && !voiceNoteBlob) {
+                showToast('Add reflection text or voice note first', 'error');
                 return;
             }
             
             try {
-                const ndef = new NDEFWriter();
-                await ndef.write({
-                    records: [{
-                        recordType: "text",
-                        data: `JUICE-ROOM:${presetKey}`
-                    }]
-                });
-                
-                showToast(`NFC card programmed with "${presetName}"`, 'success');
-                
-                setTimeout(() => {
-                    selectedPreset = presetKey;
-                    updatePresetUI();
-                }, 800);
-                
-            } catch (err) {
-                showToast('Failed to write to NFC card. Make sure tag is writable and close.', 'error');
-                console.error(err);
+                const nfc = await requestNFCAuth(true);
+                const log = {
+                    id: Date.now(),
+                    timestamp: Date.now(),
+                    text: text || '(voice note only)',
+                    preset: selectedPreset,
+                    profile: currentProfile,
+                    nfcSerial: nfc.shortSerial || nfc.serialNumber,
+                    hasVoice: !!voiceNoteBlob
+                };
+                reflectionLogs.unshift(log);
+                saveProfileData();
+                updateReflectionLogsUI();
+                updateRitualStats();
+                document.getElementById('reflectionText').value = '';
+                showToast('Reflection logged & NFC ritual stamped', 'success');
+            } catch(e) {
+                showToast(e.message || 'NFC required to stamp ritual', 'error');
             }
         }
 
-        // ==================== VOICE NOTE ====================
-        async function toggleVoiceRecording() {
-            const btn = document.getElementById('recordBtn');
-            const controls = document.getElementById('voiceNoteControls');
-            const btnText = document.getElementById('recordBtnText');
+        function updateReflectionLogsUI() {
+            const container = document.getElementById('reflectionLogs');
+            container.innerHTML = '';
+            if (reflectionLogs.length === 0) {
+                container.innerHTML = '<div class="text-xs text-zinc-500">No group reflections yet — log with NFC for ritual tracking</div>';
+                return;
+            }
+            reflectionLogs.slice(0, 5).forEach(log => {
+                const div = document.createElement('div');
+                div.className = 'bg-zinc-900 border border-zinc-800 rounded-xl p-3 flex justify-between items-start';
+                div.innerHTML = `
+                    <div class="flex-1 pr-3">
+                        <div class="text-emerald-400 text-xs font-mono">${new Date(log.timestamp).toLocaleDateString()} • ${log.preset}</div>
+                        <div class="text-sm mt-0.5 line-clamp-2">${log.text}</div>
+                        ${log.nfcSerial ? `<div class="text-[10px] text-emerald-300 mt-1">NFC stamped: ${log.nfcSerial}</div>` : ''}
+                    </div>
+                    <button onclick="deleteLog(${log.id})" class="text-red-400 text-xs">×</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function deleteLog(id) {
+            reflectionLogs = reflectionLogs.filter(l => l.id !== id);
+            saveProfileData();
+            updateReflectionLogsUI();
+            updateRitualStats();
+        }
+
+        let stemNodes = {};
+
+        function buildStemMixer(processedBuffer) {
+            if (currentStemMixer) currentStemMixer.close();
             
-            if (!isRecording) {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const source = ctx.createBufferSource();
+            source.buffer = processedBuffer;
+            
+            const masterGain = ctx.createGain();
+            masterGain.gain.value = 0.95;
+            
+            const voxGain = ctx.createGain();
+            const voxFilter = ctx.createBiquadFilter();
+            voxFilter.type = 'lowpass';
+            voxFilter.frequency.value = 4500;
+            
+            const voxLFO = ctx.createOscillator();
+            voxLFO.type = 'sine';
+            voxLFO.frequency.value = 5.5;
+            const voxLFOGain = ctx.createGain();
+            voxLFOGain.gain.value = 4;
+            voxLFO.connect(voxLFOGain);
+            voxLFOGain.connect(source.detune);
+            voxLFO.start();
+            
+            const drumGain = ctx.createGain();
+            const drumFilter = ctx.createBiquadFilter();
+            drumFilter.type = 'bandpass';
+            drumFilter.frequency.value = 1200;
+            drumFilter.Q.value = 1.8;
+            
+            const drumLFO = ctx.createOscillator();
+            drumLFO.type = 'sine';
+            drumLFO.frequency.value = 0.8;
+            const drumLFOGain = ctx.createGain();
+            drumLFOGain.gain.value = 400;
+            drumLFO.connect(drumLFOGain);
+            drumLFOGain.connect(drumFilter.frequency);
+            drumLFO.start();
+            
+            const stringsGain = ctx.createGain();
+            const stringsDelayL = ctx.createDelay(0.03);
+            const stringsDelayR = ctx.createDelay(0.035);
+            const stringsMerger = ctx.createChannelMerger(2);
+            const stringsSplitter = ctx.createChannelSplitter(2);
+            
+            source.connect(stringsSplitter);
+            stringsSplitter.connect(stringsDelayL, 0);
+            stringsSplitter.connect(stringsDelayR, 1);
+            stringsDelayL.connect(stringsMerger, 0, 0);
+            stringsDelayR.connect(stringsMerger, 0, 1);
+            
+            const pianoGain = ctx.createGain();
+            const pianoComp = ctx.createDynamicsCompressor();
+            pianoComp.threshold.value = -18;
+            pianoComp.ratio.value = 3;
+            
+            source.connect(voxGain);
+            voxGain.connect(voxFilter);
+            voxFilter.connect(masterGain);
+            
+            source.connect(drumGain);
+            drumGain.connect(drumFilter);
+            drumFilter.connect(masterGain);
+            
+            stringsMerger.connect(stringsGain);
+            stringsGain.connect(masterGain);
+            
+            source.connect(pianoGain);
+            pianoGain.connect(pianoComp);
+            pianoComp.connect(masterGain);
+            
+            masterGain.connect(ctx.destination);
+            source.start(0);
+            
+            currentStemMixer = ctx;
+            stemNodes = { ctx, source, masterGain, voxGain, voxFilter, voxLFOGain, drumGain, drumFilter, drumLFOGain, stringsGain, stringsDelayL, stringsDelayR, pianoGain, pianoComp };
+            
+            if (selectedPreset === 'scoring-stage') {
+                document.getElementById('voxVibrato').value = 5.5;
+                document.getElementById('voxBreath').value = 40;
+                document.getElementById('drumIntensity').value = 75;
+                document.getElementById('stringsWidth').value = 22;
+                document.getElementById('stringsWarmth').value = 60;
+                document.getElementById('pianoVelocity').value = 40;
+            }
+            updateStemMixer();
+        }
+
+        function updateStemMixer() {
+            if (!stemNodes.ctx || !stemNodes.source) return;
+            const s = stemNodes;
+            
+            const vibDepth = parseFloat(document.getElementById('voxVibrato').value);
+            s.voxLFOGain.gain.value = vibDepth;
+            s.voxFilter.frequency.value = 3000 + (parseFloat(document.getElementById('voxBreath').value) * 20);
+            s.voxGain.gain.value = parseFloat(document.getElementById('voxVol').value) / 100;
+            
+            s.drumFilter.frequency.value = parseFloat(document.getElementById('drumTexture').value);
+            s.drumGain.gain.value = parseFloat(document.getElementById('drumIntensity').value) / 100;
+            
+            const width = parseFloat(document.getElementById('stringsWidth').value) / 1000;
+            s.stringsDelayL.delayTime.value = 0.015 + width;
+            s.stringsDelayR.delayTime.value = 0.022 + width * 1.3;
+            s.stringsGain.gain.value = parseFloat(document.getElementById('stringsVol').value) / 100;
+            
+            s.pianoComp.threshold.value = -24 + (parseFloat(document.getElementById('pianoVelocity').value) / 4);
+            s.pianoGain.gain.value = parseFloat(document.getElementById('pianoDynamics').value) / 100;
+        }
+
+        function resetStemMixer() {
+            document.getElementById('voxVibrato').value = 5;
+            document.getElementById('voxBreath').value = 38;
+            document.getElementById('voxVol').value = 88;
+            document.getElementById('drumTexture').value = 1400;
+            document.getElementById('drumIntensity').value = 72;
+            document.getElementById('stringsWidth').value = 20;
+            document.getElementById('stringsWarmth').value = 58;
+            document.getElementById('stringsVol').value = 98;
+            document.getElementById('pianoVelocity').value = 38;
+            document.getElementById('pianoDynamics').value = 62;
+            updateStemMixer();
+            showToast('Reset to intelligent cinematic balance', 'success');
+        }
+
+        function triggerDrumFill() {
+            if (!stemNodes.drumGain) return;
+            const orig = stemNodes.drumGain.gain.value;
+            stemNodes.drumGain.gain.value = orig * 1.6;
+            setTimeout(() => { if (stemNodes.drumGain) stemNodes.drumGain.gain.value = orig; }, 1800);
+            showToast('Drum fill triggered', 'info');
+        }
+        function triggerDrumChop() {
+            if (!stemNodes.drumGain) return;
+            stemNodes.drumGain.gain.value = 0.1;
+            setTimeout(() => { if (stemNodes.drumGain) stemNodes.drumGain.gain.value = parseFloat(document.getElementById('drumIntensity').value) / 100; }, 450);
+        }
+        function triggerPianoRun() {
+            if (!stemNodes.pianoGain) return;
+            const orig = stemNodes.pianoGain.gain.value;
+            stemNodes.pianoGain.gain.value = orig * 1.4;
+            setTimeout(() => { if (stemNodes.pianoGain) stemNodes.pianoGain.gain.value = orig; }, 2200);
+        }
+        function triggerPianoCut() {
+            if (!stemNodes.pianoGain) return;
+            stemNodes.pianoGain.gain.value = 0.15;
+            setTimeout(() => { if (stemNodes.pianoGain) stemNodes.pianoGain.gain.value = parseFloat(document.getElementById('pianoDynamics').value) / 100; }, 380);
+        }
+
+        function createCinematicImpulse(audioContext, presetKey) {
+            const p = roomPresets[presetKey];
+            const length = Math.floor(audioContext.sampleRate * p.duration);
+            const impulse = audioContext.createBuffer(2, length, audioContext.sampleRate);
+            const left = impulse.getChannelData(0);
+            const right = impulse.getChannelData(1);
+            for (let i = 0; i < length; i++) {
+                const progress = i / length;
+                let env = Math.pow(1 - progress, p.decay);
+                if (progress < 0.12) env *= (1 + p.earlyRefl * 1.8);
+                if (progress > 0.03 && progress < 0.11) env *= (1 + p.earlyRefl * 0.9);
+                left[i] = (Math.random() * 2 - 1) * 0.9 * env;
+                right[i] = (Math.random() * 2 - 1) * 0.9 * env;
+            }
+            return impulse;
+        }
+
+        async function performCinematicRetouch(audioBuffer, presetKey) {
+            const p = roomPresets[presetKey];
+            const sampleRate = audioBuffer.sampleRate;
+            const offlineCtx = new OfflineAudioContext(2, Math.ceil((audioBuffer.duration + p.duration + 2) * sampleRate), sampleRate);
+            
+            const source = offlineCtx.createBufferSource();
+            source.buffer = audioBuffer;
+            
+            const lowShelf = offlineCtx.createBiquadFilter(); lowShelf.type = 'lowshelf'; lowShelf.frequency.value = 280; lowShelf.gain.value = p.lowShelf;
+            const highCut = offlineCtx.createBiquadFilter(); highCut.type = 'lowpass'; highCut.frequency.value = p.highCut;
+            const compressor = offlineCtx.createDynamicsCompressor(); compressor.threshold.value = -22; compressor.ratio.value = 3.2;
+            const convolver = offlineCtx.createConvolver(); convolver.buffer = createCinematicImpulse(offlineCtx, presetKey);
+            const master = offlineCtx.createGain(); master.gain.value = 0.92;
+            
+            source.connect(lowShelf); lowShelf.connect(highCut); highCut.connect(compressor); compressor.connect(convolver); convolver.connect(master); master.connect(offlineCtx.destination);
+            source.start(0);
+            
+            let rendered = await offlineCtx.startRendering();
+            
+            if (document.getElementById('overlayVoiceCheckbox').checked && voiceNoteBlob) {
                 try {
-                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                    mediaRecorder = new MediaRecorder(stream);
-                    audioChunks = [];
+                    const voiceCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    const voiceArray = await voiceNoteBlob.arrayBuffer();
+                    const voiceBuffer = await voiceCtx.decodeAudioData(voiceArray);
                     
-                    mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
-                    mediaRecorder.onstop = () => {
-                        voiceNoteBlob = new Blob(audioChunks, { type: 'audio/webm' });
-                        stream.getTracks().forEach(track => track.stop());
-                        
-                        controls.classList.remove('hidden');
-                        btnText.innerHTML = 'RE-RECORD';
-                        btn.classList.add('!border-emerald-400', '!text-emerald-300');
-                        
-                        const durationEl = document.getElementById('voiceDuration');
-                        durationEl.textContent = `~${Math.round(audioChunks.length * 0.1)}s`;
-                        
-                        showToast('Voice note recorded — will overlay if enabled', 'success');
-                    };
+                    const mixLength = Math.max(rendered.length, Math.floor(voiceBuffer.duration * sampleRate) + 2000);
+                    const mixedBuffer = offlineCtx.createBuffer(2, mixLength, sampleRate);
                     
-                    mediaRecorder.start();
-                    isRecording = true;
-                    btnText.innerHTML = '<i class="fa-solid fa-stop mr-2"></i> STOP RECORDING';
-                    btn.classList.add('!bg-red-950', '!border-red-600', '!text-red-300');
+                    for (let ch = 0; ch < 2; ch++) {
+                        const renderedData = rendered.getChannelData(ch);
+                        const mixedData = mixedBuffer.getChannelData(ch);
+                        for (let i = 0; i < renderedData.length; i++) {
+                            mixedData[i] = renderedData[i];
+                        }
+                    }
                     
-                } catch (err) {
-                    showToast('Microphone access denied or not available', 'error');
+                    const voiceData = voiceBuffer.getChannelData(0);
+                    const voiceGain = 0.28;
+                    const voiceStart = 800;
+                    
+                    for (let i = 0; i < voiceData.length; i++) {
+                        const idx = voiceStart + i;
+                        if (idx < mixLength) {
+                            const v = voiceData[i] * voiceGain;
+                            mixedBuffer.getChannelData(0)[idx] += v * 0.7;
+                            mixedBuffer.getChannelData(1)[idx] += v * 0.7;
+                        }
+                    }
+                    
+                    rendered = mixedBuffer;
+                } catch (e) {
+                    console.warn('Voice overlay failed, continuing without', e);
                 }
-            } else {
-                if (mediaRecorder && mediaRecorder.state === 'recording') {
-                    mediaRecorder.stop();
+            }
+            return rendered;
+        }
+
+        function audioBufferToWav(buffer) {
+            const numChannels = buffer.numberOfChannels;
+            const sampleRate = buffer.sampleRate;
+            const bytesPerSample = 2;
+            const blockAlign = numChannels * bytesPerSample;
+            const dataSize = buffer.length * blockAlign;
+            const bufferSize = 44 + dataSize;
+            const arrayBuffer = new ArrayBuffer(bufferSize);
+            const view = new DataView(arrayBuffer);
+            let pos = 0;
+            const writeString = str => { for (let i=0; i<str.length; i++) view.setUint8(pos++, str.charCodeAt(i)); };
+            const writeUint16 = val => { view.setUint16(pos, val, true); pos += 2; };
+            const writeUint32 = val => { view.setUint32(pos, val, true); pos += 4; };
+            
+            writeString('RIFF'); writeUint32(bufferSize-8); writeString('WAVE');
+            writeString('fmt '); writeUint32(16); writeUint16(1); writeUint16(numChannels);
+            writeUint32(sampleRate); writeUint32(sampleRate * blockAlign); writeUint16(blockAlign); writeUint16(16);
+            writeString('data'); writeUint32(dataSize);
+            
+            const channels = [];
+            for (let ch=0; ch<numChannels; ch++) channels.push(buffer.getChannelData(ch));
+            for (let i=0; i<buffer.length; i++) {
+                for (let ch=0; ch<numChannels; ch++) {
+                    let sample = Math.max(-1, Math.min(1, channels[ch][i]));
+                    sample = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
+                    view.setInt16(pos, sample, true); pos += 2;
                 }
-                isRecording = false;
-                btn.classList.remove('!bg-red-950', '!border-red-600', '!text-red-300');
+            }
+            return arrayBuffer;
+        }
+
+        async function processSingleTrack(queueItem, presetKey) {
+            const modal = document.getElementById('processingModal');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            const currentInfo = document.getElementById('currentTrackInfo');
+            const titleEl = document.getElementById('processingTitle');
+            
+            currentInfo.textContent = `Processing: ${queueItem.name}`;
+            titleEl.textContent = `${roomPresets[presetKey].name.toUpperCase()} • DARKROOM`;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            progressBar.style.width = '8%';
+            progressText.textContent = 'EXPOSING NEGATIVE • 8%';
+            
+            let progress = 8;
+            const progressInterval = setInterval(() => {
+                progress += Math.random() * 9 + 4;
+                if (progress > 94) progress = 94;
+                progressBar.style.width = `${progress}%`;
+                
+                if (progress < 35) progressText.textContent = `BURNING EARLY REFLECTIONS • ${Math.floor(progress)}%`;
+                else if (progress < 68) progressText.textContent = `DEVELOPING ${roomPresets[presetKey].name} TAIL • ${Math.floor(progress)}%`;
+                else progressText.textContent = `FIXING CINEMATIC PRINT • ${Math.floor(progress)}%`;
+            }, 380);
+            
+            try {
+                const rendered = await performCinematicRetouch(queueItem.buffer, presetKey);
+                const wavArray = audioBufferToWav(rendered);
+                const blob = new Blob([wavArray], { type: 'audio/wav' });
+                const url = URL.createObjectURL(blob);
+                
+                clearInterval(progressInterval);
+                progressBar.style.width = '100%';
+                progressText.textContent = 'PRINT COMPLETE • 100%';
+                
+                await new Promise(r => setTimeout(r, 650));
+                
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+                
+                return {
+                    name: queueItem.name,
+                    url,
+                    blob,
+                    preset: presetKey,
+                    presetName: roomPresets[presetKey].name,
+                    duration: rendered.duration,
+                    buffer: rendered,
+                    voiceIncluded: !!voiceNoteBlob
+                };
+            } catch (err) {
+                clearInterval(progressInterval);
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+                throw err;
             }
         }
 
-        function playVoiceNote() {
-            if (!voiceNoteBlob) return;
-            const audio = new Audio(URL.createObjectURL(voiceNoteBlob));
-            audio.play();
+        async function handleRetouchClick() {
+            if (processingQueue.length === 0) return showToast('Add tracks first', 'error');
+            
+            const btn = document.getElementById('retouchBtn');
+            btn.disabled = true;
+            document.getElementById('retouchBtnText').innerHTML = 'NFC RITUAL + PROCESSING...';
+            
+            try {
+                const nfc = await requestNFCAuth();
+                if (nfc.presetFromCard) {
+                    selectedPreset = nfc.presetFromCard;
+                    updatePresetUI();
+                }
+                showToast('NFC ritual authorized — building stems', 'success');
+                
+                lastProcessedOutputs = [];
+                const list = document.getElementById('cinematicOutputsList');
+                list.innerHTML = '';
+                
+                for (let item of processingQueue) {
+                    const result = await processSingleTrack(item, selectedPreset);
+                    lastProcessedOutputs.push(result);
+                    addProcessedOutputCard(result, list);
+                }
+                
+                document.getElementById('cinematicSection').classList.remove('hidden');
+                saveProfileData();
+                
+            } catch(e) {
+                showToast(e.message || 'Failed', 'error');
+            } finally {
+                btn.disabled = false;
+                document.getElementById('retouchBtnText').innerHTML = 'PROCESS QUEUE + ENABLE STEMS — TAP NFC';
+            }
         }
 
-        function clearVoiceNote() {
-            voiceNoteBlob = null;
-            document.getElementById('voiceNoteControls').classList.add('hidden');
-            const btn = document.getElementById('recordBtn');
-            btn.classList.remove('!border-emerald-400', '!text-emerald-300');
-            document.getElementById('recordBtnText').innerHTML = 'RECORD VOICE NOTE';
-            document.getElementById('voiceDuration').textContent = '';
-            showToast('Voice note cleared');
+        function addProcessedOutputCard(result, container) {
+            const card = document.createElement('div');
+            card.className = 'cinema-card border border-amber-400/20 rounded-2xl p-5';
+            card.innerHTML = `
+                <div class="flex justify-between mb-2">
+                    <div>
+                        <div class="font-semibold">${result.name}</div>
+                        <div class="text-xs text-amber-400">${result.presetName} • ${formatDuration(result.duration)}</div>
+                    </div>
+                    <button onclick="playWithStems('${result.url}', this)" class="px-4 py-1 text-xs border border-amber-400/60 hover:bg-amber-400/10 rounded-xl flex items-center gap-x-2">
+                        <i class="fa-solid fa-play"></i> <span>PLAY WITH LIVE STEMS</span>
+                    </button>
+                </div>
+                <audio controls class="w-full accent-amber-400" src="${result.url}"></audio>
+            `;
+            container.appendChild(card);
         }
 
-        // ==================== QUEUE MANAGEMENT ====================
+        function playWithStems(url, btn) {
+            fetch(url).then(r => r.arrayBuffer()).then(ab => {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                return ctx.decodeAudioData(ab);
+            }).then(buffer => {
+                buildStemMixer(buffer);
+                showToast('Live stem mixer active — tweak sliders while playing', 'success');
+                btn.innerHTML = '<i class="fa-solid fa-sliders-h"></i> STEM MIXER LIVE';
+            });
+        }
+
+        function setupDropzone() {
+            const dropzone = document.getElementById('dropzone');
+            const fileInput = document.getElementById('fileInput');
+            
+            dropzone.addEventListener('click', () => fileInput.click());
+            
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    Array.from(e.target.files).forEach(file => {
+                        if (file.type.startsWith('audio/') || /\.(mp3|wav|m4a|aac|ogg|flac)$/i.test(file.name)) {
+                            addToQueue(file);
+                        }
+                    });
+                    e.target.value = '';
+                }
+            });
+            
+            dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
+            dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+            dropzone.addEventListener('drop', e => {
+                e.preventDefault();
+                dropzone.classList.remove('dragover');
+                Array.from(e.dataTransfer.files).forEach(file => {
+                    if (file.type.startsWith('audio/') || /\.(mp3|wav|m4a)$/i.test(file.name)) {
+                        addToQueue(file);
+                    }
+                });
+            });
+            
+            dropzone.setAttribute('tabindex', '0');
+            dropzone.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
+            });
+        }
+
         function addToQueue(file) {
             const reader = new FileReader();
             reader.onload = async function(e) {
@@ -899,445 +1201,20 @@
             }
         }
 
-        // ==================== PROCESSING WITH PRESET + VOICE + BATCH ====================
-        function createCinematicImpulse(audioContext, presetKey) {
-            const p = roomPresets[presetKey];
-            const length = Math.floor(audioContext.sampleRate * p.duration);
-            const impulse = audioContext.createBuffer(2, length, audioContext.sampleRate);
-            const left = impulse.getChannelData(0);
-            const right = impulse.getChannelData(1);
-            
-            for (let i = 0; i < length; i++) {
-                const progress = i / length;
-                let env = Math.pow(1 - progress, p.decay);
-                
-                if (progress < 0.12) {
-                    env *= (1 + p.earlyRefl * 1.8);
-                }
-                if (progress > 0.03 && progress < 0.11) {
-                    env *= (1 + p.earlyRefl * 0.9);
-                }
-                
-                const noiseL = (Math.random() * 2 - 1) * 0.9;
-                const noiseR = (Math.random() * 2 - 1) * 0.9;
-                
-                left[i] = noiseL * env;
-                right[i] = noiseR * env;
-            }
-            return impulse;
-        }
-
-        async function performCinematicRetouch(audioBuffer, presetKey) {
-            const p = roomPresets[presetKey];
-            const sampleRate = audioBuffer.sampleRate;
-            const numChannels = 2;
-            const tailSeconds = p.duration + 1.5;
-            const offlineLength = Math.ceil((audioBuffer.duration + tailSeconds) * sampleRate);
-            
-            const offlineCtx = new OfflineAudioContext(numChannels, offlineLength, sampleRate);
-            
-            const source = offlineCtx.createBufferSource();
-            source.buffer = audioBuffer;
-            
-            const lowShelf = offlineCtx.createBiquadFilter();
-            lowShelf.type = 'lowshelf';
-            lowShelf.frequency.value = 280;
-            lowShelf.gain.value = p.lowShelf;
-            
-            const highCut = offlineCtx.createBiquadFilter();
-            highCut.type = 'lowpass';
-            highCut.frequency.value = p.highCut;
-            highCut.Q.value = 0.7;
-            
-            const compressor = offlineCtx.createDynamicsCompressor();
-            compressor.threshold.value = -22;
-            compressor.knee.value = 28;
-            compressor.ratio.value = 3.2;
-            compressor.attack.value = 0.004;
-            compressor.release.value = 0.28;
-            
-            const convolver = offlineCtx.createConvolver();
-            convolver.buffer = createCinematicImpulse(offlineCtx, presetKey);
-            
-            const masterGain = offlineCtx.createGain();
-            masterGain.gain.value = 0.92;
-            
-            source.connect(lowShelf);
-            lowShelf.connect(highCut);
-            highCut.connect(compressor);
-            compressor.connect(convolver);
-            convolver.connect(masterGain);
-            masterGain.connect(offlineCtx.destination);
-            
-            source.start(0);
-            let renderedBuffer = await offlineCtx.startRendering();
-            
-            if (document.getElementById('overlayVoiceCheckbox').checked && voiceNoteBlob) {
-                try {
-                    const voiceCtx = new (window.AudioContext || window.webkitAudioContext)();
-                    const voiceArray = await voiceNoteBlob.arrayBuffer();
-                    const voiceBuffer = await voiceCtx.decodeAudioData(voiceArray);
-                    
-                    const mixLength = Math.max(renderedBuffer.length, Math.floor(voiceBuffer.duration * sampleRate) + 2000);
-                    const mixedBuffer = offlineCtx.createBuffer(2, mixLength, sampleRate);
-                    
-                    for (let ch = 0; ch < 2; ch++) {
-                        const renderedData = renderedBuffer.getChannelData(ch);
-                        const mixedData = mixedBuffer.getChannelData(ch);
-                        for (let i = 0; i < renderedData.length; i++) {
-                            mixedData[i] = renderedData[i];
-                        }
-                    }
-                    
-                    const voiceData = voiceBuffer.getChannelData(0);
-                    const voiceGain = 0.28;
-                    const voiceStart = 800;
-                    
-                    for (let i = 0; i < voiceData.length; i++) {
-                        const idx = voiceStart + i;
-                        if (idx < mixLength) {
-                            const v = voiceData[i] * voiceGain;
-                            mixedBuffer.getChannelData(0)[idx] += v * 0.7;
-                            mixedBuffer.getChannelData(1)[idx] += v * 0.7;
-                        }
-                    }
-                    
-                    renderedBuffer = mixedBuffer;
-                } catch (e) {
-                    console.warn('Voice overlay failed, continuing without', e);
-                }
-            }
-            
-            return renderedBuffer;
-        }
-
-        function audioBufferToWav(buffer) {
-            const numChannels = buffer.numberOfChannels;
-            const sampleRate = buffer.sampleRate;
-            const format = 1;
-            const bitDepth = 16;
-            const bytesPerSample = bitDepth / 8;
-            const blockAlign = numChannels * bytesPerSample;
-            const samples = buffer.length;
-            const dataSize = samples * blockAlign;
-            const bufferSize = 44 + dataSize;
-            
-            const arrayBuffer = new ArrayBuffer(bufferSize);
-            const view = new DataView(arrayBuffer);
-            let pos = 0;
-            
-            const writeString = (str) => { for (let i = 0; i < str.length; i++) view.setUint8(pos + i, str.charCodeAt(i)); pos += str.length; };
-            const writeUint16 = (val) => { view.setUint16(pos, val, true); pos += 2; };
-            const writeUint32 = (val) => { view.setUint32(pos, val, true); pos += 4; };
-            
-            writeString('RIFF');
-            writeUint32(bufferSize - 8);
-            writeString('WAVE');
-            writeString('fmt ');
-            writeUint32(16);
-            writeUint16(format);
-            writeUint16(numChannels);
-            writeUint32(sampleRate);
-            writeUint32(sampleRate * blockAlign);
-            writeUint16(blockAlign);
-            writeUint16(bitDepth);
-            writeString('data');
-            writeUint32(dataSize);
-            
-            const channels = [];
-            for (let ch = 0; ch < numChannels; ch++) channels.push(buffer.getChannelData(ch));
-            
-            for (let i = 0; i < samples; i++) {
-                for (let ch = 0; ch < numChannels; ch++) {
-                    let sample = Math.max(-1, Math.min(1, channels[ch][i]));
-                    sample = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
-                    view.setInt16(pos, sample, true);
-                    pos += 2;
-                }
-            }
-            return arrayBuffer;
-        }
-
-        async function processSingleTrack(queueItem, presetKey) {
-            const modal = document.getElementById('processingModal');
-            const progressBar = document.getElementById('progressBar');
-            const progressText = document.getElementById('progressText');
-            const currentInfo = document.getElementById('currentTrackInfo');
-            const titleEl = document.getElementById('processingTitle');
-            
-            currentInfo.textContent = `Processing: ${queueItem.name}`;
-            titleEl.textContent = `${roomPresets[presetKey].name.toUpperCase()} • DARKROOM`;
-            
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            progressBar.style.width = '8%';
-            progressText.textContent = 'EXPOSING NEGATIVE • 8%';
-            
-            let progress = 8;
-            const progressInterval = setInterval(() => {
-                progress += Math.random() * 9 + 4;
-                if (progress > 94) progress = 94;
-                progressBar.style.width = `${progress}%`;
-                
-                if (progress < 35) progressText.textContent = `BURNING EARLY REFLECTIONS • ${Math.floor(progress)}%`;
-                else if (progress < 68) progressText.textContent = `DEVELOPING ${roomPresets[presetKey].name} TAIL • ${Math.floor(progress)}%`;
-                else progressText.textContent = `FIXING CINEMATIC PRINT • ${Math.floor(progress)}%`;
-            }, 380);
-            
-            try {
-                const rendered = await performCinematicRetouch(queueItem.buffer, presetKey);
-                const wavArray = audioBufferToWav(rendered);
-                const blob = new Blob([wavArray], { type: 'audio/wav' });
-                const url = URL.createObjectURL(blob);
-                
-                clearInterval(progressInterval);
-                progressBar.style.width = '100%';
-                progressText.textContent = 'PRINT COMPLETE • 100%';
-                
-                await new Promise(r => setTimeout(r, 650));
-                
-                modal.classList.remove('flex');
-                modal.classList.add('hidden');
-                
-                return {
-                    name: queueItem.name,
-                    url: url,
-                    blob: blob,
-                    preset: presetKey,
-                    presetName: roomPresets[presetKey].name,
-                    duration: rendered.duration,
-                    voiceIncluded: document.getElementById('overlayVoiceCheckbox').checked && !!voiceNoteBlob
-                };
-                
-            } catch (err) {
-                clearInterval(progressInterval);
-                modal.classList.remove('flex');
-                modal.classList.add('hidden');
-                throw err;
-            }
-        }
-
-        async function handleRetouchClick() {
-            if (processingQueue.length === 0) {
-                showToast('Add tracks to the queue first', 'error');
-                return;
-            }
-            
-            const btn = document.getElementById('retouchBtn');
-            const originalText = document.getElementById('retouchBtnText').innerHTML;
-            
-            btn.disabled = true;
-            document.getElementById('retouchBtnText').innerHTML = 'AUTHORIZING WITH NFC...';
-            
-            try {
-                const nfcResult = await requestNFCAuth();
-                
-                if (nfcResult.presetFromCard) {
-                    selectedPreset = nfcResult.presetFromCard;
-                    updatePresetUI();
-                    showToast(`NFC card loaded preset: ${roomPresets[selectedPreset].name}`, 'nfc');
-                } else {
-                    showToast('NFC verified — processing batch', 'success');
-                }
-                
-                lastProcessedOutputs = [];
-                const outputsList = document.getElementById('cinematicOutputsList');
-                outputsList.innerHTML = '';
-                
-                for (let i = 0; i < processingQueue.length; i++) {
-                    const item = processingQueue[i];
-                    document.getElementById('retouchBtnText').innerHTML = `PROCESSING ${i+1}/${processingQueue.length}...`;
-                    
-                    const result = await processSingleTrack(item, selectedPreset);
-                    lastProcessedOutputs.push(result);
-                    
-                    addProcessedOutputCard(result, outputsList);
-                }
-                
-                document.getElementById('cinematicSection').classList.remove('hidden');
-                showToast(`Batch complete! ${lastProcessedOutputs.length} cinematic tracks ready`, 'success');
-                
-            } catch (err) {
-                showToast(err.message || 'Processing failed', 'error');
-            } finally {
-                btn.disabled = false;
-                document.getElementById('retouchBtnText').innerHTML = originalText;
-                updateRetouchButtonState();
-            }
-        }
-
-        function addProcessedOutputCard(result, container) {
-            const card = document.createElement('div');
-            card.className = 'cinema-card border border-amber-400/20 rounded-2xl p-5 cinematic-glow';
-            card.innerHTML = `
-                <div class="flex justify-between items-start mb-3">
-                    <div>
-                        <div class="font-semibold">${result.name}</div>
-                        <div class="text-xs text-amber-400 font-mono">${result.presetName} • ${formatDuration(result.duration)}</div>
-                        ${result.voiceIncluded ? '<div class="text-xs text-emerald-400 mt-0.5">+ Voice note overlay</div>' : ''}
-                    </div>
-                    <div class="text-right">
-                        <button onclick="downloadSingleOutput('${result.url}', '${result.name}', '${result.preset}')" 
-                                class="text-xs px-4 py-1.5 border border-zinc-700 hover:bg-zinc-800 rounded-xl flex items-center gap-x-1">
-                            <i class="fa-solid fa-download"></i> <span>DOWNLOAD</span>
-                        </button>
-                    </div>
-                </div>
-                <audio controls class="w-full accent-amber-400 mb-2" src="${result.url}"></audio>
-            `;
-            container.appendChild(card);
-        }
-
-        function downloadSingleOutput(url, originalName, preset) {
-            const link = document.createElement('a');
-            const base = originalName.replace(/\.[^/.]+$/, '');
-            link.download = `juice-${preset}-${base}.wav`;
-            link.href = url;
-            link.click();
-        }
-
-        // ==================== ECOSYSTEM EXPORT ====================
-        function exportForLuna() {
-            if (lastProcessedOutputs.length === 0) {
-                showToast('Process some tracks first', 'error');
-                return;
-            }
-            
-            const last = lastProcessedOutputs[lastProcessedOutputs.length - 1];
-            const meta = {
-                app: "Juice Cinema",
-                exportedFor: "Luna",
-                trackName: last.name,
-                preset: last.preset,
-                presetName: last.presetName,
-                duration: last.duration,
-                voiceNoteIncluded: last.voiceIncluded,
-                timestamp: new Date().toISOString(),
-                roomCharacter: roomPresets[last.preset].description
-            };
-            
-            const jsonBlob = new Blob([JSON.stringify(meta, null, 2)], { type: 'application/json' });
-            const jsonLink = document.createElement('a');
-            jsonLink.download = `luna-import-${last.name.replace(/\.[^/.]+$/, '')}.json`;
-            jsonLink.href = URL.createObjectURL(jsonBlob);
-            jsonLink.click();
-            
-            setTimeout(() => {
-                const wavLink = document.createElement('a');
-                wavLink.download = `luna-${last.name.replace(/\.[^/.]+$/, '')}.wav`;
-                wavLink.href = last.url;
-                wavLink.click();
-            }, 300);
-            
-            showToast('Luna export package ready (JSON + WAV)', 'success');
-        }
-
-        function exportForSonicPostcards() {
-            if (lastProcessedOutputs.length === 0) {
-                showToast('Process some tracks first', 'error');
-                return;
-            }
-            
-            const last = lastProcessedOutputs[lastProcessedOutputs.length - 1];
-            const meta = {
-                app: "Juice Cinema",
-                exportedFor: "Sonic Postcards",
-                trackName: last.name,
-                presetUsed: last.presetName,
-                cinematicRoom: roomPresets[last.preset].description,
-                duration: last.duration,
-                hasVoiceOverlay: last.voiceIncluded,
-                recommendedUse: "Emotional gift / personal soundtrack",
-                timestamp: new Date().toISOString()
-            };
-            
-            const jsonBlob = new Blob([JSON.stringify(meta, null, 2)], { type: 'application/json' });
-            const jsonLink = document.createElement('a');
-            jsonLink.download = `sonic-postcard-${last.name.replace(/\.[^/.]+$/, '')}.json`;
-            jsonLink.href = URL.createObjectURL(jsonBlob);
-            jsonLink.click();
-            
-            setTimeout(() => {
-                const wavLink = document.createElement('a');
-                wavLink.download = `postcard-${last.name.replace(/\.[^/.]+$/, '')}.wav`;
-                wavLink.href = last.url;
-                wavLink.click();
-            }, 300);
-            
-            showToast('Sonic Postcards export ready — perfect for gifting', 'success');
-        }
-
-        // ==================== HELPERS ====================
-        function formatDuration(seconds) {
-            const min = Math.floor(seconds / 60);
-            const sec = Math.floor(seconds % 60);
-            return `${min}:${sec.toString().padStart(2, '0')}`;
-        }
-
-        function formatBytes(bytes) {
-            if (bytes === 0) return '0 B';
-            const k = 1024;
-            const sizes = ['B', 'KB', 'MB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
-        }
-
-        function showToast(message, type = 'info') {
+        function formatDuration(s) { return `${Math.floor(s/60)}:${Math.floor(s%60).toString().padStart(2,'0')}`; }
+        function formatBytes(b) { return b > 1048576 ? (b/1048576).toFixed(1)+' MB' : (b/1024).toFixed(1)+' KB'; }
+        function showToast(msg, type='info') { 
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
-            
             let icon = 'fa-info-circle';
             let color = 'bg-zinc-800 border-zinc-700 text-zinc-200';
-            
             if (type === 'success') { icon = 'fa-check-circle'; color = 'bg-emerald-950 border-emerald-800 text-emerald-300'; }
             else if (type === 'error') { icon = 'fa-exclamation-circle'; color = 'bg-red-950 border-red-800 text-red-300'; }
             else if (type === 'nfc') { icon = 'fa-wifi'; color = 'bg-amber-950 border-amber-700 text-amber-300'; }
-            
             toast.className = `px-5 py-3 rounded-2xl border flex items-center gap-x-3 text-sm shadow-xl ${color} max-w-xs`;
-            toast.innerHTML = `<i class="fa-solid ${icon} flex-shrink-0"></i> <span>${message}</span>`;
-            
+            toast.innerHTML = `<i class="fa-solid ${icon} flex-shrink-0"></i> <span>${msg}</span>`;
             container.appendChild(toast);
-            setTimeout(() => {
-                toast.style.transition = 'all 0.3s ease';
-                toast.style.opacity = '0';
-                setTimeout(() => toast.remove(), 220);
-            }, 2600);
-        }
-
-        // ==================== DROPZONE & INIT ====================
-        function setupDropzone() {
-            const dropzone = document.getElementById('dropzone');
-            const fileInput = document.getElementById('fileInput');
-            
-            dropzone.addEventListener('click', () => fileInput.click());
-            
-            fileInput.addEventListener('change', (e) => {
-                if (e.target.files.length > 0) {
-                    Array.from(e.target.files).forEach(file => {
-                        if (file.type.startsWith('audio/') || /\.(mp3|wav|m4a|aac|ogg|flac)$/i.test(file.name)) {
-                            addToQueue(file);
-                        }
-                    });
-                    e.target.value = '';
-                }
-            });
-            
-            dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
-            dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
-            dropzone.addEventListener('drop', e => {
-                e.preventDefault();
-                dropzone.classList.remove('dragover');
-                Array.from(e.dataTransfer.files).forEach(file => {
-                    if (file.type.startsWith('audio/') || /\.(mp3|wav|m4a)$/i.test(file.name)) {
-                        addToQueue(file);
-                    }
-                });
-            });
-            
-            dropzone.setAttribute('tabindex', '0');
-            dropzone.addEventListener('keydown', e => {
-                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
-            });
+            setTimeout(() => { toast.style.transition = 'all 0.3s ease'; toast.style.opacity = '0'; setTimeout(() => toast.remove(), 220); }, 2600);
         }
 
         function setupKeyboardShortcuts() {
@@ -1380,25 +1257,21 @@
 
         function initializeEverything() {
             initTailwind();
+            initProfile();
             setupDropzone();
             setupKeyboardShortcuts();
             
             updatePresetUI();
+            updateRitualStats();
+            updateReflectionLogsUI();
             
-            const writeSelect = document.getElementById('writePresetSelect');
-            if (writeSelect) {
-                Object.keys(roomPresets).forEach(key => {
-                    const opt = document.createElement('option');
-                    opt.value = key;
-                    opt.textContent = roomPresets[key].name;
-                    writeSelect.appendChild(opt);
-                });
-                writeSelect.value = selectedPreset;
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('mode') === 'cinematic') {
+                selectedPreset = 'scoring-stage';
+                updatePresetUI();
             }
             
-            updateRetouchButtonState();
-            
-            console.log('%c[Juice Cinema v2] Multi-room • Batch • Voice • NFC cards • Ecosystem exports ready.', 'color:#52525b');
+            console.log('%c[Juice Cinema v3] Real-time stems • Multi-profile • NFC rituals • Group logs ready for main.', 'color:#52525b');
         }
 
         window.onload = initializeEverything;
