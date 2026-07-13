@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juice Cinema • v3 • Master</title>
+    <!-- Juice Cinema v3 - Stable Personal Use Version -->
+    <!-- Full working build: Real-time stems, NFC rituals, multi-profile, reflection logs -->
+    <!-- This is the current daily driver version while modular src/ is developed -->
+    <title>Juice Cinema • v3</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -35,7 +38,7 @@
     </style>
 </head>
 <body class="cinema-bg text-zinc-200 min-h-screen pb-12">
-    <!-- Header v3 -->
+    <!-- Header -->
     <div class="max-w-5xl mx-auto px-6 pt-8 pb-6">
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-x-4">
@@ -69,9 +72,7 @@
             <p class="text-xs text-zinc-500 mt-1.5 font-mono tracking-[2px]">?profile=juice&mode=cinematic • STEMS • RITUALS</p>
         </div>
 
-        <!-- Main Card -->
         <div class="cinema-card rounded-3xl p-8 film-grain scanline">
-            
             <!-- Multi-Profile Info -->
             <div class="mb-6 p-4 bg-zinc-950 border border-zinc-800 rounded-2xl text-xs">
                 <div class="flex items-center justify-between">
@@ -837,7 +838,7 @@
             updatePresetUI();
             updateRitualStats();
             updateReflectionLogsUI();
-            console.log('%c[Juice Cinema v3] Fully functional self-contained build restored.', 'color:#52525b');
+            console.log('%c[Juice Cinema v3] Stable personal use version shipped.', 'color:#52525b');
         }
 
         window.onload = initializeEverything;
