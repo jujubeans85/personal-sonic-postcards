@@ -132,7 +132,7 @@
                 </div>
                 
                 <div id="dropzone" class="audio-dropzone border-2 border-dashed border-zinc-700 hover:border-zinc-600 rounded-2xl h-40 flex flex-col items-center justify-center cursor-pointer relative overflow-hidden mb-4">
-                    <input type="file" id="fileInput" accept="audio/*" multiple class="hidden">
+                    <input type="file" id="fileInput" accept="audio/*,.wav,.mp3,.m4a,.aac,.ogg,.flac" multiple class="hidden">
                     <div id="dropzone-content" class="flex flex-col items-center text-center px-6">
                         <i class="fa-solid fa-headphones text-4xl text-zinc-600 mb-3"></i>
                         <div class="font-semibold text-lg">Drop tracks (multi OK) — stems ready</div>
@@ -735,10 +735,32 @@
             const dropzone = document.getElementById('dropzone');
             const fileInput = document.getElementById('fileInput');
             dropzone.addEventListener('click', () => fileInput.click());
-            fileInput.addEventListener('change', (e) => { if (e.target.files.length > 0) { Array.from(e.target.files).forEach(file => { if (file.type.startsWith('audio/') || /\.(mp3|wav|m4a)$/i.test(file.name)) addToQueue(file); }); e.target.value = ''; } });
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    Array.from(e.target.files).forEach(file => {
+                        // More robust file type check
+                        const isAudio = file.type.startsWith('audio/') || 
+                                       /\.(wav|mp3|m4a|aac|ogg|flac)$/i.test(file.name);
+                        if (isAudio) {
+                            addToQueue(file);
+                        }
+                    });
+                    e.target.value = '';
+                }
+            });
             dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
             dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
-            dropzone.addEventListener('drop', e => { e.preventDefault(); dropzone.classList.remove('dragover'); Array.from(e.dataTransfer.files).forEach(file => { if (file.type.startsWith('audio/') || /\.(mp3|wav|m4a)$/i.test(file.name)) addToQueue(file); }); });
+            dropzone.addEventListener('drop', e => {
+                e.preventDefault();
+                dropzone.classList.remove('dragover');
+                Array.from(e.dataTransfer.files).forEach(file => {
+                    const isAudio = file.type.startsWith('audio/') || 
+                                   /\.(wav|mp3|m4a)$/i.test(file.name);
+                    if (isAudio) {
+                        addToQueue(file);
+                    }
+                });
+            });
         }
 
         function addToQueue(file) {
