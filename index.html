@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juice Cinema • v3 • Master Ritual</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
+        body { font-family: 'Inter', system_ui, sans-serif; }
+        .font-display { font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif; font-weight: 600; letter-spacing: -0.02em; }
+        .cinema-bg { background: radial-gradient(circle at center, #111113 0%, #0a0a0f 100%); }
+        .film-grain { position: relative; }
+        .film-grain::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 3px 3px; pointer-events: none; z-index: 1;
+            animation: grain 0.8s steps(1) infinite;
+        }
+        .neon-button {
+            transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative; overflow: hidden;
+        }
+        .neon-button::before {
+            content: '';
+            position: absolute; top: 0; left: -100%; width: 40%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent); transition: 0.6s;
+        }
+        .neon-button:hover::before { left: 250%; }
+        .master-card {
+            background: #111113;
+            border: 1px solid #27272a;
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
+        }
+    </style>
+</head>
+<body class="cinema-bg text-zinc-200 min-h-screen flex items-center justify-center p-6">
+    <div class="max-w-md w-full text-center">
+        <!-- Logo -->
+        <div class="flex justify-center mb-8">
+            <div class="flex items-center gap-x-3">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-yellow-600 flex items-center justify-center shadow-inner">
+                    <i class="fa-solid fa-film text-[#111113] text-4xl"></i>
+                </div>
+                <div class="text-left">
+                    <div class="font-display text-5xl tracking-tighter font-semibold">JUICE</div>
+                    <div class="font-display text-4xl tracking-[-3px] text-amber-400 -mt-3">CINEMA <span class="text-lg align-super text-amber-300">v3</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="master-card rounded-3xl p-8 film-grain">
+            <div class="mb-6">
+                <div class="inline-flex items-center gap-x-2 px-4 py-1.5 rounded-2xl bg-emerald-950 border border-emerald-800 text-emerald-400 text-sm font-mono tracking-widest mb-4">
+                    <i class="fa-solid fa-wifi"></i>
+                    <span>NFC RITUAL MASTER</span>
+                </div>
+                
+                <h1 class="text-3xl font-semibold tracking-tight mb-2">Real-time stems.<br>NFC rituals.<br>Group reflections.</h1>
+                <p class="text-zinc-400">The complete cinematic audio experience</p>
+            </div>
+
+            <!-- Master Launch Button -->
+            <a href="juice-cinema.html?profile=juice&mode=cinematic" 
+               class="neon-button block w-full py-5 rounded-3xl text-xl font-bold bg-gradient-to-r from-amber-400 to-yellow-500 text-[#111113] flex items-center justify-center gap-x-3 mb-4">
+                <i class="fa-solid fa-magic text-2xl"></i>
+                <span>LAUNCH MASTER CINEMATIC v3</span>
+            </a>
+            <p class="text-xs text-zinc-500 mb-6">?profile=juice&mode=cinematic — full stems + NFC ritual mode</p>
+
+            <div class="grid grid-cols-2 gap-3 text-sm">
+                <a href="juice-cinema.html" class="px-4 py-3 border border-zinc-700 hover:bg-zinc-900 rounded-2xl flex items-center justify-center gap-x-2 text-zinc-300">
+                    <i class="fa-solid fa-play"></i>
+                    <span>Open App</span>
+                </a>
+                <a href="README.md" class="px-4 py-3 border border-zinc-700 hover:bg-zinc-900 rounded-2xl flex items-center justify-center gap-x-2 text-zinc-300">
+                    <i class="fa-solid fa-book"></i>
+                    <span>Documentation</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="mt-8 text-xs text-zinc-500 font-mono tracking-widest">
+            100% LOCAL • NFC POWERED • MULTI-PROFILE • READY FOR NETLIFY / PAGES
+        </div>
+        
+        <div class="mt-4 text-[10px] text-zinc-600">
+            Tap NFC cards • Real-time stem mixer • Group reflection logs
+        </div>
+    </div>
+
+    <script>
+        // Tailwind quick config
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+</body>
+</html>
