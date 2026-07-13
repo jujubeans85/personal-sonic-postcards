@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juice Cinema • NFC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --cinema-gold: #d4af37;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .cinema-bg {
+            background: radial-gradient(circle at center, #111113 0%, #0a0a0f 100%);
+        }
+
+        .film-grain {
+            position: relative;
+        }
+        
+        .film-grain::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 3px 3px;
+            pointer-events: none;
+            z-index: 1;
+            animation: grain 0.8s steps(1) infinite;
+        }
+
+        @keyframes grain {
+            0% { transform: translate(0, 0); }
+            10% { transform: translate(-1px, 1px); }
+            20% { transform: translate(1px, -1px); }
+            30% { transform: translate(-1px, -1px); }
+            40% { transform: translate(1px, 1px); }
+            50% { transform: translate(-1px, 1px); }
+            60% { transform: translate(1px, -1px); }
+            70% { transform: translate(-1px, -1px); }
+            80% { transform: translate(1px, 1px); }
+            90% { transform: translate(-1px, 1px); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .scanline {
+            position: relative;
+        }
+        
+        .scanline::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(255,255,255,0.04) 51%,
+                transparent 52%
+            );
+            background-size: 100% 6px;
+            pointer-events: none;
+            z-index: 2;
+            animation: scan 4s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 300px; }
+        }
+
+        .cinema-card {
+            background: #111113;
+            border: 1px solid #27272a;
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
+        }
+
+        .gold-text {
+            color: #d4af37;
+        }
+
+        .section-header {
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: #71717a;
+        }
+
+        .neon-button {
+            transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .neon-button::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,0.35),
+                transparent
+            );
+            transition: 0.6s;
+        }
+        
+        .neon-button:hover::before {
+            left: 250%;
+        }
+
+        .retouch-btn {
+            background: linear-gradient(135deg, #d4af37, #b8972e);
+            color: #111113;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 10px 15px -3px rgb(212 175 55 / 0.3),
+                        0 4px 6px -4px rgb(212 175 55 / 0.3);
+        }
+
+        .retouch-btn:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 20px 25px -5px rgb(212 175 55 / 0.3),
+                        0 8px 10px -6px rgb(212 175 55 / 0.3);
+        }
+
+        .retouch-btn:active:not(:disabled) {
+            transform: scale(0.985);
+        }
+
+        .audio-dropzone {
+            transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .audio-dropzone.dragover {
+            border-color: #d4af37;
+            background-color: rgba(212, 175, 55, 0.05);
+            transform: scale(1.01);
+        }
+
+        .status-dot {
+            transition: all 0.3s ease;
+        }
+
+        .processing-overlay {
+            animation: fadeIn 0.2s ease forwards;
+        }
+
+        .cinematic-glow {
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.15),
+                        inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .track-name {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 0.875rem;
+        }
+
+        .film-reel {
+            animation: reel-spin 20s linear infinite;
+        }
+
+        .nfc-pulse {
+            animation: nfc-pulse-anim 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        /* New: Darkroom film-burn styles */
+        .film-burn {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 20;
+            background: 
+                linear-gradient(to right, rgba(139, 69, 19, 0.25) 0%, transparent 4%, transparent 96%, rgba(139, 69, 19, 0.25) 100%),
+                linear-gradient(to bottom, rgba(139, 69, 19, 0.18) 0%, transparent 2%, transparent 98%, rgba(139, 69, 19, 0.18) 100%);
+            animation: burn-flicker 1.2s infinite alternate ease-in-out;
+            box-shadow: inset 0 0 80px rgba(139, 69, 19, 0.15);
+        }
+
+        @keyframes burn-flicker {
+            0% { 
+                opacity: 0.7; 
+                filter: brightness(1.05) contrast(1.1);
+            }
+            100% { 
+                opacity: 1; 
+                filter: brightness(0.92) contrast(0.95);
+            }
+        }
+
+        .film-burn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 140, 0, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 100, 0, 0.08) 0%, transparent 35%);
+            animation: burn-flames 2.5s infinite ease-in-out;
+        }
+
+        @keyframes burn-flames {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 0.95; transform: scale(1.03); }
+        }
+
+        .darkroom-text {
+            font-family: 'Space Grotesk', monospace;
+            letter-spacing: 2px;
+        }
+
+        /* Preset cards */
+        .preset-card {
+            transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 2px solid transparent;
+        }
+        
+        .preset-card.active {
+            border-color: #d4af37;
+            background-color: rgba(212, 175, 55, 0.08);
+            box-shadow: 0 0 0 1px #d4af37;
+        }
+        
+        .preset-card:hover:not(.active) {
+            border-color: #52525b;
+            transform: translateY(-1px);
+        }
+
+        /* Queue styles */
+        .queue-item {
+            transition: all 0.15s ease;
+        }
+        
+        .queue-item:hover {
+            background-color: #1f1f23;
+        }
+    </style>
+</head>
+<body class="cinema-bg text-zinc-200 min-h-screen pb-12">
+    <!-- Header -->
+    <div class="max-w-4xl mx-auto px-6 pt-8 pb-6">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-x-4">
+                <!-- Logo -->
+                <div class="flex items-center gap-x-3">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-400 to-yellow-600 flex items-center justify-center shadow-inner">
+                        <i class="fa-solid fa-film text-[#111113] text-3xl"></i>
+                    </div>
+                    <div>
+                        <div class="font-display text-4xl tracking-tighter font-semibold">JUICE</div>
+                        <div class="font-display text-3xl tracking-[-2.5px] text-amber-400 -mt-2">CINEMA</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-x-2 text-xs">
+                <div class="px-3 py-1.5 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center gap-x-2">
+                    <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                    <span class="font-mono text-emerald-400 text-[10px] tracking-widest">NFC SECURED v2</span>
+                </div>
+                <div class="text-[10px] px-2.5 py-1 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-500 font-mono">ENHANCED</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-6">
+        <!-- Tagline -->
+        <div class="text-center mb-8">
+            <p class="text-xl text-zinc-400 tracking-tight">Drop tracks. Choose your room.<br>Tap your card. Batch cinematic magic.</p>
+            <p class="text-xs text-zinc-500 mt-1.5 font-mono tracking-[2px]">MULTI-ROOM • NFC KEYED • JUICE ECOSYSTEM READY</p>
+        </div>
+
+        <!-- Main Card -->
+        <div class="cinema-card rounded-3xl p-8 film-grain scanline">
+            
+            <!-- Room Presets Section -->
+            <div class="mb-8">
+                <div class="section-header mb-3 flex items-center gap-x-2">
+                    <i class="fa-solid fa-layer-group text-xs"></i>
+                    <span>ROOM PRESETS — SELECT BEFORE NFC</span>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="presetGrid">
+                    <!-- Populated by JS -->
+                </div>
+                <p class="text-center text-xs text-zinc-500 mt-2 font-mono">Different decay • Early reflections • Cinematic character</p>
+            </div>
+
+            <!-- NFC Card Programming (new) -->
+            <div class="mb-8 p-4 bg-zinc-950 border border-zinc-800 rounded-2xl">
+                <div class="flex items-center justify-between mb-3">
+                    <div>
+                        <div class="section-header flex items-center gap-x-2">
+                            <i class="fa-solid fa-microchip text-xs"></i>
+                            <span>NFC CARD PROGRAMMING</span>
+                        </div>
+                        <p class="text-xs text-zinc-500">Store preset ID on physical card for auto-select</p>
+                    </div>
+                </div>
+                
+                <div class="flex flex-wrap items-center gap-3">
+                    <select id="writePresetSelect" class="bg-zinc-900 border border-zinc-700 text-sm rounded-xl px-4 py-2 text-zinc-200 focus:outline-none focus:border-amber-400">
+                        <!-- Populated by JS -->
+                    </select>
+                    <button onclick="writePresetToNFC()" 
+                            class="px-5 py-2 text-sm font-semibold border border-amber-400/60 hover:bg-amber-400/10 active:bg-amber-400/20 transition-all rounded-2xl flex items-center gap-x-2 text-amber-300">
+                        <i class="fa-solid fa-pen"></i>
+                        <span>WRITE PRESET TO CARD</span>
+                    </button>
+                </div>
+                <p class="text-[10px] text-zinc-500 mt-2 font-mono">Tap a blank or rewritable NFC tag • Different cards = different rooms</p>
+            </div>
+
+            <!-- Upload + Queue Section -->
+            <div class="mb-8">
+                <div class="section-header mb-3 flex items-center justify-between">
+                    <div class="flex items-center gap-x-2">
+                        <i class="fa-solid fa-upload text-xs"></i>
+                        <span>INPUT TRACKS — BATCH QUEUE</span>
+                    </div>
+                    <button onclick="clearQueue()" 
+                            class="text-xs px-3 py-1 hover:bg-zinc-800 transition-colors rounded-xl border border-zinc-700 text-zinc-400 flex items-center gap-x-1">
+                        <i class="fa-solid fa-trash text-xs"></i>
+                        <span>CLEAR QUEUE</span>
+                    </button>
+                </div>
+                
+                <!-- Dropzone -->
+                <div id="dropzone" 
+                     class="audio-dropzone border-2 border-dashed border-zinc-700 hover:border-zinc-600 rounded-2xl h-40 flex flex-col items-center justify-center cursor-pointer relative overflow-hidden mb-4">
+                    <input type="file" id="fileInput" accept="audio/*" multiple class="hidden">
+                    
+                    <div id="dropzone-content" class="flex flex-col items-center text-center px-6">
+                        <i class="fa-solid fa-headphones text-4xl text-zinc-600 mb-3"></i>
+                        <div class="font-semibold text-lg">Drop tracks here (multiple OK)</div>
+                        <div class="text-xs text-zinc-500 mt-1">or click to browse • MP3, WAV, M4A etc. • Added to queue</div>
+                    </div>
+                </div>
+                
+                <!-- Processing Queue -->
+                <div id="queueSection" class="hidden">
+                    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="font-semibold text-sm flex items-center gap-x-2">
+                                <i class="fa-solid fa-list-ol"></i>
+                                <span>PROCESSING QUEUE</span>
+                                <span id="queueCount" class="text-xs px-2 py-0.5 bg-zinc-800 rounded-full font-mono"></span>
+                            </div>
+                        </div>
+                        <div id="queueList" class="space-y-2 max-h-48 overflow-auto pr-2 text-sm">
+                            <!-- Populated dynamically by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voice Note Section (new) -->
+            <div class="mb-8">
+                <div class="section-header mb-3 flex items-center gap-x-2">
+                    <i class="fa-solid fa-microphone text-xs"></i>
+                    <span>VOICE NOTE — OPTIONAL OVERLAY</span>
+                </div>
+                
+                <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-5">
+                    <div class="flex flex-wrap items-center gap-4">
+                        <button id="recordBtn" onclick="toggleVoiceRecording()"
+                                class="px-5 py-2.5 text-sm font-semibold border border-zinc-700 hover:bg-zinc-800 active:bg-zinc-950 transition-all rounded-2xl flex items-center gap-x-2">
+                            <i class="fa-solid fa-microphone"></i>
+                            <span id="recordBtnText">RECORD VOICE NOTE</span>
+                        </button>
+                        
+                        <div id="voiceNoteControls" class="hidden flex items-center gap-3">
+                            <button onclick="playVoiceNote()" class="px-4 py-2 text-xs border border-zinc-700 rounded-xl flex items-center gap-x-1.5 hover:bg-zinc-800">
+                                <i class="fa-solid fa-play"></i> <span>PLAY</span>
+                            </button>
+                            <button onclick="clearVoiceNote()" class="px-4 py-2 text-xs border border-red-800/60 text-red-300 rounded-xl flex items-center gap-x-1.5 hover:bg-red-950">
+                                <i class="fa-solid fa-trash"></i> <span>CLEAR</span>
+                            </button>
+                            <span id="voiceDuration" class="text-xs font-mono text-emerald-400"></span>
+                        </div>
+                        
+                        <div class="flex items-center gap-x-2 ml-auto">
+                            <label class="flex items-center gap-x-2 cursor-pointer text-sm">
+                                <input type="checkbox" id="overlayVoiceCheckbox" checked class="accent-amber-400 w-4 h-4">
+                                <span class="text-xs">Overlay on processed audio</span>
+                            </label>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-zinc-500 mt-3 font-mono">Short personal message • mixed at -12dB • or disable for metadata-only</p>
+                </div>
+            </div>
+
+            <!-- The Main Action Button -->
+            <div>
+                <button id="retouchBtn"
+                        onclick="handleRetouchClick()"
+                        disabled
+                        class="retouch-btn neon-button w-full py-7 rounded-3xl text-xl font-bold flex items-center justify-center gap-x-3 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:transform-none">
+                    <div class="flex items-center gap-x-3">
+                        <i class="fa-solid fa-magic text-2xl"></i>
+                        <span id="retouchBtnText">PROCESS QUEUE — TAP NFC</span>
+                    </div>
+                </button>
+                <p class="text-center text-xs text-zinc-500 mt-3 font-mono tracking-[1px]">NFC AUTHORIZES THE ENTIRE BATCH • ONE TAP FOR ALL</p>
+            </div>
+
+            <!-- Original Players (for queue preview) -->
+            <div id="originalPlayersSection" class="hidden mt-8 pt-6 border-t border-zinc-800">
+                <div class="section-header mb-3">LOADED TRACKS PREVIEW</div>
+                <div id="originalPlayersList" class="space-y-4"></div>
+            </div>
+
+            <!-- Cinematic Output Section -->
+            <div id="cinematicSection" class="hidden mt-8 pt-6 border-t border-zinc-800">
+                <div class="flex items-center justify-between mb-3 px-1">
+                    <div class="section-header flex items-center gap-x-2">
+                        <span>PROCESSED OUTPUTS</span>
+                        <span class="px-2 py-px text-[9px] font-mono bg-amber-400/10 text-amber-400 rounded">BATCH COMPLETE</span>
+                    </div>
+                </div>
+                
+                <div id="cinematicOutputsList" class="space-y-4">
+                    <!-- Populated with cards for each processed track -->
+                </div>
+
+                <!-- Ecosystem Integration -->
+                <div class="mt-6 p-5 bg-zinc-950 border border-zinc-800 rounded-2xl">
+                    <div class="section-header mb-3 flex items-center gap-x-2">
+                        <i class="fa-solid fa-share-alt text-xs"></i>
+                        <span>JUICE ECOSYSTEM — ONE-CLICK SEND</span>
+                    </div>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="exportForLuna()" 
+                                class="flex-1 px-5 py-3 text-sm font-semibold bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 rounded-2xl flex items-center justify-center gap-x-2 transition-colors">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>EXPORT FOR LUNA</span>
+                        </button>
+                        <button onclick="exportForSonicPostcards()" 
+                                class="flex-1 px-5 py-3 text-sm font-semibold bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 rounded-2xl flex items-center justify-center gap-x-2 transition-colors">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>EXPORT FOR SONIC POSTCARDS</span>
+                        </button>
+                    </div>
+                    <p class="text-center text-xs text-zinc-500 mt-3 font-mono">Downloads WAV + metadata JSON ready for import into your other apps</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer info -->
+        <div class="mt-8 text-center">
+            <div class="text-xs text-zinc-500 font-mono tracking-widest">100% LOCAL • NO SERVERS • NFC PHYSICAL KEYS • BATCH + VOICE + MULTI-ROOM</div>
+            <div class="text-[10px] text-zinc-600 mt-1">Best on Chrome Android • Program your own NFC room cards • Integrates with Luna &amp; Sonic Postcards</div>
+        </div>
+    </div>
+
+    <!-- Processing Modal with Darkroom Film-Burn -->
+    <div id="processingModal" class="hidden fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-6">
+        <div class="max-w-md w-full text-center relative">
+            <!-- Darkroom film-burn overlay -->
+            <div class="film-burn rounded-3xl"></div>
+            
+            <div class="relative z-30">
+                <div class="mb-8">
+                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full border border-amber-400/30 mb-6 relative">
+                        <i class="fa-solid fa-film text-5xl text-amber-400 film-reel"></i>
+                        <div class="absolute inset-0 rounded-full border border-amber-400/20 animate-ping"></div>
+                    </div>
+                    <div class="font-display text-3xl tracking-tighter mb-1 darkroom-text">DARKROOM • EXPOSING</div>
+                    <div id="processingTitle" class="text-amber-400/80 text-sm tracking-[4px] font-mono">CINEMATIC RE-ROOM IN PROGRESS</div>
+                </div>
+                
+                <div class="w-full bg-zinc-900 h-2 rounded-full overflow-hidden mb-4 border border-zinc-800">
+                    <div id="progressBar" 
+                         class="h-2 bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-400 transition-all duration-300"
+                         style="width: 0%"></div>
+                </div>
+                <div id="progressText" class="text-xs font-mono text-zinc-400 tracking-widest">PREPARING NEGATIVE • 0%</div>
+                
+                <div class="mt-8 text-xs text-zinc-400 max-w-[280px] mx-auto leading-relaxed">
+                    Burning in selected room acoustics • Early reflections • Long cinematic tail
+                </div>
+                
+                <div id="currentTrackInfo" class="mt-4 text-xs font-mono text-amber-300/70"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] flex flex-col gap-y-2 items-center"></div>
+
+    <script>
+        // Tailwind + config
+        function initTailwind() {
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            'display': ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif']
+                        }
+                    }
+                }
+            };
+        }
+
+        // ==================== ROOM PRESETS ====================
+        const roomPresets = {
+            'intimate-studio': { 
+                name: 'Intimate Studio', 
+                decay: 1.55, 
+                duration: 2.1, 
+                earlyRefl: 0.85, 
+                lowShelf: 3.2, 
+                highCut: 13500,
+                description: 'Warm & close • Quick reflections'
+            },
+            'scoring-stage': { 
+                name: 'Scoring Stage', 
+                decay: 1.85, 
+                duration: 3.8, 
+                earlyRefl: 0.55, 
+                lowShelf: 5.5, 
+                highCut: 11500,
+                description: 'Balanced cinematic • Film scoring classic'
+            },
+            'concert-hall': { 
+                name: 'Concert Hall', 
+                decay: 2.15, 
+                duration: 5.6, 
+                earlyRefl: 0.35, 
+                lowShelf: 4.8, 
+                highCut: 9800,
+                description: 'Spacious & lush • Natural reverb tail'
+            },
+            'cathedral': { 
+                name: 'Cathedral', 
+                decay: 2.45, 
+                duration: 8.2, 
+                earlyRefl: 0.22, 
+                lowShelf: 6.5, 
+                highCut: 8200,
+                description: 'Epic & cavernous • Long sacred tail'
+            }
+        };
+
+        let selectedPreset = 'scoring-stage';
+        let processingQueue = [];
+        let voiceNoteBlob = null;
+        let mediaRecorder = null;
+        let audioChunks = [];
+        let isRecording = false;
+        let lastProcessedOutputs = []; // for export
+
+        function updatePresetUI() {
+            const grid = document.getElementById('presetGrid');
+            grid.innerHTML = '';
+            
+            Object.keys(roomPresets).forEach(key => {
+                const preset = roomPresets[key];
+                const isActive = key === selectedPreset;
+                
+                const card = document.createElement('div');
+                card.className = `preset-card bg-zinc-900 border border-zinc-700 rounded-2xl p-4 cursor-pointer ${isActive ? 'active' : ''}`;
+                card.innerHTML = `
+                    <div class="font-semibold text-sm mb-1">${preset.name}</div>
+                    <div class="text-xs text-zinc-400 mb-2">${preset.description}</div>
+                    <div class="flex justify-between text-[10px] font-mono text-zinc-500">
+                        <div>Decay: ${preset.decay}s</div>
+                        <div>Early: ${Math.round(preset.earlyRefl * 100)}%</div>
+                    </div>
+                `;
+                
+                card.onclick = () => {
+                    selectedPreset = key;
+                    updatePresetUI();
+                    showToast(`Room preset changed to ${preset.name}`, 'success');
+                };
+                
+                grid.appendChild(card);
+            });
+            
+            // Also update write select
+            const writeSelect = document.getElementById('writePresetSelect');
+            if (writeSelect) {
+                writeSelect.innerHTML = '';
+                Object.keys(roomPresets).forEach(key => {
+                    const opt = document.createElement('option');
+                    opt.value = key;
+                    opt.textContent = roomPresets[key].name;
+                    if (key === selectedPreset) opt.selected = true;
+                    writeSelect.appendChild(opt);
+                });
+            }
+        }
+
+        function setSelectedPreset(key) {
+            if (roomPresets[key]) {
+                selectedPreset = key;
+                updatePresetUI();
+            }
+        }
+
+        // ==================== NFC ENHANCED ====================
+        function updateNFCStatus(connected = false, info = '') {
+            console.log('NFC status updated (batch mode)');
+        }
+
+        async function requestNFCAuth() {
+            return new Promise((resolve, reject) => {
+                if (!('NDEFReader' in window)) {
+                    const proceed = confirm(
+                        "Web NFC not supported on this device.\n\n" +
+                        "Simulate NFC tap for demo? (You can still program cards on supported devices)"
+                    );
+                    if (proceed) {
+                        resolve({ serialNumber: 'SIMULATED-' + Date.now().toString(36).slice(-8), simulated: true });
+                    } else {
+                        reject(new Error('NFC required for processing'));
+                    }
+                    return;
+                }
+
+                const ndef = new NDEFReader();
+                let timeoutId = null;
+
+                ndef.scan()
+                    .then(() => {
+                        ndef.onreading = (event) => {
+                            clearTimeout(timeoutId);
+                            
+                            let presetFromCard = null;
+                            let serial = event.serialNumber || 'UNKNOWN';
+                            
+                            if (event.message && event.message.records) {
+                                for (const record of event.message.records) {
+                                    if (record.recordType === 'text') {
+                                        try {
+                                            const textDecoder = new TextDecoder();
+                                            const text = textDecoder.decode(record.data);
+                                            if (text.startsWith('JUICE-ROOM:')) {
+                                                const presetId = text.split(':')[1];
+                                                if (roomPresets[presetId]) {
+                                                    presetFromCard = presetId;
+                                                }
+                                            }
+                                        } catch(e) {}
+                                    }
+                                }
+                            }
+                            
+                            const shortSerial = serial.length > 12 ? serial.slice(0,8) + '...' : serial;
+                            
+                            resolve({ 
+                                serialNumber: serial, 
+                                shortSerial: shortSerial,
+                                timestamp: Date.now(),
+                                presetFromCard: presetFromCard
+                            });
+                        };
+
+                        timeoutId = setTimeout(() => {
+                            reject(new Error('NFC tap timeout — please tap your programmed card'));
+                        }, 28000);
+                    })
+                    .catch((err) => {
+                        reject(new Error('NFC scan failed: ' + (err.message || 'Check permissions/hardware')));
+                    });
+            });
+        }
+
+        async function writePresetToNFC() {
+            const select = document.getElementById('writePresetSelect');
+            const presetKey = select.value;
+            const presetName = roomPresets[presetKey].name;
+            
+            if (!('NDEFWriter' in window)) {
+                alert('NFC writing requires Chrome on Android with NFC support.\n\nOn supported devices you can program cards with preset IDs.');
+                return;
+            }
+            
+            try {
+                const ndef = new NDEFWriter();
+                await ndef.write({
+                    records: [{
+                        recordType: "text",
+                        data: `JUICE-ROOM:${presetKey}`
+                    }]
+                });
+                
+                showToast(`NFC card programmed with "${presetName}"`, 'success');
+                
+                setTimeout(() => {
+                    selectedPreset = presetKey;
+                    updatePresetUI();
+                }, 800);
+                
+            } catch (err) {
+                showToast('Failed to write to NFC card. Make sure tag is writable and close.', 'error');
+                console.error(err);
+            }
+        }
+
+        // ==================== VOICE NOTE ====================
+        async function toggleVoiceRecording() {
+            const btn = document.getElementById('recordBtn');
+            const controls = document.getElementById('voiceNoteControls');
+            const btnText = document.getElementById('recordBtnText');
+            
+            if (!isRecording) {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    audioChunks = [];
+                    
+                    mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+                    mediaRecorder.onstop = () => {
+                        voiceNoteBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                        stream.getTracks().forEach(track => track.stop());
+                        
+                        controls.classList.remove('hidden');
+                        btnText.innerHTML = 'RE-RECORD';
+                        btn.classList.add('!border-emerald-400', '!text-emerald-300');
+                        
+                        const durationEl = document.getElementById('voiceDuration');
+                        durationEl.textContent = `~${Math.round(audioChunks.length * 0.1)}s`;
+                        
+                        showToast('Voice note recorded — will overlay if enabled', 'success');
+                    };
+                    
+                    mediaRecorder.start();
+                    isRecording = true;
+                    btnText.innerHTML = '<i class="fa-solid fa-stop mr-2"></i> STOP RECORDING';
+                    btn.classList.add('!bg-red-950', '!border-red-600', '!text-red-300');
+                    
+                } catch (err) {
+                    showToast('Microphone access denied or not available', 'error');
+                }
+            } else {
+                if (mediaRecorder && mediaRecorder.state === 'recording') {
+                    mediaRecorder.stop();
+                }
+                isRecording = false;
+                btn.classList.remove('!bg-red-950', '!border-red-600', '!text-red-300');
+            }
+        }
+
+        function playVoiceNote() {
+            if (!voiceNoteBlob) return;
+            const audio = new Audio(URL.createObjectURL(voiceNoteBlob));
+            audio.play();
+        }
+
+        function clearVoiceNote() {
+            voiceNoteBlob = null;
+            document.getElementById('voiceNoteControls').classList.add('hidden');
+            const btn = document.getElementById('recordBtn');
+            btn.classList.remove('!border-emerald-400', '!text-emerald-300');
+            document.getElementById('recordBtnText').innerHTML = 'RECORD VOICE NOTE';
+            document.getElementById('voiceDuration').textContent = '';
+            showToast('Voice note cleared');
+        }
+
+        // ==================== QUEUE MANAGEMENT ====================
+        function addToQueue(file) {
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                try {
+                    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    const arrayBuffer = e.target.result;
+                    const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+                    
+                    const queueItem = {
+                        id: Date.now() + Math.random(),
+                        name: file.name,
+                        buffer: audioBuffer,
+                        file: file,
+                        duration: audioBuffer.duration,
+                        size: file.size
+                    };
+                    
+                    processingQueue.push(queueItem);
+                    updateQueueUI();
+                    updateRetouchButtonState();
+                    
+                    showToast(`Added to queue: ${file.name}`, 'success');
+                    
+                } catch (err) {
+                    showToast('Failed to decode one of the tracks', 'error');
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        function updateQueueUI() {
+            const section = document.getElementById('queueSection');
+            const list = document.getElementById('queueList');
+            const countEl = document.getElementById('queueCount');
+            
+            if (processingQueue.length === 0) {
+                section.classList.add('hidden');
+                return;
+            }
+            
+            section.classList.remove('hidden');
+            list.innerHTML = '';
+            countEl.textContent = processingQueue.length;
+            
+            processingQueue.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = `queue-item flex items-center justify-between bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-sm`;
+                div.innerHTML = `
+                    <div class="flex items-center gap-x-3 min-w-0">
+                        <i class="fa-solid fa-music text-amber-400/70"></i>
+                        <div class="min-w-0">
+                            <div class="track-name truncate max-w-[220px]">${item.name}</div>
+                            <div class="text-xs text-zinc-500 font-mono">${formatDuration(item.duration)} • ${formatBytes(item.size)}</div>
+                        </div>
+                    </div>
+                    <button onclick="removeFromQueue(${index})" class="text-red-400 hover:text-red-300 p-1">
+                        <i class="fa-solid fa-times"></i>
+                    </button>
+                `;
+                list.appendChild(div);
+            });
+            
+            updateOriginalPreview();
+        }
+
+        function removeFromQueue(index) {
+            processingQueue.splice(index, 1);
+            updateQueueUI();
+            updateRetouchButtonState();
+        }
+
+        function clearQueue() {
+            processingQueue = [];
+            updateQueueUI();
+            updateRetouchButtonState();
+            document.getElementById('originalPlayersSection').classList.add('hidden');
+            lastProcessedOutputs = [];
+            document.getElementById('cinematicSection').classList.add('hidden');
+        }
+
+        function updateOriginalPreview() {
+            const section = document.getElementById('originalPlayersSection');
+            const list = document.getElementById('originalPlayersList');
+            
+            if (processingQueue.length === 0) {
+                section.classList.add('hidden');
+                return;
+            }
+            
+            section.classList.remove('hidden');
+            list.innerHTML = '';
+            
+            processingQueue.forEach((item, idx) => {
+                const url = URL.createObjectURL(item.file);
+                const div = document.createElement('div');
+                div.className = 'bg-zinc-900 border border-zinc-800 rounded-2xl p-4';
+                div.innerHTML = `
+                    <div class="flex justify-between items-center mb-2">
+                        <div class="text-sm font-medium truncate">${item.name}</div>
+                        <div class="text-xs text-zinc-500 font-mono">${formatDuration(item.duration)}</div>
+                    </div>
+                    <audio controls class="w-full accent-amber-400" src="${url}"></audio>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        function updateRetouchButtonState() {
+            const btn = document.getElementById('retouchBtn');
+            const text = document.getElementById('retouchBtnText');
+            
+            const hasQueue = processingQueue.length > 0;
+            btn.disabled = !hasQueue;
+            
+            if (hasQueue) {
+                btn.classList.remove('opacity-40');
+                text.innerHTML = `PROCESS QUEUE (${processingQueue.length}) — TAP NFC`;
+            } else {
+                btn.classList.add('opacity-40');
+                text.innerHTML = 'ADD TRACKS TO QUEUE';
+            }
+        }
+
+        // ==================== PROCESSING WITH PRESET + VOICE + BATCH ====================
+        function createCinematicImpulse(audioContext, presetKey) {
+            const p = roomPresets[presetKey];
+            const length = Math.floor(audioContext.sampleRate * p.duration);
+            const impulse = audioContext.createBuffer(2, length, audioContext.sampleRate);
+            const left = impulse.getChannelData(0);
+            const right = impulse.getChannelData(1);
+            
+            for (let i = 0; i < length; i++) {
+                const progress = i / length;
+                let env = Math.pow(1 - progress, p.decay);
+                
+                if (progress < 0.12) {
+                    env *= (1 + p.earlyRefl * 1.8);
+                }
+                if (progress > 0.03 && progress < 0.11) {
+                    env *= (1 + p.earlyRefl * 0.9);
+                }
+                
+                const noiseL = (Math.random() * 2 - 1) * 0.9;
+                const noiseR = (Math.random() * 2 - 1) * 0.9;
+                
+                left[i] = noiseL * env;
+                right[i] = noiseR * env;
+            }
+            return impulse;
+        }
+
+        async function performCinematicRetouch(audioBuffer, presetKey) {
+            const p = roomPresets[presetKey];
+            const sampleRate = audioBuffer.sampleRate;
+            const numChannels = 2;
+            const tailSeconds = p.duration + 1.5;
+            const offlineLength = Math.ceil((audioBuffer.duration + tailSeconds) * sampleRate);
+            
+            const offlineCtx = new OfflineAudioContext(numChannels, offlineLength, sampleRate);
+            
+            const source = offlineCtx.createBufferSource();
+            source.buffer = audioBuffer;
+            
+            const lowShelf = offlineCtx.createBiquadFilter();
+            lowShelf.type = 'lowshelf';
+            lowShelf.frequency.value = 280;
+            lowShelf.gain.value = p.lowShelf;
+            
+            const highCut = offlineCtx.createBiquadFilter();
+            highCut.type = 'lowpass';
+            highCut.frequency.value = p.highCut;
+            highCut.Q.value = 0.7;
+            
+            const compressor = offlineCtx.createDynamicsCompressor();
+            compressor.threshold.value = -22;
+            compressor.knee.value = 28;
+            compressor.ratio.value = 3.2;
+            compressor.attack.value = 0.004;
+            compressor.release.value = 0.28;
+            
+            const convolver = offlineCtx.createConvolver();
+            convolver.buffer = createCinematicImpulse(offlineCtx, presetKey);
+            
+            const masterGain = offlineCtx.createGain();
+            masterGain.gain.value = 0.92;
+            
+            source.connect(lowShelf);
+            lowShelf.connect(highCut);
+            highCut.connect(compressor);
+            compressor.connect(convolver);
+            convolver.connect(masterGain);
+            masterGain.connect(offlineCtx.destination);
+            
+            source.start(0);
+            let renderedBuffer = await offlineCtx.startRendering();
+            
+            if (document.getElementById('overlayVoiceCheckbox').checked && voiceNoteBlob) {
+                try {
+                    const voiceCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    const voiceArray = await voiceNoteBlob.arrayBuffer();
+                    const voiceBuffer = await voiceCtx.decodeAudioData(voiceArray);
+                    
+                    const mixLength = Math.max(renderedBuffer.length, Math.floor(voiceBuffer.duration * sampleRate) + 2000);
+                    const mixedBuffer = offlineCtx.createBuffer(2, mixLength, sampleRate);
+                    
+                    for (let ch = 0; ch < 2; ch++) {
+                        const renderedData = renderedBuffer.getChannelData(ch);
+                        const mixedData = mixedBuffer.getChannelData(ch);
+                        for (let i = 0; i < renderedData.length; i++) {
+                            mixedData[i] = renderedData[i];
+                        }
+                    }
+                    
+                    const voiceData = voiceBuffer.getChannelData(0);
+                    const voiceGain = 0.28;
+                    const voiceStart = 800;
+                    
+                    for (let i = 0; i < voiceData.length; i++) {
+                        const idx = voiceStart + i;
+                        if (idx < mixLength) {
+                            const v = voiceData[i] * voiceGain;
+                            mixedBuffer.getChannelData(0)[idx] += v * 0.7;
+                            mixedBuffer.getChannelData(1)[idx] += v * 0.7;
+                        }
+                    }
+                    
+                    renderedBuffer = mixedBuffer;
+                } catch (e) {
+                    console.warn('Voice overlay failed, continuing without', e);
+                }
+            }
+            
+            return renderedBuffer;
+        }
+
+        function audioBufferToWav(buffer) {
+            const numChannels = buffer.numberOfChannels;
+            const sampleRate = buffer.sampleRate;
+            const format = 1;
+            const bitDepth = 16;
+            const bytesPerSample = bitDepth / 8;
+            const blockAlign = numChannels * bytesPerSample;
+            const samples = buffer.length;
+            const dataSize = samples * blockAlign;
+            const bufferSize = 44 + dataSize;
+            
+            const arrayBuffer = new ArrayBuffer(bufferSize);
+            const view = new DataView(arrayBuffer);
+            let pos = 0;
+            
+            const writeString = (str) => { for (let i = 0; i < str.length; i++) view.setUint8(pos + i, str.charCodeAt(i)); pos += str.length; };
+            const writeUint16 = (val) => { view.setUint16(pos, val, true); pos += 2; };
+            const writeUint32 = (val) => { view.setUint32(pos, val, true); pos += 4; };
+            
+            writeString('RIFF');
+            writeUint32(bufferSize - 8);
+            writeString('WAVE');
+            writeString('fmt ');
+            writeUint32(16);
+            writeUint16(format);
+            writeUint16(numChannels);
+            writeUint32(sampleRate);
+            writeUint32(sampleRate * blockAlign);
+            writeUint16(blockAlign);
+            writeUint16(bitDepth);
+            writeString('data');
+            writeUint32(dataSize);
+            
+            const channels = [];
+            for (let ch = 0; ch < numChannels; ch++) channels.push(buffer.getChannelData(ch));
+            
+            for (let i = 0; i < samples; i++) {
+                for (let ch = 0; ch < numChannels; ch++) {
+                    let sample = Math.max(-1, Math.min(1, channels[ch][i]));
+                    sample = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
+                    view.setInt16(pos, sample, true);
+                    pos += 2;
+                }
+            }
+            return arrayBuffer;
+        }
+
+        async function processSingleTrack(queueItem, presetKey) {
+            const modal = document.getElementById('processingModal');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            const currentInfo = document.getElementById('currentTrackInfo');
+            const titleEl = document.getElementById('processingTitle');
+            
+            currentInfo.textContent = `Processing: ${queueItem.name}`;
+            titleEl.textContent = `${roomPresets[presetKey].name.toUpperCase()} • DARKROOM`;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            progressBar.style.width = '8%';
+            progressText.textContent = 'EXPOSING NEGATIVE • 8%';
+            
+            let progress = 8;
+            const progressInterval = setInterval(() => {
+                progress += Math.random() * 9 + 4;
+                if (progress > 94) progress = 94;
+                progressBar.style.width = `${progress}%`;
+                
+                if (progress < 35) progressText.textContent = `BURNING EARLY REFLECTIONS • ${Math.floor(progress)}%`;
+                else if (progress < 68) progressText.textContent = `DEVELOPING ${roomPresets[presetKey].name} TAIL • ${Math.floor(progress)}%`;
+                else progressText.textContent = `FIXING CINEMATIC PRINT • ${Math.floor(progress)}%`;
+            }, 380);
+            
+            try {
+                const rendered = await performCinematicRetouch(queueItem.buffer, presetKey);
+                const wavArray = audioBufferToWav(rendered);
+                const blob = new Blob([wavArray], { type: 'audio/wav' });
+                const url = URL.createObjectURL(blob);
+                
+                clearInterval(progressInterval);
+                progressBar.style.width = '100%';
+                progressText.textContent = 'PRINT COMPLETE • 100%';
+                
+                await new Promise(r => setTimeout(r, 650));
+                
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+                
+                return {
+                    name: queueItem.name,
+                    url: url,
+                    blob: blob,
+                    preset: presetKey,
+                    presetName: roomPresets[presetKey].name,
+                    duration: rendered.duration,
+                    voiceIncluded: document.getElementById('overlayVoiceCheckbox').checked && !!voiceNoteBlob
+                };
+                
+            } catch (err) {
+                clearInterval(progressInterval);
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+                throw err;
+            }
+        }
+
+        async function handleRetouchClick() {
+            if (processingQueue.length === 0) {
+                showToast('Add tracks to the queue first', 'error');
+                return;
+            }
+            
+            const btn = document.getElementById('retouchBtn');
+            const originalText = document.getElementById('retouchBtnText').innerHTML;
+            
+            btn.disabled = true;
+            document.getElementById('retouchBtnText').innerHTML = 'AUTHORIZING WITH NFC...';
+            
+            try {
+                const nfcResult = await requestNFCAuth();
+                
+                if (nfcResult.presetFromCard) {
+                    selectedPreset = nfcResult.presetFromCard;
+                    updatePresetUI();
+                    showToast(`NFC card loaded preset: ${roomPresets[selectedPreset].name}`, 'nfc');
+                } else {
+                    showToast('NFC verified — processing batch', 'success');
+                }
+                
+                lastProcessedOutputs = [];
+                const outputsList = document.getElementById('cinematicOutputsList');
+                outputsList.innerHTML = '';
+                
+                for (let i = 0; i < processingQueue.length; i++) {
+                    const item = processingQueue[i];
+                    document.getElementById('retouchBtnText').innerHTML = `PROCESSING ${i+1}/${processingQueue.length}...`;
+                    
+                    const result = await processSingleTrack(item, selectedPreset);
+                    lastProcessedOutputs.push(result);
+                    
+                    addProcessedOutputCard(result, outputsList);
+                }
+                
+                document.getElementById('cinematicSection').classList.remove('hidden');
+                showToast(`Batch complete! ${lastProcessedOutputs.length} cinematic tracks ready`, 'success');
+                
+            } catch (err) {
+                showToast(err.message || 'Processing failed', 'error');
+            } finally {
+                btn.disabled = false;
+                document.getElementById('retouchBtnText').innerHTML = originalText;
+                updateRetouchButtonState();
+            }
+        }
+
+        function addProcessedOutputCard(result, container) {
+            const card = document.createElement('div');
+            card.className = 'cinema-card border border-amber-400/20 rounded-2xl p-5 cinematic-glow';
+            card.innerHTML = `
+                <div class="flex justify-between items-start mb-3">
+                    <div>
+                        <div class="font-semibold">${result.name}</div>
+                        <div class="text-xs text-amber-400 font-mono">${result.presetName} • ${formatDuration(result.duration)}</div>
+                        ${result.voiceIncluded ? '<div class="text-xs text-emerald-400 mt-0.5">+ Voice note overlay</div>' : ''}
+                    </div>
+                    <div class="text-right">
+                        <button onclick="downloadSingleOutput('${result.url}', '${result.name}', '${result.preset}')" 
+                                class="text-xs px-4 py-1.5 border border-zinc-700 hover:bg-zinc-800 rounded-xl flex items-center gap-x-1">
+                            <i class="fa-solid fa-download"></i> <span>DOWNLOAD</span>
+                        </button>
+                    </div>
+                </div>
+                <audio controls class="w-full accent-amber-400 mb-2" src="${result.url}"></audio>
+            `;
+            container.appendChild(card);
+        }
+
+        function downloadSingleOutput(url, originalName, preset) {
+            const link = document.createElement('a');
+            const base = originalName.replace(/\.[^/.]+$/, '');
+            link.download = `juice-${preset}-${base}.wav`;
+            link.href = url;
+            link.click();
+        }
+
+        // ==================== ECOSYSTEM EXPORT ====================
+        function exportForLuna() {
+            if (lastProcessedOutputs.length === 0) {
+                showToast('Process some tracks first', 'error');
+                return;
+            }
+            
+            const last = lastProcessedOutputs[lastProcessedOutputs.length - 1];
+            const meta = {
+                app: "Juice Cinema",
+                exportedFor: "Luna",
+                trackName: last.name,
+                preset: last.preset,
+                presetName: last.presetName,
+                duration: last.duration,
+                voiceNoteIncluded: last.voiceIncluded,
+                timestamp: new Date().toISOString(),
+                roomCharacter: roomPresets[last.preset].description
+            };
+            
+            const jsonBlob = new Blob([JSON.stringify(meta, null, 2)], { type: 'application/json' });
+            const jsonLink = document.createElement('a');
+            jsonLink.download = `luna-import-${last.name.replace(/\.[^/.]+$/, '')}.json`;
+            jsonLink.href = URL.createObjectURL(jsonBlob);
+            jsonLink.click();
+            
+            setTimeout(() => {
+                const wavLink = document.createElement('a');
+                wavLink.download = `luna-${last.name.replace(/\.[^/.]+$/, '')}.wav`;
+                wavLink.href = last.url;
+                wavLink.click();
+            }, 300);
+            
+            showToast('Luna export package ready (JSON + WAV)', 'success');
+        }
+
+        function exportForSonicPostcards() {
+            if (lastProcessedOutputs.length === 0) {
+                showToast('Process some tracks first', 'error');
+                return;
+            }
+            
+            const last = lastProcessedOutputs[lastProcessedOutputs.length - 1];
+            const meta = {
+                app: "Juice Cinema",
+                exportedFor: "Sonic Postcards",
+                trackName: last.name,
+                presetUsed: last.presetName,
+                cinematicRoom: roomPresets[last.preset].description,
+                duration: last.duration,
+                hasVoiceOverlay: last.voiceIncluded,
+                recommendedUse: "Emotional gift / personal soundtrack",
+                timestamp: new Date().toISOString()
+            };
+            
+            const jsonBlob = new Blob([JSON.stringify(meta, null, 2)], { type: 'application/json' });
+            const jsonLink = document.createElement('a');
+            jsonLink.download = `sonic-postcard-${last.name.replace(/\.[^/.]+$/, '')}.json`;
+            jsonLink.href = URL.createObjectURL(jsonBlob);
+            jsonLink.click();
+            
+            setTimeout(() => {
+                const wavLink = document.createElement('a');
+                wavLink.download = `postcard-${last.name.replace(/\.[^/.]+$/, '')}.wav`;
+                wavLink.href = last.url;
+                wavLink.click();
+            }, 300);
+            
+            showToast('Sonic Postcards export ready — perfect for gifting', 'success');
+        }
+
+        // ==================== HELPERS ====================
+        function formatDuration(seconds) {
+            const min = Math.floor(seconds / 60);
+            const sec = Math.floor(seconds % 60);
+            return `${min}:${sec.toString().padStart(2, '0')}`;
+        }
+
+        function formatBytes(bytes) {
+            if (bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            
+            let icon = 'fa-info-circle';
+            let color = 'bg-zinc-800 border-zinc-700 text-zinc-200';
+            
+            if (type === 'success') { icon = 'fa-check-circle'; color = 'bg-emerald-950 border-emerald-800 text-emerald-300'; }
+            else if (type === 'error') { icon = 'fa-exclamation-circle'; color = 'bg-red-950 border-red-800 text-red-300'; }
+            else if (type === 'nfc') { icon = 'fa-wifi'; color = 'bg-amber-950 border-amber-700 text-amber-300'; }
+            
+            toast.className = `px-5 py-3 rounded-2xl border flex items-center gap-x-3 text-sm shadow-xl ${color} max-w-xs`;
+            toast.innerHTML = `<i class="fa-solid ${icon} flex-shrink-0"></i> <span>${message}</span>`;
+            
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.transition = 'all 0.3s ease';
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 220);
+            }, 2600);
+        }
+
+        // ==================== DROPZONE & INIT ====================
+        function setupDropzone() {
+            const dropzone = document.getElementById('dropzone');
+            const fileInput = document.getElementById('fileInput');
+            
+            dropzone.addEventListener('click', () => fileInput.click());
+            
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    Array.from(e.target.files).forEach(file => {
+                        if (file.type.startsWith('audio/') || /\.(mp3|wav|m4a|aac|ogg|flac)$/i.test(file.name)) {
+                            addToQueue(file);
+                        }
+                    });
+                    e.target.value = '';
+                }
+            });
+            
+            dropzone.addEventListener('dragover', e => { e.preventDefault(); dropzone.classList.add('dragover'); });
+            dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+            dropzone.addEventListener('drop', e => {
+                e.preventDefault();
+                dropzone.classList.remove('dragover');
+                Array.from(e.dataTransfer.files).forEach(file => {
+                    if (file.type.startsWith('audio/') || /\.(mp3|wav|m4a)$/i.test(file.name)) {
+                        addToQueue(file);
+                    }
+                });
+            });
+            
+            dropzone.setAttribute('tabindex', '0');
+            dropzone.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fileInput.click(); }
+            });
+        }
+
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', e => {
+                if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+                    e.preventDefault();
+                    const btn = document.getElementById('retouchBtn');
+                    if (!btn.disabled) btn.click();
+                }
+                if (e.key === 'Escape') {
+                    const modal = document.getElementById('processingModal');
+                    if (!modal.classList.contains('hidden')) {
+                        modal.classList.add('hidden');
+                        modal.classList.remove('flex');
+                    }
+                }
+            });
+            
+            let juiceCount = 0;
+            let lastJ = 0;
+            document.addEventListener('keypress', e => {
+                if (e.key.toLowerCase() === 'j') {
+                    const now = Date.now();
+                    if (now - lastJ < 550) juiceCount++; else juiceCount = 1;
+                    lastJ = now;
+                    if (juiceCount >= 3) {
+                        juiceCount = 0;
+                        const btn = document.getElementById('retouchBtn');
+                        if (btn) {
+                            btn.style.transitionDuration = '60ms';
+                            btn.style.transform = 'rotate(3deg)';
+                            setTimeout(() => { if (btn) btn.style.transform = 'rotate(-2deg)'; }, 80);
+                            setTimeout(() => { if (btn) btn.style.transform = ''; }, 160);
+                        }
+                        showToast('Juice mode engaged — all rooms unlocked 🍊', 'info');
+                    }
+                }
+            });
+        }
+
+        function initializeEverything() {
+            initTailwind();
+            setupDropzone();
+            setupKeyboardShortcuts();
+            
+            updatePresetUI();
+            
+            const writeSelect = document.getElementById('writePresetSelect');
+            if (writeSelect) {
+                Object.keys(roomPresets).forEach(key => {
+                    const opt = document.createElement('option');
+                    opt.value = key;
+                    opt.textContent = roomPresets[key].name;
+                    writeSelect.appendChild(opt);
+                });
+                writeSelect.value = selectedPreset;
+            }
+            
+            updateRetouchButtonState();
+            
+            console.log('%c[Juice Cinema v2] Multi-room • Batch • Voice • NFC cards • Ecosystem exports ready.', 'color:#52525b');
+        }
+
+        window.onload = initializeEverything;
+    </script>
+</body>
+</html>
