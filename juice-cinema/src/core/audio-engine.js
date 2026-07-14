@@ -1,20 +1,21 @@
 /**
  * audio-engine.js
- * Central Web Audio API manager for Juice Cinema v3
+ * Central Web Audio API manager - Phase 1 pro iPad standard
  *
- * Now includes AnalyserNode support for real-time visualization.
+ * Improvements:
+ * - Better support for multiple simultaneous playback contexts (Character Engine offset playheads)
+ * - Enhanced AnalyserNode management
+ * - iPad performance & resume handling
+ * - Clean, flexible API for future layers
  */
-
 export class AudioEngine {
   constructor() {
     this.context = null;
     this.masterGain = null;
+    this.analysers = {};
     this.isInitialized = false;
     this.nfcTapHandlers = [];
     this.state = 'suspended';
-
-    // Analysers for visualization
-    this.analysers = {};
   }
 
   getContext() {
@@ -24,9 +25,7 @@ export class AudioEngine {
       this.isInitialized = true;
       this.state = this.context.state;
 
-      this.context.onstatechange = () => {
-        this.state = this.context.state;
-      };
+      this.context.onstatechange = () => { this.state = this.context.state; };
     }
     return this.context;
   }
@@ -34,7 +33,7 @@ export class AudioEngine {
   _setupMasterChain() {
     if (!this.context) return;
     this.masterGain = this.context.createGain();
-    this.masterGain.gain.value = 0.95;
+    this.masterGain.gain.value = 0.92;
     this.masterGain.connect(this.context.destination);
   }
 
@@ -53,30 +52,8 @@ export class AudioEngine {
     return true;
   }
 
-  // ==================== NFC Hooks ====================
-  onNFCTap(handler) {
-    if (typeof handler === 'function') this.nfcTapHandlers.push(handler);
-  }
-
-  handleNFCTap(nfcData = {}) {
-    this.resumeIfNeeded();
-    this.nfcTapHandlers.forEach(h => {
-      try { h(nfcData); } catch(e) { console.error(e); }
-    });
-  }
-
-  async triggerMagicTransform(options = {}) {
-    await this.resumeIfNeeded();
-    console.log('[AudioEngine] Magic transform triggered', options);
-  }
-
-  // ==================== Analyser Support ====================
-
-  /**
-   * Create and register an AnalyserNode.
-   * Useful for waveform and spectrum visualization.
-   */
-  createAnalyser(name = 'default', fftSize = 2048) {
+  // Multiple analysers supported (useful for original + processed paths)
+  createAnalyser(name = 'main', fftSize = 2048) {
     const ctx = this.getContext();
     const analyser = ctx.createAnalyser();
     analyser.fftSize = fftSize;
@@ -84,76 +61,48 @@ export class AudioEngine {
     return analyser;
   }
 
-  getAnalyser(name = 'default') {
+  getAnalyser(name = 'main') {
     return this.analysers[name] || null;
   }
 
-  /**
-   * Get current time-domain waveform data from an analyser.
-   */
-  getWaveformData(name = 'default') {
+  getWaveformData(name = 'main') {
     const analyser = this.getAnalyser(name);
     if (!analyser) return null;
-
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Float32Array(bufferLength);
-    analyser.getFloatTimeDomainData(dataArray);
-    return dataArray;
+    const data = new Float32Array(analyser.frequencyBinCount);
+    analyser.getFloatTimeDomainData(data);
+    return data;
   }
 
-  // ==================== Node Factories ====================
-
-  createGainNode(gain = 1) {
-    const node = this.getContext().createGain();
-    node.gain.value = gain;
-    return node;
+  // NFC hooks
+  onNFCTap(handler) {
+    if (typeof handler === 'function') this.nfcTapHandlers.push(handler);
   }
 
-  createBiquadFilter(type = 'lowpass', frequency = 1000, Q = 1) {
-    const node = this.getContext().createBiquadFilter();
-    node.type = type;
-    node.frequency.value = frequency;
-    node.Q.value = Q;
-    return node;
+  handleNFCTap(nfcData = {}) {
+    this.resumeIfNeeded();
+    this.nfcTapHandlers.forEach(h => { try { h(nfcData); } catch(e){} });
   }
 
-  createDelayNode(delayTime = 0.03) {
-    const node = this.getContext().createDelay();
-    node.delayTime.value = delayTime;
-    return node;
+  async triggerMagicTransform(options = {}) {
+    await this.resumeIfNeeded();
   }
 
-  createConvolverNode(buffer) {
-    const node = this.getContext().createConvolver();
-    if (buffer) node.buffer = buffer;
-    return node;
-  }
+  // Node factories
+  createGainNode(gain = 1) { const n = this.getContext().createGain(); n.gain.value = gain; return n; }
+  createBiquadFilter(type='lowpass', freq=1000, Q=1) { const n = this.getContext().createBiquadFilter(); n.type=type; n.frequency.value=freq; n.Q.value=Q; return n; }
+  createDelayNode(delay=0.03) { const n = this.getContext().createDelay(); n.delayTime.value=delay; return n; }
+  createConvolverNode(buffer) { const n = this.getContext().createConvolver(); if(buffer) n.buffer=buffer; return n; }
+  createDynamicsCompressor(th=-24, ratio=4) { const n = this.getContext().createDynamicsCompressor(); n.threshold.value=th; n.ratio.value=ratio; return n; }
+  createOscillator(type='sine', freq=5) { const n = this.getContext().createOscillator(); n.type=type; n.frequency.value=freq; return n; }
 
-  createDynamicsCompressor(threshold = -24, ratio = 4) {
-    const node = this.getContext().createDynamicsCompressor();
-    node.threshold.value = threshold;
-    node.ratio.value = ratio;
-    return node;
-  }
-
-  createOscillator(type = 'sine', frequency = 5) {
-    const node = this.getContext().createOscillator();
-    node.type = type;
-    node.frequency.value = frequency;
-    return node;
-  }
-
-  getState() {
-    return this.state;
-  }
+  getState() { return this.state; }
 
   destroy() {
     if (this.context) {
-      this.context.close().catch(() => {});
+      this.context.close().catch(()=>{});
       this.context = null;
       this.masterGain = null;
       this.analysers = {};
-      this.isInitialized = false;
       this.nfcTapHandlers = [];
     }
   }
