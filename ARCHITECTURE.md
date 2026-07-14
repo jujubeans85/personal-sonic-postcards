@@ -1,112 +1,132 @@
-# Juice Cinema Architecture v2 (July 2026)
+# Juice Cinema Architecture v3 (July 2026)
 
-**Status**: Refactored direction after deep analysis
-
-This document defines the long-term layered architecture for Juice Cinema, incorporating lessons from the initial V3 build.
+**Status**: Updated with M4 Mini + iOS split strategy and clearer terminology
 
 ---
 
 ## Core Philosophy
 
-- **Preserve the magic first** — The current "accidental" offset/second-playhead behaviour has genuine creative value. It should be intentionally preserved and evolved as a **Character Engine** rather than cleaned up too early.
-- **Hybridity over purity** — True stem separation and character-based processing can (and should) coexist.
-- **Creator depth + Gift simplicity** — Deep, tactile control for the maker. Simple, magical one-tap experiences for recipients.
-- **Flexible, pro iPad-friendly foundation** — All modules should be built to a high standard that works well on iPad while remaining easy to evolve.
+- **Preserve the magic first** — The current offset/second-playhead behaviour is creatively valuable. It should be treated as a deliberate **Character Engine** feature rather than accidental behaviour.
+- **Hybridity over purity** — Character Engine and True Stem Engine can coexist.
+- **Creator power vs Recipient simplicity** — Heavy, high-quality work happens on powerful machines (M4 Mini / Mac Studio). Gift recipients get a lightweight, magical experience on iOS/iPadOS.
+- **Flexible, future-proof modules** — All code should be easy to evolve without major rewrites.
 
 ---
 
-## Four-Layer Architecture
+## Terminology Clarification
 
-### 1. Character Engine (Current Magic — Preserve & Evolve)
+| Old / Misleading Term     | Better Term                  | Description |
+|---------------------------|------------------------------|-----------|
+| Stem controls / Stem Mixer | Character Engine            | Parallel full-mix processing with intentional timing offsets |
+| Future real stem work      | True Stem Engine            | Actual source-separated audio streams (Vocals, Drums, Bass, etc.) |
 
-**Purpose**: The creative heart of the current system. Processes full-mix copies through parallel character paths with intentional timing offsets.
+---
 
-**Key Behaviours to Preserve**:
-- Parallel full-mix processing paths (labelled as frequency/character regions rather than literal stems)
-- Intentional second playhead / offset behaviour (Sync / Drift / Free modes)
-- Random but reproducible room/character generation
-- Macro + targeted controls that affect the whole character
+## Four-Layer Architecture + Hardware Split
 
-**Future Naming**:
-- Rename controls honestly (e.g. "Texture", "Movement", "Width", "Air" instead of claiming literal stem separation)
-- Expose **Sync / Drift / Free** modes for the second playhead explicitly
+### 1. Character Engine (Preserve & Evolve)
 
-**Status**: Currently exists in V3 (needs honest relabelling + intentional offset controls)
+**Purpose**: The current creative magic. Processes full-mix copies through parallel character paths with intentional timing offsets.
+
+**Key Features**:
+- Parallel full-mix processing
+- Intentional second playhead (Sync / Drift / Free modes)
+- Macro + targeted character controls
+- Reproducible random room/character generation
+
+**Hardware**:
+- Creator work can happen on M4 Mini for faster iteration and higher quality
+- Gift recipients experience a lightweight version on iOS
+
+**Status**: Exists in V3. Needs honest relabelling and explicit playhead mode controls.
 
 ---
 
 ### 2. True Stem Engine (Future Layer)
 
-**Purpose**: Actual source-separated stem processing (Vocals, Drums, Bass, Harmony/Instruments, Atmosphere/Other).
+**Purpose**: Real source-separated stem processing for when precision is needed.
 
 **Approach**:
-- Built on top of the same AudioEngine infrastructure
+- Built on the same AudioEngine foundation
 - Can run alongside or instead of the Character Engine
-- Allows precise per-stem manipulation when needed
+- Best created on M4 Mini (more RAM/CPU for AI-assisted separation if used)
+- Delivered results must still run well on iOS
 
-**Status**: Not yet built. Planned for V4+
+**Status**: Not yet built. Planned for V4+.
 
 ---
 
 ### 3. Performance Capture Engine
 
-**Purpose**: Record exactly what the user hears and performs, including live slider moves, offsets, cuts, triggers, and gestures.
+**Purpose**: Record exactly what the user performs and hears (including live gestures and timing).
 
-**Core Requirements**:
-- Record master bus output in real time
-- Capture all live parameter changes and timing
-- Export WAV + small session JSON (for recall)
-- Include output limiter + metering
-- Support both creator performance capture and simple NFC gift recording
+**Requirements**:
+- Real-time master bus recording
+- Capture of live parameter changes and playhead offsets
+- Export WAV + session JSON
+- Include limiter and metering
 
-**Status**: Not yet built. High priority for V4
+**Hardware Note**: Heavy capture can be done on M4 Mini. Playback must work on iOS.
+
+**Status**: High priority for V4.
 
 ---
 
-### 4. Gift / NFC Layer
+### 4. Gift / NFC Receiver Layer (iOS Optimised)
 
-**Purpose**: Simple, magical recipient experience.
+**Purpose**: Simple, magical experience for card recipients.
 
 **Principles**:
 - One tap → emotional transformation
-- Pre-curated or lightly customisable by creator
-- Does **not** expose the full creator interface
-- Can use either Character Engine or True Stem Engine under the hood
+- Lightweight and fast on iOS/iPadOS
+- Minimal real-time processing on device
+- Pre-rendered or lightly processed audio preferred
+- Does **not** expose full creator controls
 
-**Status**: Partially exists (NFC ritual logic). Needs clean integration with the above layers.
+**Hardware Strategy**:
+- Creator prepares rich experiences on M4 Mini
+- Recipients get a curated, low-friction version on iOS
 
----
-
-## Current Modular Foundation (Being Built)
-
-- `src/core/audio-engine.js` — Central AudioContext + AnalyserNode management + NFC hooks
-- `src/core/stem-mixer.js` — Real-time manipulation layer (initially focused on Character Engine behaviour)
-- `src/ui/waveform-visualizer.js` — Live waveform + future spectrum support
-- `src/nfc-manager.js` — Physical NFC + ritual logic
-
-All modules are being brought to a **pro iPad-friendly standard** while remaining highly flexible for future evolution.
+**Status**: Partially exists. Needs clean integration with the other layers.
 
 ---
 
-## Design Principles for All Modules
+## Hardware Split Strategy (M4 Mini + iOS)
 
-- **iPad-first performance & touch** — Smooth 60fps visuals, large touch targets, minimal jank
-- **Flexible evolution** — Clear interfaces, minimal tight coupling, easy to extend or replace parts
-- **Preserve creative signal** — Do not over-normalise interesting behaviour too early
-- **Clear separation of concerns** — Audio infrastructure, creative processing, capture, and gifting layers stay distinct but composable
-- **Offline / local-first** — Core functionality works without network (CDNs are acceptable for UI only)
+| Layer                        | Primary Development Machine | Recipient Device | Notes |
+|-----------------------------|-----------------------------|------------------|-------|
+| Character Engine            | M4 Mini (recommended)       | iOS (light)      | Creator gets full power; recipients get smooth experience |
+| True Stem Engine            | M4 Mini                     | iOS (light)      | Heavy separation/generation on Mac; results optimised for iOS |
+| Performance Capture         | M4 Mini                     | iOS              | Capture rich performances on Mac; playback on iOS |
+| Gift / NFC Layer            | M4 Mini (preparation)       | iOS (primary)    | Keep recipient experience simple and magical |
 
----
-
-## Immediate Next Steps
-
-1. Update all current modules to pro iPad standard + fix known issues
-2. Preserve and intentionally expose Character Engine behaviour (offset playhead, Sync/Drift modes)
-3. Build V4 with:
-   - True Stem Engine
-   - Performance Capture Engine
-   - Clean Gift / NFC Layer
+**Goal**: Give creators serious power during making, while ensuring recipients have a delightful, reliable experience on their devices.
 
 ---
 
-*This architecture prioritises keeping the unique creative voice of Juice Cinema while building a solid, evolvable foundation.*
+## Current Modular Foundation
+
+- `src/core/audio-engine.js` — Phase 1 complete (pro iPad standard)
+- `src/core/stem-mixer.js` — Phase 1 complete (Character Engine foundation + explicit playhead modes)
+- `src/ui/waveform-visualizer.js` — Phase 1 complete
+- `src/nfc-manager.js` — Needs alignment with new model
+
+All modules follow pro iPad-friendly standards while remaining highly flexible.
+
+---
+
+## Immediate Roadmap
+
+**Phase 2 (Next)**
+- Build working V4 with:
+  - True Stem Engine (MVP)
+  - Performance Capture Engine
+  - Refined Gift / NFC Layer
+
+**Phase 3**
+- Expert M4 Mini + iOS split implementation
+- Full testing, optimisation, and verification on both platforms
+
+---
+
+*This architecture balances creative power, recipient experience, and long-term flexibility.*
