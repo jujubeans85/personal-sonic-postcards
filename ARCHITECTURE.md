@@ -1,138 +1,112 @@
-# Juice Cinema + NFC + Sonic Postcards Architecture
+# Juice Cinema Architecture v2 (July 2026)
 
-**Status**: Early modular foundation (July 2026)
+**Status**: Refactored direction after deep analysis
 
-This document defines the overall direction, the separation of concerns, and how the different systems work together cohesively while remaining distinct.
-
----
-
-## Vision
-
-The goal is to create a system where:
-
-- **Deep creative audio manipulation** is possible for the maker.
-- **Simple, magical experiences** can be delivered to others via physical NFC cards.
-- The act of tapping an NFC card can transform music in a meaningful, emotional, and surprising way.
-- The original source remains recognizable while gaining new life, texture, and feeling.
-
-The system should feel tactile and explorable for the creator, while feeling magical and low-friction for the recipient.
+This document defines the long-term layered architecture for Juice Cinema, incorporating lessons from the initial V3 build.
 
 ---
 
-## Core Engines / Layers
+## Core Philosophy
 
-We are building **cohesive but separate engines**:
-
-### 1. Audio Engine (`src/core/audio-engine.js`)
-
-**Purpose**: Own and manage all Web Audio API concerns.
-
-**Responsibilities**:
-- Single shared `AudioContext` with proper lifecycle and iOS resume handling
-- Clean node factories (Gain, Filter, Delay, Convolver, Compressor, Oscillator)
-- NFC tap integration hooks (`onNFCTap`, `handleNFCTap`, `triggerMagicTransform`)
-- Master chain management
-- Foundation for all real-time and offline audio processing
-
-**Scope**: Low-level audio infrastructure. Does **not** contain stem logic or UI.
+- **Preserve the magic first** — The current "accidental" offset/second-playhead behaviour has genuine creative value. It should be intentionally preserved and evolved as a **Character Engine** rather than cleaned up too early.
+- **Hybridity over purity** — True stem separation and character-based processing can (and should) coexist.
+- **Creator depth + Gift simplicity** — Deep, tactile control for the maker. Simple, magical one-tap experiences for recipients.
+- **Flexible, pro iPad-friendly foundation** — All modules should be built to a high standard that works well on iPad while remaining easy to evolve.
 
 ---
 
-### 2. Stem Mixer (`src/core/stem-mixer.js`)
+## Four-Layer Architecture
 
-**Purpose**: Real-time creative manipulation and blending of audio.
+### 1. Character Engine (Current Magic — Preserve & Evolve)
 
-**Responsibilities**:
-- Dual-layer playback (Original + Processed)
-- Sync mode as default (with future flexibility for elastic timing)
-- Per-stem controls (Texture, Punch, Movement, Width, etc.)
-- Macro / global controls
-- Isolation mode (solo one stem's manipulation over the original)
-- Clear zero points (middle = original)
-- Easy reset behavior
-- Gesture triggers (fills, chops, runs, cuts)
-- Optional preset / character system
+**Purpose**: The creative heart of the current system. Processes full-mix copies through parallel character paths with intentional timing offsets.
 
-**Scope**: Creative control layer. Sits on top of the Audio Engine.
+**Key Behaviours to Preserve**:
+- Parallel full-mix processing paths (labelled as frequency/character regions rather than literal stems)
+- Intentional second playhead / offset behaviour (Sync / Drift / Free modes)
+- Random but reproducible room/character generation
+- Macro + targeted controls that affect the whole character
 
----
+**Future Naming**:
+- Rename controls honestly (e.g. "Texture", "Movement", "Width", "Air" instead of claiming literal stem separation)
+- Expose **Sync / Drift / Free** modes for the second playhead explicitly
 
-### 3. NFC Manager (`src/nfc-manager.js`)
-
-**Purpose**: Handle all physical NFC interactions and ritual/gifting logic.
-
-**Responsibilities**:
-- NFC scanning and writing to cards
-- Profile-aware data isolation
-- Ritual stamping and reflection logging
-- Storing preset/character IDs on physical cards
-- Tap counting and history
-
-**Scope**: Physical interaction + gifting/ritual layer. Does **not** contain audio processing logic.
+**Status**: Currently exists in V3 (needs honest relabelling + intentional offset controls)
 
 ---
 
-### 4. Gifting / Experience Layer (Future)
+### 2. True Stem Engine (Future Layer)
 
-**Purpose**: The "magic" recipient experience.
+**Purpose**: Actual source-separated stem processing (Vocals, Drums, Bass, Harmony/Instruments, Atmosphere/Other).
 
-This layer sits above the others and defines how an NFC tap translates into a meaningful audio transformation for someone who receives a card.
+**Approach**:
+- Built on top of the same AudioEngine infrastructure
+- Can run alongside or instead of the Character Engine
+- Allows precise per-stem manipulation when needed
 
-Key characteristics:
-- Recipient experience should feel simple and magical (just tap)
-- Can be pre-curated by the maker (limited taps, specific transformations)
-- Should respect the original music while transforming its feeling
-- Analytics / feedback loop on what transformations resonate
-
-This layer is currently emerging through the integration of NFC + Audio Engine.
+**Status**: Not yet built. Planned for V4+
 
 ---
 
-## How They Work Together (Coupling)
+### 3. Performance Capture Engine
 
-| From              | To                    | Coupling Type     | Description |
-|-------------------|-----------------------|-------------------|-----------|
-| NFC Manager       | Audio Engine          | Event-driven      | NFC tap calls `audioEngine.handleNFCTap()` which can trigger `resumeIfNeeded()` + `triggerMagicTransform()` |
-| Audio Engine      | Stem Mixer            | Composition       | Stem Mixer is given an `AudioEngine` instance and uses it to create real-time graphs |
-| Stem Mixer        | Audio Engine          | Uses              | Requests context, creates nodes via the engine's factories |
-| NFC Manager       | Gifting Experience    | Data              | NFC cards can carry preset/character IDs that shape the transformation |
-| All layers        | Profile State         | Shared state      | Per-profile isolation for presets, logs, and settings |
+**Purpose**: Record exactly what the user hears and performs, including live slider moves, offsets, cuts, triggers, and gestures.
 
-**Design goal**: Keep coupling **loose but intentional**. Each engine can be developed and tested somewhat independently while still enabling powerful combined experiences.
+**Core Requirements**:
+- Record master bus output in real time
+- Capture all live parameter changes and timing
+- Export WAV + small session JSON (for recall)
+- Include output limiter + metering
+- Support both creator performance capture and simple NFC gift recording
 
----
-
-## Current Build Status (July 2026)
-
-- `src/core/audio-engine.js` — Created (AudioContext management + NFC hooks)
-- `src/core/stem-mixer.js` — In progress
-- `src/nfc-manager.js` — Exists (needs alignment with new Audio Engine)
-- Single-file `juice-cinema.html` — Stable personal-use V3 (daily driver)
-- Modular `src/` structure — Being established
+**Status**: Not yet built. High priority for V4
 
 ---
 
-## Design Principles
+### 4. Gift / NFC Layer
 
-- **Neutral baseline** — Start with the original track. Presets and transformations are optional.
-- **Clear zero points** — Every control has an obvious "this is the original" position.
-- **Explorable + Resettable** — Fast to tweak, fast to return to a known state.
-- **Dual experience modes**:
-  - Deep creator mode (full control, tactile feel)
-  - Magical gift mode (simple tap, curated transformation)
-- **Future flexibility** — Especially around timing/sync and new stem types.
-- **Physical + Digital cohesion** — NFC cards act as portable, limited keys to specific sonic experiences.
+**Purpose**: Simple, magical recipient experience.
 
----
+**Principles**:
+- One tap → emotional transformation
+- Pre-curated or lightly customisable by creator
+- Does **not** expose the full creator interface
+- Can use either Character Engine or True Stem Engine under the hood
 
-## Future Direction
-
-- Complete Stem Mixer with broader stems and isolation mode
-- Align NFC Manager with Audio Engine hooks
-- Develop clearer "Character / Preset" system that can be written to NFC cards
-- Explore recipient-side experience flows (minimal UI, strong feeling)
-- Add analytics/feedback on what transformations work well across different tracks and people
+**Status**: Partially exists (NFC ritual logic). Needs clean integration with the above layers.
 
 ---
 
-*This document will evolve as the system grows.*
+## Current Modular Foundation (Being Built)
+
+- `src/core/audio-engine.js` — Central AudioContext + AnalyserNode management + NFC hooks
+- `src/core/stem-mixer.js` — Real-time manipulation layer (initially focused on Character Engine behaviour)
+- `src/ui/waveform-visualizer.js` — Live waveform + future spectrum support
+- `src/nfc-manager.js` — Physical NFC + ritual logic
+
+All modules are being brought to a **pro iPad-friendly standard** while remaining highly flexible for future evolution.
+
+---
+
+## Design Principles for All Modules
+
+- **iPad-first performance & touch** — Smooth 60fps visuals, large touch targets, minimal jank
+- **Flexible evolution** — Clear interfaces, minimal tight coupling, easy to extend or replace parts
+- **Preserve creative signal** — Do not over-normalise interesting behaviour too early
+- **Clear separation of concerns** — Audio infrastructure, creative processing, capture, and gifting layers stay distinct but composable
+- **Offline / local-first** — Core functionality works without network (CDNs are acceptable for UI only)
+
+---
+
+## Immediate Next Steps
+
+1. Update all current modules to pro iPad standard + fix known issues
+2. Preserve and intentionally expose Character Engine behaviour (offset playhead, Sync/Drift modes)
+3. Build V4 with:
+   - True Stem Engine
+   - Performance Capture Engine
+   - Clean Gift / NFC Layer
+
+---
+
+*This architecture prioritises keeping the unique creative voice of Juice Cinema while building a solid, evolvable foundation.*
