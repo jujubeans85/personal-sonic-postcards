@@ -335,6 +335,7 @@
 
     <div id="toastContainer" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] flex flex-col gap-y-2 items-center"></div>
 
+    <script src="./shared/nfc-transport.js"></script>
     <script>
         // ==================== COMPLETE v3 (self-contained, fully functional) ====================
         function initTailwind() {
@@ -414,42 +415,17 @@
         }
 
         async function requestNFCAuth(forRitual = false) {
-            return new Promise((resolve, reject) => {
-                if (!('NDEFReader' in window)) {
-                    const proceed = confirm('Web NFC not supported. Simulate NFC tap?');
-                    if (proceed) resolve({ serialNumber: 'SIM-' + Date.now().toString(36), simulated: true, presetFromCard: null });
-                    else reject(new Error('NFC required'));
-                    return;
-                }
-                const ndef = new NDEFReader();
-                ndef.scan().then(() => {
-                    ndef.onreading = (event) => {
-                        let presetFromCard = null;
-                        let serial = event.serialNumber || 'UNKNOWN';
-                        if (event.message && event.message.records) {
-                            for (const record of event.message.records) {
-                                if (record.recordType === 'text') {
-                                    const text = new TextDecoder().decode(record.data);
-                                    if (text.startsWith('JUICE-ROOM:')) {
-                                        const id = text.split(':')[1];
-                                        if (roomPresets[id]) presetFromCard = id;
-                                    }
-                                }
-                            }
-                        }
-                        resolve({ serialNumber: serial, shortSerial: serial.slice(0,8), presetFromCard, timestamp: Date.now() });
-                    };
-                }).catch(reject);
+            return JuiceNFCTransport.read({
+                confirmSimulation: () => confirm('Web NFC not supported. Simulate NFC tap?'),
+                acceptPreset: id => Object.prototype.hasOwnProperty.call(roomPresets, id)
             });
         }
 
         async function writePresetToNFC() {
             const select = document.getElementById('writePresetSelect');
             const key = select.value;
-            if (!('NDEFWriter' in window)) { alert('NFC write needs Chrome Android'); return; }
             try {
-                const ndef = new NDEFWriter();
-                await ndef.write({ records: [{ recordType: 'text', data: `JUICE-ROOM:${key}` }] });
+                await JuiceNFCTransport.writePreset(key);
                 showToast(`Card programmed: ${roomPresets[key].name}`, 'success');
                 setTimeout(() => { selectedPreset = key; updatePresetUI(); }, 600);
             } catch(e) { showToast('Write failed', 'error'); }
