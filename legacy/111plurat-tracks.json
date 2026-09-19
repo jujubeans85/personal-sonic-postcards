@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Anchor Beat \u2014 Sonic Love Letter",
+    "url": "https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav",
+    "source": "file",
+    "slug": "anchor-beat-sonic-love-letter"
+  },
+  {
+    "title": "Mimi's Drift",
+    "url": "https://www2.cs.uic.edu/~i101/SoundFiles/ImperialMarch60.wav",
+    "source": "file",
+    "slug": "mimis-drift"
+  },
+  {
+    "title": "Cbo's Glow",
+    "url": "https://www2.cs.uic.edu/~i101/SoundFiles/PinkPanther30.wav",
+    "source": "file",
+    "slug": "cbos-glow"
+  }
+]

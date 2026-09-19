@@ -34,3 +34,9 @@ Enhanced modulation and layering for bigger, more noticeable shifts:
 `?profile=juice&mode=cinematic` supported. Different data per profile (presets, stem settings, reflection logs).
 
 **Repo ready for auto-deploy on main.** Juice Cinema v3 is the core cinematic tool integrated into the Personal Sonic Postcards ecosystem.
+
+## Preserved postcard collection
+
+Open [`collections/`](collections/) for the eight original postcard/audio pairs, 18 Chloe/Mimi print images, shareable `?t=vintage-1` links and local photo preview. Source artwork and audio bytes are unchanged. Audio files are historical demonstration samples.
+
+Stage-6 migration evidence and remaining retirement gates: [docs/BATCH-03.md](docs/BATCH-03.md).

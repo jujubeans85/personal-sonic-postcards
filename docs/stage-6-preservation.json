@@ -1,0 +1,2578 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-19",
+  "copied_assets": [
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_audio/tone1.wav",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_audio/tone1.wav",
+      "sha256": "1dae4d7b5aaf74d8d58e9808956a0cf2d9c375f5aa144408391e7fd00a38dc3f",
+      "bytes": 176444
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_audio/tone2.wav",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_audio/tone2.wav",
+      "sha256": "aa931f19a9844acf7c2fbca27eea5746eaebd9b9b01385b8f23612446de8c5f9",
+      "bytes": 176444
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_audio/tone3.wav",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_audio/tone3.wav",
+      "sha256": "68dc3d2f73e11417bd40cd65b0cdd65ec6bccb7371aeca3fb3e8c11e6de9fc53",
+      "bytes": 176444
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_audio/tone4.wav",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_audio/tone4.wav",
+      "sha256": "829b86cc2e64afc240ef7edf84b6473807376a83b7c5ab4c4fc773efc951e263",
+      "bytes": 176444
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_audio/tone5.wav",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_audio/tone5.wav",
+      "sha256": "68203fd5dc20051baa887883705b97b77f6d137575958f7f5ee8e2efdfd90351",
+      "bytes": 169502
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_audio/tone6.wav",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_audio/tone6.wav",
+      "sha256": "6a82442c3cc4c7a2d581ecf131117ce9f27460dae7b165974b89da86ebe555ec",
+      "bytes": 176444
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_audio/tone7.wav",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_audio/tone7.wav",
+      "sha256": "fa88e8a8ae9c3c6bc5c645b36b508d34df06006729639d1e6bee7ca6496215e0",
+      "bytes": 176444
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_audio/tone8.wav",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_audio/tone8.wav",
+      "sha256": "8c7a3d71741577c22d8b24d0e59b1fcb44792ae2902d93be4b0b8fe034093495",
+      "bytes": 176444
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_postcards/backs/back1.jpg",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_postcards/backs/back1.jpg",
+      "sha256": "257865d1d0f45e6d95bce761492766a3a9a055c3a0d743d0fd0f13ac15cf2445",
+      "bytes": 79689
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_postcards/backs/back2.jpg",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_postcards/backs/back2.jpg",
+      "sha256": "216e5420f50011513d6e30e941b2abe6303273210f99c32d14737f8d0db1df36",
+      "bytes": 79441
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_postcards/backs/back3.jpg",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_postcards/backs/back3.jpg",
+      "sha256": "576176e7f3765dffd832bd32fdb1b4d6f5123f7e798b985daf7104ec354bfa6a",
+      "bytes": 78810
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_postcards/backs/back4.jpg",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_postcards/backs/back4.jpg",
+      "sha256": "37560af8a90f77365e027b18479985c7670c474f9f64815566a5a76cda2adc73",
+      "bytes": 78961
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_postcards/backs/back5.jpg",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_postcards/backs/back5.jpg",
+      "sha256": "59a8b92e30273037b8d98146b5bf0a850384c11eb0cf066dc27642cd50ec6c0d",
+      "bytes": 79635
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_postcards/backs/back6.jpg",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_postcards/backs/back6.jpg",
+      "sha256": "f17280812d8a9296542acd38a27f7c83f6bd393183097a53fa47867d9d8adbf6",
+      "bytes": 78038
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_postcards/backs/back7.jpg",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_postcards/backs/back7.jpg",
+      "sha256": "6a3deed1eb557ffe9ae814951d89356fcf466c84d4e611a7bb30271d3aa8015b",
+      "bytes": 79213
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_postcards/backs/back8.jpg",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_postcards/backs/back8.jpg",
+      "sha256": "122ba90f8ce071b4160dd32a7185651926ef8a6d70041d4d88bec0185c0238f3",
+      "bytes": 79813
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_postcards/fronts/front1.jpg",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_postcards/fronts/front1.jpg",
+      "sha256": "7096e79fdd631e071591e6353c6c5e24961e6dcb61e3179fe8ee1bea06390aa7",
+      "bytes": 97694
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_postcards/fronts/front2.jpg",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_postcards/fronts/front2.jpg",
+      "sha256": "3e3bf2ca46cb28db3f3affbbf7e44e2ef47d5dd684eecbcfb3360aa4a33358c6",
+      "bytes": 130549
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_postcards/fronts/front3.jpg",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_postcards/fronts/front3.jpg",
+      "sha256": "8d3d1f100fb50ef192af5d6bff307f6ac8ec9800f924625573389af18df93325",
+      "bytes": 101996
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_postcards/fronts/front4.jpg",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_postcards/fronts/front4.jpg",
+      "sha256": "3f8fa5ddae47891308e7054498c1429e0323cb5257331adaa348a5f6ffd4553f",
+      "bytes": 114222
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_postcards/fronts/front5.jpg",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_postcards/fronts/front5.jpg",
+      "sha256": "af098068cf610ed658a147e79fca24eb2869ad884f8d602562e161b0d976edc8",
+      "bytes": 113925
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_postcards/fronts/front6.jpg",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_postcards/fronts/front6.jpg",
+      "sha256": "45c6c990fc48da3a2969ccf4bf09810d6ff6ac890da493eae33589e07787f533",
+      "bytes": 157452
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_postcards/fronts/front7.jpg",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_postcards/fronts/front7.jpg",
+      "sha256": "4a608731d91965c4c71d33a663734dcc7138649c8523a9515815de76536a0618",
+      "bytes": 253492
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_postcards/fronts/front8.jpg",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_postcards/fronts/front8.jpg",
+      "sha256": "3594cbae529e8e6f1e864c7ced836ac3cd7c78c3bd8afc35d9038767def84e50",
+      "bytes": 90204
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "CrateJuice_Vintage_Postcards/vintage_postcards/index.html",
+      "archive_member": null,
+      "destination": "collections/vintage/vintage_postcards/index.html",
+      "sha256": "a8623c190ca00cf9a294e707a671253c58cf4077bf1734f46e6241c4e86efa79",
+      "bytes": 3128
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "juju_whole_lot_v1to4.zip",
+      "archive_member": "postcards_v1/fronts/front_cbo_01_A6_300dpi.jpg",
+      "destination": "collections/print/fronts/front_cbo_01_A6_300dpi.jpg",
+      "sha256": "b0b55f76db7637df0d5a879e9ed3fed82027a409791aa9ffbfd024dd2085f972",
+      "bytes": 374885
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "juju_whole_lot_v1to4.zip",
+      "archive_member": "postcards_v1/fronts/front_cbo_02_A6_300dpi.jpg",
+      "destination": "collections/print/fronts/front_cbo_02_A6_300dpi.jpg",
+      "sha256": "0c754dfe4abbc669721d1c8229820b360452e0675db465b6a7859cb4e25a6953",
+      "bytes": 272688
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "juju_whole_lot_v1to4.zip",
+      "archive_member": "postcards_v1/fronts/front_cbo_03_A6_300dpi.jpg",
+      "destination": "collections/print/fronts/front_cbo_03_A6_300dpi.jpg",
+      "sha256": "3dd9ceb7dc7cc3451167d5daa3c0fc33422a45cabeec5f9a4c7d00addc2a193b",
+      "bytes": 334787
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "juju_whole_lot_v1to4.zip",
+      "archive_member": "postcards_v1/fronts/front_cbo_04_A6_300dpi.jpg",
+      "destination": "collections/print/fronts/front_cbo_04_A6_300dpi.jpg",
+      "sha256": "9705902c1f27dc32e688386314ecf639f8f142dc95a7369399889a9704eef112",
+      "bytes": 238622
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "juju_whole_lot_v1to4.zip",
+      "archive_member": "postcards_v1/fronts/front_cbo_05_A6_300dpi.jpg",
+      "destination": "collections/print/fronts/front_cbo_05_A6_300dpi.jpg",
+      "sha256": "cba995462ec0b703268665b0a61d21be3bc5419e29d1ede98f1930299e8e339f",
+      "bytes": 319632
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "juju_whole_lot_v1to4.zip",
+      "archive_member": "postcards_v1/fronts/front_cbo_06_A6_300dpi.jpg",
+      "destination": "collections/print/fronts/front_cbo_06_A6_300dpi.jpg",
+      "sha256": "a29edbc5650f67b09cadb6e24b5567779fd972f1608bd0cbabfa175680c703a9",
+      "bytes": 225778
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "juju_whole_lot_v1to4.zip",
+      "archive_member": "postcards_v1/fronts/front_cbo_07_A6_300dpi.jpg",
+      "destination": "collections/print/fronts/front_cbo_07_A6_300dpi.jpg",
+      "sha256": "9cb5955d709050fe2396aa7fcd59b7314d617aaa9f2cbebb86813bd2aaa169d2",
+      "bytes": 257847
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "juju_whole_lot_v1to4.zip",
+      "archive_member": "postcards_v1/fronts/front_cbo_08_A6_300dpi.jpg",
+      "destination": "collections/print/fronts/front_cbo_08_A6_300dpi.jpg",
+      "sha256": "0dd73a4919bcfe4c6485f6261049d99421fd37f8dd43caab27adb72d17bc504d",
+      "bytes": 540907
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "juju_whole_lot_v1to4.zip",
+      "archive_member": "postcards_v1/fronts/front_mmi_01_A6_300dpi.jpg",
+      "destination": "collections/print/fronts/front_mmi_01_A6_300dpi.jpg",
+      "sha256": "6190e5d2f89e3edd5c33814992c1140b1d1e94c6750a6706c8359b713d6a28e8",
+      "bytes": 374856
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "juju_whole_lot_v1to4.zip",
+      "archive_member": "postcards_v1/fronts/front_mmi_02_A6_300dpi.jpg",
+      "destination": "collections/print/fronts/front_mmi_02_A6_300dpi.jpg",
+      "sha256": "cd3e556acb8e63b4187590203b253e36395ee4de5289ff76b36f40d36842fc22",
+      "bytes": 272676
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "juju_whole_lot_v1to4.zip",
+      "archive_member": "postcards_v1/fronts/front_mmi_03_A6_300dpi.jpg",
+      "destination": "collections/print/fronts/front_mmi_03_A6_300dpi.jpg",
+      "sha256": "9b558a3c959a0058c494a854edb3c0f3f5a6425723490416b296aaeb9f099e63",
+      "bytes": 334828
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "juju_whole_lot_v1to4.zip",
+      "archive_member": "postcards_v1/fronts/front_mmi_04_A6_300dpi.jpg",
+      "destination": "collections/print/fronts/front_mmi_04_A6_300dpi.jpg",
+      "sha256": "31b7c2364fc4c5502290f49c75180b73cf9a22050b070d41d57ea7449203be70",
+      "bytes": 238618
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "juju_whole_lot_v1to4.zip",
+      "archive_member": "postcards_v1/fronts/front_mmi_05_A6_300dpi.jpg",
+      "destination": "collections/print/fronts/front_mmi_05_A6_300dpi.jpg",
+      "sha256": "6803cf6eb592bd90fa135fbe5f8e401516e5068394e2c2f38d949395fd2ba370",
+      "bytes": 319566
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "juju_whole_lot_v1to4.zip",
+      "archive_member": "postcards_v1/fronts/front_mmi_06_A6_300dpi.jpg",
+      "destination": "collections/print/fronts/front_mmi_06_A6_300dpi.jpg",
+      "sha256": "48f03a8d8747d5077f7ca4fc7ce06e57db80ed8e8ceab8f9e47ab0b4da0e77f1",
+      "bytes": 225699
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "juju_whole_lot_v1to4.zip",
+      "archive_member": "postcards_v1/fronts/front_mmi_07_A6_300dpi.jpg",
+      "destination": "collections/print/fronts/front_mmi_07_A6_300dpi.jpg",
+      "sha256": "0ae709608f0c9a130b72ae948416ebf20edbec9e7d32a48cb41b85452b38e630",
+      "bytes": 257876
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "juju_whole_lot_v1to4.zip",
+      "archive_member": "postcards_v1/fronts/front_mmi_08_A6_300dpi.jpg",
+      "destination": "collections/print/fronts/front_mmi_08_A6_300dpi.jpg",
+      "sha256": "6c53386102e18df107f78094a1b9514f41bbf5f39da53fc151aacd3678ec5b6f",
+      "bytes": 540964
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "juju_whole_lot_v1to4.zip",
+      "archive_member": "postcards_v1/backs/back_cbo_A6_300dpi.jpg",
+      "destination": "collections/print/backs/back_cbo_A6_300dpi.jpg",
+      "sha256": "22c3aa214e0ee1d1c7488dd3b8354ea87615195964b865d87950385a51bdfb1c",
+      "bytes": 125861
+    },
+    {
+      "source_repo": "cratejuice-v1",
+      "source_commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "source_path": "juju_whole_lot_v1to4.zip",
+      "archive_member": "postcards_v1/backs/back_mmi_A6_300dpi.jpg",
+      "destination": "collections/print/backs/back_mmi_A6_300dpi.jpg",
+      "sha256": "6f9f111cb59767838f5d1290aaf23df889af53a36769096481a318c9a99bd466",
+      "bytes": 125747
+    },
+    {
+      "source_repo": "111PLURAT-backend",
+      "source_commit": "1ac8b4e515a77c913e17d919979b3c32a4270923",
+      "source_path": "cratejuice-backend-memory-ready.zip",
+      "archive_member": "main.py",
+      "destination": "legacy/111plurat-backend/main.py",
+      "sha256": "5baf5dc489770145b9942b0d107feb43ebc5c4440b467a6236dc510c43b69d26",
+      "bytes": 2944
+    },
+    {
+      "source_repo": "111PLURAT-backend",
+      "source_commit": "1ac8b4e515a77c913e17d919979b3c32a4270923",
+      "source_path": "cratejuice-backend-memory-ready.zip",
+      "archive_member": "requirements.txt",
+      "destination": "legacy/111plurat-backend/requirements.txt",
+      "sha256": "a06bc44797f1b4d8d3ad08894d1e15a3b6e61d17a747a5b97bd0d9fea6deb7da",
+      "bytes": 57
+    },
+    {
+      "source_repo": "111PLURAT-backend",
+      "source_commit": "1ac8b4e515a77c913e17d919979b3c32a4270923",
+      "source_path": "cratejuice-backend-memory-ready.zip",
+      "archive_member": "README.md",
+      "destination": "legacy/111plurat-backend/README.md",
+      "sha256": "b581f0c64edbce00fe8033ecaf6bb67fc71ae0718fe85bfdce1493784b8e6cd8",
+      "bytes": 821
+    },
+    {
+      "source_repo": "111PLURAT",
+      "source_commit": "304f566f5fe501bf627b9f69f6e62af03c80f1bd",
+      "source_path": "tracks.json",
+      "archive_member": null,
+      "destination": "legacy/111plurat-tracks.json",
+      "sha256": "12dc4d1f731de58470dc46c758d1c88031760aa8b8bf09ad9163bb6214bb5de2",
+      "bytes": 516
+    }
+  ],
+  "source_inventory": [
+    {
+      "repository": "111PLURAT",
+      "commit": "304f566f5fe501bf627b9f69f6e62af03c80f1bd",
+      "files": [
+        {
+          "path": "README.md",
+          "bytes": 430,
+          "sha256": "bb7e3916c9a60feafbc7c266a462ead35f77dc9536e10fc82a63cf780731c45b"
+        },
+        {
+          "path": "app.js",
+          "bytes": 7650,
+          "sha256": "a3efec6bde944a12408f30e9993f94ebdd2f0586306c6d74cd16ad9716438f55"
+        },
+        {
+          "path": "cj-postcard-kit.zip",
+          "bytes": 5631,
+          "sha256": "ffe0a93bcdda2f53509e8ab18a8dcc8c23175c208254ded1e009bcf3b7d85971",
+          "members": [
+            {
+              "path": "index.html",
+              "bytes": 1496,
+              "sha256": "8e93e7fc949d11cd3255326e6d527df10ecd20c34bc9ab7fdb70b4a95f88422c"
+            },
+            {
+              "path": "postcard.css",
+              "bytes": 1835,
+              "sha256": "124812f4d54c1c82eaa2489c0016e694f8e388c48355a86095441dd529d9c60f"
+            },
+            {
+              "path": "postcard.js",
+              "bytes": 1984,
+              "sha256": "ab219252b9b677d9cd4891fa4f6a27bd558c1e25a0b4ffb0eba546677fe7df20"
+            }
+          ]
+        },
+        {
+          "path": "cratejuice-backend-memory-ready.zip",
+          "bytes": 5252,
+          "sha256": "57d7b729f96c398a1f10d5cbf0a3b136277ce94a6c311fb80164ae6f309c2368",
+          "members": [
+            {
+              "path": "main.py",
+              "bytes": 2944,
+              "sha256": "5baf5dc489770145b9942b0d107feb43ebc5c4440b467a6236dc510c43b69d26"
+            },
+            {
+              "path": "requirements.txt",
+              "bytes": 57,
+              "sha256": "a06bc44797f1b4d8d3ad08894d1e15a3b6e61d17a747a5b97bd0d9fea6deb7da"
+            },
+            {
+              "path": "render.yaml",
+              "bytes": 301,
+              "sha256": "bce0fccb15ed0b1cceab3c4733d62f021bf7b00b7f6bed7a7d1edacca9ebd412"
+            },
+            {
+              "path": "README.md",
+              "bytes": 821,
+              "sha256": "b581f0c64edbce00fe8033ecaf6bb67fc71ae0718fe85bfdce1493784b8e6cd8"
+            },
+            {
+              "path": ".env.example",
+              "bytes": 107,
+              "sha256": "a79f864890d2f5353f7b757730501aab520f7c2ac45b179be94c9de0308cc830"
+            },
+            {
+              "path": "test_mongo.py",
+              "bytes": 408,
+              "sha256": "758409180af7aeb77d76094fe47ca1c79b95170ce0a2aafee53e9f9005637e70"
+            }
+          ]
+        },
+        {
+          "path": "cratejuice-backend.zip",
+          "bytes": 1189,
+          "sha256": "06beeab9525b929121d4aa9b6ad5606b81e1f5cf99375ca60bb7f905036e38d4",
+          "members": [
+            {
+              "path": "README.md",
+              "bytes": 1073,
+              "sha256": "e9d7f5a293ce94b8e172ac4a4e6001742fcbca39524a3c65e005bb927db7673d"
+            }
+          ]
+        },
+        {
+          "path": "cratejuice-frontend-vintage-slug.zip",
+          "bytes": 17365,
+          "sha256": "90a5521a781c1b7ee8476140554d14c7492db4af15f7fe37959241c9f56577bd",
+          "members": [
+            {
+              "path": "index.html",
+              "bytes": 3898,
+              "sha256": "2177ecd6120b62b79c48a7625dcbe801cd63d13c94a906e661e2d7b9a48f6a8f"
+            },
+            {
+              "path": "style.css",
+              "bytes": 3956,
+              "sha256": "3a2e425e135d9691838e55bbf47cf395548b7d599455a18cbe533c02eb0fe6bd"
+            },
+            {
+              "path": "app.js",
+              "bytes": 7650,
+              "sha256": "a3efec6bde944a12408f30e9993f94ebdd2f0586306c6d74cd16ad9716438f55"
+            },
+            {
+              "path": "tracks.json",
+              "bytes": 516,
+              "sha256": "12dc4d1f731de58470dc46c758d1c88031760aa8b8bf09ad9163bb6214bb5de2"
+            },
+            {
+              "path": "netlify.toml",
+              "bytes": 323,
+              "sha256": "f71860d54d984e4c0029c3c713a6cce77210e38aa6cb32f3bfbdfde513c1a227"
+            },
+            {
+              "path": "README.md",
+              "bytes": 430,
+              "sha256": "bb7e3916c9a60feafbc7c266a462ead35f77dc9536e10fc82a63cf780731c45b"
+            }
+          ]
+        },
+        {
+          "path": "cratejuice-frontend-vintage-slug/README.md",
+          "bytes": 430,
+          "sha256": "bb7e3916c9a60feafbc7c266a462ead35f77dc9536e10fc82a63cf780731c45b"
+        },
+        {
+          "path": "cratejuice-frontend-vintage-slug/app.js",
+          "bytes": 7650,
+          "sha256": "a3efec6bde944a12408f30e9993f94ebdd2f0586306c6d74cd16ad9716438f55"
+        },
+        {
+          "path": "cratejuice-frontend-vintage-slug/index.html",
+          "bytes": 3898,
+          "sha256": "2177ecd6120b62b79c48a7625dcbe801cd63d13c94a906e661e2d7b9a48f6a8f"
+        },
+        {
+          "path": "cratejuice-frontend-vintage-slug/netlify.toml",
+          "bytes": 323,
+          "sha256": "f71860d54d984e4c0029c3c713a6cce77210e38aa6cb32f3bfbdfde513c1a227"
+        },
+        {
+          "path": "cratejuice-frontend-vintage-slug/style.css",
+          "bytes": 3956,
+          "sha256": "3a2e425e135d9691838e55bbf47cf395548b7d599455a18cbe533c02eb0fe6bd"
+        },
+        {
+          "path": "cratejuice-frontend-vintage-slug/tracks.json",
+          "bytes": 516,
+          "sha256": "12dc4d1f731de58470dc46c758d1c88031760aa8b8bf09ad9163bb6214bb5de2"
+        },
+        {
+          "path": "cratejuice-frontend-vintage.zip",
+          "bytes": 15469,
+          "sha256": "45dc201318c17f29058c71362ff4f66a91c586656ff1d7a33868ddbdfffd6827",
+          "members": [
+            {
+              "path": "index.html",
+              "bytes": 3794,
+              "sha256": "9470f13acfdd20056ac72500893c6c3c8bb4a86e72ec0b6aa11efd03914fab9b"
+            },
+            {
+              "path": "style.css",
+              "bytes": 3897,
+              "sha256": "f94ba0e1d9e821a9f5d76b6755e127e37c1aac3c5eef9a613163a21ae64f16b6"
+            },
+            {
+              "path": "app.js",
+              "bytes": 5870,
+              "sha256": "9bafa47827bbaa519dedc7a1e4aebd42054c7158a199ec7fc519d88013f3107c"
+            },
+            {
+              "path": "tracks.json",
+              "bytes": 419,
+              "sha256": "1f79ddff84c9985f4bf0726a4b8f357145d1f3ecc6ecd1e8f535b1288baab356"
+            },
+            {
+              "path": "netlify.toml",
+              "bytes": 323,
+              "sha256": "f71860d54d984e4c0029c3c713a6cce77210e38aa6cb32f3bfbdfde513c1a227"
+            },
+            {
+              "path": "README.md",
+              "bytes": 574,
+              "sha256": "963bfc461ec2204dfd0dfa4a8c5487c248fa3677dd0f746450f91767064ff97d"
+            }
+          ]
+        },
+        {
+          "path": "cratejuice-frontend-with-soundcloud.zip",
+          "bytes": 816,
+          "sha256": "5301a1acab254155bbfb377d29a4c5059bca02d779e716ed818fe985b25d218a",
+          "members": [
+            {
+              "path": "tracks.json",
+              "bytes": 696,
+              "sha256": "9a2d774540f25b22413c1ee43edda39361f63665a90ee8f7242a889d84f093a2"
+            }
+          ]
+        },
+        {
+          "path": "cratejuice-frontend.zip",
+          "bytes": 9312,
+          "sha256": "2a7486b44de7c10a4fcf61a0096ea92051988d77170aaebd98a73e9224e88845",
+          "members": [
+            {
+              "path": "index.html",
+              "bytes": 2042,
+              "sha256": "fbddebaf16365dc231c93051c8546763a36a556c03895360f00d7099eceda644"
+            },
+            {
+              "path": "style.css",
+              "bytes": 1884,
+              "sha256": "3420685dff55c13a64a718ebc50ea9e6518d6e093a3ff8afd32c1b9d88fba1d0"
+            },
+            {
+              "path": "app.js",
+              "bytes": 3506,
+              "sha256": "cd75fb8b505c42ca3e6e4a9cb7537ff482c5bd8c6daf69e5654b697b2f576c7f"
+            },
+            {
+              "path": "tracks.json",
+              "bytes": 464,
+              "sha256": "53bae84d861fd5b44d54fa327830047c82d79359f193de8fc4a55b60be4ea8e4"
+            },
+            {
+              "path": "netlify.toml",
+              "bytes": 323,
+              "sha256": "f71860d54d984e4c0029c3c713a6cce77210e38aa6cb32f3bfbdfde513c1a227"
+            },
+            {
+              "path": "README.md",
+              "bytes": 501,
+              "sha256": "694d18e48ec4fac3deb64701821740da4cf339b09da9b54bc0af7bbbf425f476"
+            }
+          ]
+        },
+        {
+          "path": "cratejuice_pwa_sw.zip",
+          "bytes": 1928,
+          "sha256": "3a3e2641debe063fa0ce1c6e55c82e05cd2c6695d18a10d2fc78958ae21bef6c",
+          "members": [
+            {
+              "path": "index.html",
+              "bytes": 792,
+              "sha256": "bd06cd8ac2ea9df584f0e25d691962db57a4abde89f7b1302ac2ad575b12e806"
+            },
+            {
+              "path": "style.css",
+              "bytes": 374,
+              "sha256": "078cc961b8f418404bf066c8316292fc8cb98e3d0a16cf5e65a2cb56b57c5d6c"
+            },
+            {
+              "path": "app.js",
+              "bytes": 123,
+              "sha256": "df803682325a06e9a4d5ed2c96d8d2d5a76e5c1cac7ec0759357f7a9bbcb3f15"
+            },
+            {
+              "path": "manifest.json",
+              "bytes": 260,
+              "sha256": "32cce3f6630ae80303d9772cba2c5058931f11b40e3f2ddf1711a5ad90cfc0b1"
+            },
+            {
+              "path": "service-worker.js",
+              "bytes": 420,
+              "sha256": "161aecede11085871b4760eb61dd3b518428972bf0a5ef9df1fa400f09b29c42"
+            },
+            {
+              "path": "icon.png",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "path": "sample.mp3",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ]
+        },
+        {
+          "path": "cratejuice_pwa_tracks_bjork.zip",
+          "bytes": 2952,
+          "sha256": "443d48cc80c92a76a29ec54c16edf492330038ffa40c97808a698082b091470c",
+          "members": [
+            {
+              "path": "index.html",
+              "bytes": 922,
+              "sha256": "7fb027e494f916b19b35afa0f38b669edd20ff9c1df9ae2b785e5f816ec8bab1"
+            },
+            {
+              "path": "style.css",
+              "bytes": 372,
+              "sha256": "be51cad4c053312f1ba8e9d8edbe16d6541fe098cf5aef17b25824205aa1aa1d"
+            },
+            {
+              "path": "app.js",
+              "bytes": 856,
+              "sha256": "6173ce99e794c912f8ffa1b4ef71ffb0fd08c59bff639114a0cbff174162e95f"
+            },
+            {
+              "path": "manifest.json",
+              "bytes": 260,
+              "sha256": "32cce3f6630ae80303d9772cba2c5058931f11b40e3f2ddf1711a5ad90cfc0b1"
+            },
+            {
+              "path": "service-worker.js",
+              "bytes": 585,
+              "sha256": "8850034fb574d6a124c2f2c95e427208685321964bd1cb379c4540f0a0bfeff1"
+            },
+            {
+              "path": "tracks/01_lofi_nights.mp3",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "path": "tracks/02_dreamscape_drift.mp3",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "path": "tracks/03_soft_pulse.mp3",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "path": "tracks/04_acoustic_breeze.mp3",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "path": "tracks/05_bjork_all_is_full_of_love_remix.mp3",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "path": "icon.png",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ]
+        },
+        {
+          "path": "icon.png",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "index.html",
+          "bytes": 1496,
+          "sha256": "8e93e7fc949d11cd3255326e6d527df10ecd20c34bc9ab7fdb70b4a95f88422c"
+        },
+        {
+          "path": "manifest.json",
+          "bytes": 260,
+          "sha256": "32cce3f6630ae80303d9772cba2c5058931f11b40e3f2ddf1711a5ad90cfc0b1"
+        },
+        {
+          "path": "netlify.toml",
+          "bytes": 323,
+          "sha256": "f71860d54d984e4c0029c3c713a6cce77210e38aa6cb32f3bfbdfde513c1a227"
+        },
+        {
+          "path": "postcard.css",
+          "bytes": 1835,
+          "sha256": "124812f4d54c1c82eaa2489c0016e694f8e388c48355a86095441dd529d9c60f"
+        },
+        {
+          "path": "service-worker.js",
+          "bytes": 2856,
+          "sha256": "42706ee039954a1819572bdd706344da965e49e0a6df99560d27e7637e1edada"
+        },
+        {
+          "path": "style.css",
+          "bytes": 3956,
+          "sha256": "3a2e425e135d9691838e55bbf47cf395548b7d599455a18cbe533c02eb0fe6bd"
+        },
+        {
+          "path": "tracks.json",
+          "bytes": 516,
+          "sha256": "12dc4d1f731de58470dc46c758d1c88031760aa8b8bf09ad9163bb6214bb5de2"
+        },
+        {
+          "path": "tracks/01_lofi_nights.mp3",
+          "bytes": 404,
+          "sha256": "0d9c9cabd6f4ae6270fa28ed227f6f72c28d36e2e55736dca0a74c4b5c8ee07e"
+        },
+        {
+          "path": "tracks/02_dreamscape_drift.mp3",
+          "bytes": 404,
+          "sha256": "0d9c9cabd6f4ae6270fa28ed227f6f72c28d36e2e55736dca0a74c4b5c8ee07e"
+        },
+        {
+          "path": "tracks/03_soft_pulse.mp3",
+          "bytes": 404,
+          "sha256": "0d9c9cabd6f4ae6270fa28ed227f6f72c28d36e2e55736dca0a74c4b5c8ee07e"
+        },
+        {
+          "path": "tracks/04_acoustic_breeze.mp3",
+          "bytes": 404,
+          "sha256": "0d9c9cabd6f4ae6270fa28ed227f6f72c28d36e2e55736dca0a74c4b5c8ee07e"
+        }
+      ]
+    },
+    {
+      "repository": "111PLURAT-backend",
+      "commit": "1ac8b4e515a77c913e17d919979b3c32a4270923",
+      "files": [
+        {
+          "path": "README.md",
+          "bytes": 1073,
+          "sha256": "e9d7f5a293ce94b8e172ac4a4e6001742fcbca39524a3c65e005bb927db7673d"
+        },
+        {
+          "path": "cratejuice-backend-memory-ready.zip",
+          "bytes": 5252,
+          "sha256": "57d7b729f96c398a1f10d5cbf0a3b136277ce94a6c311fb80164ae6f309c2368",
+          "members": [
+            {
+              "path": "main.py",
+              "bytes": 2944,
+              "sha256": "5baf5dc489770145b9942b0d107feb43ebc5c4440b467a6236dc510c43b69d26"
+            },
+            {
+              "path": "requirements.txt",
+              "bytes": 57,
+              "sha256": "a06bc44797f1b4d8d3ad08894d1e15a3b6e61d17a747a5b97bd0d9fea6deb7da"
+            },
+            {
+              "path": "render.yaml",
+              "bytes": 301,
+              "sha256": "bce0fccb15ed0b1cceab3c4733d62f021bf7b00b7f6bed7a7d1edacca9ebd412"
+            },
+            {
+              "path": "README.md",
+              "bytes": 821,
+              "sha256": "b581f0c64edbce00fe8033ecaf6bb67fc71ae0718fe85bfdce1493784b8e6cd8"
+            },
+            {
+              "path": ".env.example",
+              "bytes": 107,
+              "sha256": "a79f864890d2f5353f7b757730501aab520f7c2ac45b179be94c9de0308cc830"
+            },
+            {
+              "path": "test_mongo.py",
+              "bytes": 408,
+              "sha256": "758409180af7aeb77d76094fe47ca1c79b95170ce0a2aafee53e9f9005637e70"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "repository": "cratejuice",
+      "commit": "1279a5e60fc678823cfb9c66311021f806073458",
+      "files": [
+        {
+          "path": ".github/workflows/b",
+          "bytes": 2,
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+        },
+        {
+          "path": ".github/workflows/p",
+          "bytes": 2,
+          "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
+        },
+        {
+          "path": ".gitignore",
+          "bytes": 1009,
+          "sha256": "cb0236f5ab1871353beb72280ce2c495b125b0b1a2805911480bcc9d0acccb6f"
+        },
+        {
+          "path": ".snapshots/config.json",
+          "bytes": 2855,
+          "sha256": "062cb76690bb6fc4a32b799b36968458628854b650937e90d91e2163f43a76b7"
+        },
+        {
+          "path": ".snapshots/readme.md",
+          "bytes": 409,
+          "sha256": "0ab695ae4c6c2bae966a796fa9c1c29fce82c4381dc5ca6fad2cdf38f5f8af64"
+        },
+        {
+          "path": ".snapshots/sponsors.md",
+          "bytes": 2391,
+          "sha256": "b255d6d45f4f0f2476c5294f04a2f5681a7e9bf7259b4e3f1f0899f12759bbc3"
+        },
+        {
+          "path": "3DL4L_Anthology/games/README.md",
+          "bytes": 274,
+          "sha256": "cf795cc0ab92d0141ef0bb66ff4a79c239c9737d57e6435d4e362042a8693ed1"
+        },
+        {
+          "path": "3DL4L_Anthology/games/games/riddles_set_01.md",
+          "bytes": 377,
+          "sha256": "fe788353391617f9e9179483b9e10fa49dc10e5d93a7c68746d0bd4e007d0f71"
+        },
+        {
+          "path": "3DL4L_Anthology/games/p",
+          "bytes": 2,
+          "sha256": "fd6641673e7f3bf6e80e4bc5401fcb2821a1e117206c8e1c65cef23a58dc37ff"
+        },
+        {
+          "path": "3DL4L_Anthology/games/printable_card_sheet.md",
+          "bytes": 236,
+          "sha256": "0045ce4a2eca54fa5ace307d3b395d1289d2a43482cc38b56d42411613e201b5"
+        },
+        {
+          "path": "3DL4L_Anthology/games/riddles_set_01.md",
+          "bytes": 377,
+          "sha256": "fe788353391617f9e9179483b9e10fa49dc10e5d93a7c68746d0bd4e007d0f71"
+        },
+        {
+          "path": "3DL4L_Anthology/games/sample_game.md",
+          "bytes": 239,
+          "sha256": "e9b008d376206dc09d23212e09075bbb4a8a3907644886feb74833e07592ed8f"
+        },
+        {
+          "path": "3DL4L_Anthology/games/trivia_pack_A.md",
+          "bytes": 417,
+          "sha256": "0448e6b5667888229374b3c513708a8bce26f2c10796594e7fc3f19509397f78"
+        },
+        {
+          "path": "3DL4L_Anthology/mum/README..md",
+          "bytes": 266,
+          "sha256": "6fe303861c0f9a3a854d6c221ff7d5ecbcd3d4b7c1f5d47a29dbf6a89cf43516"
+        },
+        {
+          "path": "3DL4L_Anthology/mum/daily_notes.md",
+          "bytes": 170,
+          "sha256": "68d8eeec1e23186b315c30e716f48f3781ead939c6afcf55ec139134d65d474b"
+        },
+        {
+          "path": "3DL4L_Anthology/mum/p",
+          "bytes": 1,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+        },
+        {
+          "path": "3DL4L_Anthology/p",
+          "bytes": 70,
+          "sha256": "51eeb9c6af900d5839537623f7762906fb2de3aad9a8a369dbac851bd61b62dd"
+        },
+        {
+          "path": "3DL4L_Anthology/playlists/README.md",
+          "bytes": 213,
+          "sha256": "2156e958fcbd6d142354ee403c405b4e08052ca13c625342a8ce43afd52b100b"
+        },
+        {
+          "path": "3DL4L_Anthology/playlists/editor_template.md",
+          "bytes": 145,
+          "sha256": "e04b4c4f3090faa8956f09a0df3235670eeef5a0b5ab1e7ef6f31b3f4e5700f3"
+        },
+        {
+          "path": "3DL4L_Anthology/playlists/p",
+          "bytes": 1,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+        },
+        {
+          "path": "3DL4L_Anthology/playlists/playlists/sample_playlist_cards.md",
+          "bytes": 370,
+          "sha256": "6a67d37a65db5cdc68e33c0fdea43ab59ed1fa0faec79239c10e8cee4187b61a"
+        },
+        {
+          "path": "3DL4L_Anthology/playlists/playlists/seed_list_vibe_tags.json",
+          "bytes": 368,
+          "sha256": "a82b32efd0907809410477a1ab3cc5dbaec0cfe9d88cee74f5bc98eab4653b02"
+        },
+        {
+          "path": "3DL4L_Anthology/playlists/sample_playlist_cards.md",
+          "bytes": 368,
+          "sha256": "a82b32efd0907809410477a1ab3cc5dbaec0cfe9d88cee74f5bc98eab4653b02"
+        },
+        {
+          "path": "3DL4L_Anthology/playlists/seed_list_vibe_tags.json",
+          "bytes": 185,
+          "sha256": "afb28ec5455ac929e43175212b37e3b0e5558b05c368856782d1352205cdfd0d"
+        },
+        {
+          "path": "3DL4L_Anthology/playlists/starter.csv",
+          "bytes": 1988,
+          "sha256": "82bbcc623e1201f3688c27c43542bbfeb3c64eed11e487beee9ec4bc3d6655c4"
+        },
+        {
+          "path": "3DL4L_Anthology/text/README.md",
+          "bytes": 191,
+          "sha256": "57e4011adb9218cb4ff37ca76cf3fbc32e9398b41a781b6da8e0bd39a6d0b59e"
+        },
+        {
+          "path": "3DL4L_Anthology/text/p",
+          "bytes": 1,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+        },
+        {
+          "path": "3DL4L_Anthology/text/p_v2/README.md",
+          "bytes": 49,
+          "sha256": "45308ee06ede589855186869f97a918359d837b629e0928f20f99dcdcd3e83b1"
+        },
+        {
+          "path": "3DL4L_Anthology/text/p_v2/pulse_01.txt",
+          "bytes": 21,
+          "sha256": "9345f821da4075e83d47731d49bee043407518504719f44d0795982454f50bef"
+        },
+        {
+          "path": "3DL4L_Anthology/text/p_v2/pulse_02.txt",
+          "bytes": 79,
+          "sha256": "6ca244a2aae13753b0d4add08aac32041cd0f76fb681eb474e27301d487bc425"
+        },
+        {
+          "path": "3DL4L_Anthology/text/p_v2/starter_poem.md",
+          "bytes": 73,
+          "sha256": "2127e428d9a4b878a6172673a5419e7d28b09d5507151587ffe47994c27be5fa"
+        },
+        {
+          "path": "3DL4L_Anthology/text/scratchpad.md",
+          "bytes": 166,
+          "sha256": "476ceb549db224259459ccc32280a27b541e9ad8d780ac10f0205b06b7a31d1d"
+        },
+        {
+          "path": "Add Crate Juice v3 frontend + backend",
+          "bytes": 283,
+          "sha256": "f35222cdab1e1b6e0b5c5a8f1d406a5f0ac496fbf891c6d43eddeead5528e8fc"
+        },
+        {
+          "path": "BASH.txt",
+          "bytes": 70,
+          "sha256": "070ca11c765ee925b71d39ca205939d46320434f68fb3effc9cb0f2610ba5cd6"
+        },
+        {
+          "path": "Cratejuice.json",
+          "bytes": 12337,
+          "sha256": "c25c4e4153ed4f0a68d73950ede81f4be4605a2a170f2412ea5b7a518a8de210"
+        },
+        {
+          "path": "DEPLOYMENT-GUIDE.md",
+          "bytes": 1417,
+          "sha256": "48bdf16894ef2b23c577e54edd34075b497b4aa7818b2c43eb085684c0b215cd"
+        },
+        {
+          "path": "Dockerfile",
+          "bytes": 370,
+          "sha256": "a35910660724db73a9b43b34a24f3250cb4433bb30b194fcf222050d64f23ab0"
+        },
+        {
+          "path": "Dockerfile.frontend",
+          "bytes": 728,
+          "sha256": "de3b61da6e16be083d73e54395e4a6b1a51bcc56bea9d9f0ca0fc77b5f000063"
+        },
+        {
+          "path": "Help.json",
+          "bytes": 5042,
+          "sha256": "3dd274390ce130a3fb4ef55ea8a3c5918b0035c09b6ecc358fad05675bf25730"
+        },
+        {
+          "path": "IMPLEMENTATION-SUMMARY.md",
+          "bytes": 8443,
+          "sha256": "fa72b9e72ac71ad82d5596a8259ed4664db80045333635d71706c63d03c78c33"
+        },
+        {
+          "path": "PRODUCTION.md",
+          "bytes": 3282,
+          "sha256": "857cf7a501020ad17102a215c7e1e72f1b13ec4f632b7a3ad69cb08db34c804d"
+        },
+        {
+          "path": "PWA-TEST-RESULTS.md",
+          "bytes": 2217,
+          "sha256": "071c2713d963a297a4d91f559e3f00c5e2e634c6e30cc4004413e7705d2494a9"
+        },
+        {
+          "path": "README.md",
+          "bytes": 978,
+          "sha256": "b553ea4cc986e09b66296748db97951c0e537fdcb50681e9433b561220e25369"
+        },
+        {
+          "path": "README_RENDER.md",
+          "bytes": 298,
+          "sha256": "aae9d154254ea0c05831fdd161f07a78189e8dfa46bda14a22e372893e19f59b"
+        },
+        {
+          "path": "__init__.py",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "addurl",
+          "bytes": 163,
+          "sha256": "8f9f9bbbb20f64946e69d6f0e94bda70f4b2bf36c8c117fae96ef573bf088dbc"
+        },
+        {
+          "path": "apps/ripper/ripper.sh",
+          "bytes": 2401,
+          "sha256": "51cd668ebfce5e931d0a4164cc56156ab7fda7b0c7524d52655cebf0965a31ba"
+        },
+        {
+          "path": "bash",
+          "bytes": 343,
+          "sha256": "3d7e7dfd11e2e1f859887d7e75fb59fd8791e20aff4f78b8b4556dd2bd067bce"
+        },
+        {
+          "path": "cjrip",
+          "bytes": 141,
+          "sha256": "af5b1b57eb114ee7f7617c183946cf978ff751f65b54049bc8ebfb576201a82a"
+        },
+        {
+          "path": "cleanup.sh",
+          "bytes": 2266,
+          "sha256": "aa47d319d1f142d52ae0e20c51afaaf5b0089351880140711a149445621dbd6c"
+        },
+        {
+          "path": "content/data/library.json",
+          "bytes": 18,
+          "sha256": "ee2b64323b5f4f6896dc6fa6f8ac118517e33a2c62bcfd3ead5f614268ebad48"
+        },
+        {
+          "path": "content/data/playlist_16.json",
+          "bytes": 2,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "path": "content/data/playlist_8.json",
+          "bytes": 43,
+          "sha256": "bd00e4130714126a1c7bce45964ccfcb15549f7b97205a6adc6c90e911e00c83"
+        },
+        {
+          "path": "content/data/playlist_all.json",
+          "bytes": 2,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "path": "cratejuice/.gitignore",
+          "bytes": 179,
+          "sha256": "3201a8a1e8327d6f5394bd6ec7153b5eb8bda86e1f4a53d65fdbc4610d202902"
+        },
+        {
+          "path": "cratejuice/apps/indexer/index_crates_light.py",
+          "bytes": 715,
+          "sha256": "3a2790982036b3acc4e08a3b6fc0ed7e28f955d7d6c69981962fda0b94996ee0"
+        },
+        {
+          "path": "cratejuice/apps/ripper/rip_loop.sh",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "cratejuice/content/data/library.json",
+          "bytes": 18,
+          "sha256": "ee2b64323b5f4f6896dc6fa6f8ac118517e33a2c62bcfd3ead5f614268ebad48"
+        },
+        {
+          "path": "cratejuice/content/data/playlist_16.json",
+          "bytes": 2,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "path": "cratejuice/content/data/playlist_8.json",
+          "bytes": 2,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "path": "cratejuice/content/data/playlist_all.json",
+          "bytes": 2,
+          "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "path": "cratejuice/content/data/riplist.txt",
+          "bytes": 200,
+          "sha256": "4c3bfab16dbec138f78c65bece1608220708e9c94a0cc8db2c8416179f144e54"
+        },
+        {
+          "path": "cratejuice/content/data/taglines.json",
+          "bytes": 144,
+          "sha256": "439652a5d66f7b85ebe1527d24ea759e318104388e6f3163c9cde59e3a8123d9"
+        },
+        {
+          "path": "cratejuice/content/data/urls.txt",
+          "bytes": 99,
+          "sha256": "ad02e467f431eae170f01785361b7c2555244780c66fcea7edb9a339e3b4f61b"
+        },
+        {
+          "path": "cratejuice/crate_run.sh",
+          "bytes": 164,
+          "sha256": "9a7616466153725301f8f91e70c7bd57abc57a6d6a3ceb647245116958faf14f"
+        },
+        {
+          "path": "cratejuice/offgrid-crates/.gitkeep",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "cratejuice/p",
+          "bytes": 1,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+        },
+        {
+          "path": "cratejuice/renderconfig.backend",
+          "bytes": 193,
+          "sha256": "de71cddf4d02496964f06e8af44a133b05d7962c575896a920bb51ce6411049c"
+        },
+        {
+          "path": "cratejuice/tools/cjpack.py",
+          "bytes": 4403,
+          "sha256": "b2f5940dff697458062e08a0ab4117d1e5f662e67db5351603aa450027687c61"
+        },
+        {
+          "path": "cratejuice/tools/cjplay.py",
+          "bytes": 2225,
+          "sha256": "d8160b5e5ff6b1161f439ef89bced46e156e1e0b9998f53ad1eb91cef3b34826"
+        },
+        {
+          "path": "cratejuice/tools/ripper/overnight_ripper.sh",
+          "bytes": 499,
+          "sha256": "cb1716988628b34968d560dc9143db1cdb5bb7712fd1b21a109e1399ed36b891"
+        },
+        {
+          "path": "cratejuice/v3/frontend/public/app.js",
+          "bytes": 6699,
+          "sha256": "f3106059f33e55147a7181665e74d32d0d709fee6008c08821ca92e87ce5dc82"
+        },
+        {
+          "path": "cratejuice/v3/frontend/public/cover_default.png",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "cratejuice/v3/frontend/public/debug.html",
+          "bytes": 2869,
+          "sha256": "544d17194f3c9fe0c1e73e35138ec5df10e6413e238d1977bab6f6dea7deaed0"
+        },
+        {
+          "path": "cratejuice/v3/frontend/public/gift.html",
+          "bytes": 3328,
+          "sha256": "d06201c6b43d135eb011e8cdd4d4bfe59898766e14964176d1ec40f13545ccab"
+        },
+        {
+          "path": "cratejuice/v3/frontend/public/icons/app_green.svg",
+          "bytes": 116,
+          "sha256": "7a89676f731ffb040d7c5653404568b13ccaa3c6df7650d2c34d2dc7da6c5be5"
+        },
+        {
+          "path": "cratejuice/v3/frontend/public/icons/app_orange.svg",
+          "bytes": 116,
+          "sha256": "ed4584d19948f7c99d660a32735e01e4be558a230a368b382d34b56a69694f9c"
+        },
+        {
+          "path": "cratejuice/v3/frontend/public/icons/app_pink.svg",
+          "bytes": 116,
+          "sha256": "0e560b3d83dec5ced13cc816190661651872bcca7c985c24213b705954aa440e"
+        },
+        {
+          "path": "cratejuice/v3/frontend/public/icons/app_violet.svg",
+          "bytes": 116,
+          "sha256": "098eb64ea4dc7d45051c60acef42abfc616d2d03a179be06a320ef0e0edf766f"
+        },
+        {
+          "path": "cratejuice/v3/frontend/public/icons/app_white.svg",
+          "bytes": 116,
+          "sha256": "7c97c2604e39dcd194bd10c6ebbc5bb9a2e676d1006da303967cb8a92fbf8aa1"
+        },
+        {
+          "path": "cratejuice/v3/frontend/public/index.html",
+          "bytes": 1737,
+          "sha256": "14a1aabb86b55ea304dc1e3075030df95a9ac4deb78703e6a88119a159ecf9b4"
+        },
+        {
+          "path": "cratejuice/v3/frontend/public/library.json",
+          "bytes": 958,
+          "sha256": "0c744508f8003504e9f962f731702422e7101d11c60607236f8523fce7178d58"
+        },
+        {
+          "path": "cratejuice/v3/frontend/public/manifest.webmanifest",
+          "bytes": 844,
+          "sha256": "d249ce0f9ac944cb775de6b9279590ee8ef93518d84ec1ff3c3523797535d1f9"
+        },
+        {
+          "path": "cratejuice/v3/frontend/public/playlist.json",
+          "bytes": 25,
+          "sha256": "814a083f6c4fed6dee921c8266480f85b46ae37c65524ea3b0bc59526a246160"
+        },
+        {
+          "path": "cratejuice/v3/frontend/public/service-worker.js",
+          "bytes": 833,
+          "sha256": "534999a8c188fb4d1e0a8c6341c6e47d8fde9445b77da12bacc1db463f0d16a2"
+        },
+        {
+          "path": "cratejuice/v3/frontend/public/style.css",
+          "bytes": 7952,
+          "sha256": "5546871a26242073bf570246503fc6d3139a933938261b076e2f9697714d79e4"
+        },
+        {
+          "path": "cratejuice_full_bundle_v3.zip",
+          "bytes": 5595,
+          "sha256": "b2144532d729748e3c84dcb623da84b1bb9772aa0e8c928be9cb53fb1b0b3c39",
+          "members": [
+            {
+              "path": "netlify.toml",
+              "bytes": 127,
+              "sha256": "67662e6dc3968ebfd555bb8a2c0ea4b27f3d16584456f5c418d13155d630d773"
+            },
+            {
+              "path": "tools/cjplay.py",
+              "bytes": 88,
+              "sha256": "4cb7dcdb615958392bb5409b26318683b778ea001bb24a17a9f8981812619598"
+            },
+            {
+              "path": "tools/cjpack.py",
+              "bytes": 88,
+              "sha256": "28879d5bccb47a513790f99028631c8bb80ede50a3027819410a6d801f42e8eb"
+            },
+            {
+              "path": "v3/frontend/public/manifest.webmanifest",
+              "bytes": 288,
+              "sha256": "d654e7d26247aa05deb5eddbba15ddd7b315794d538762bf87fef89cb49a46c8"
+            },
+            {
+              "path": "v3/frontend/public/service-worker.js",
+              "bytes": 128,
+              "sha256": "ced41e00a8a60c35b83e1d5ef01a494db7041d87d7ecda59291859ddeb8ca92c"
+            },
+            {
+              "path": "v3/frontend/public/index.html",
+              "bytes": 163,
+              "sha256": "c5a8d0a9f339b74bc67ad48d40d08116be476cb6be9e1ce0c14d0005c68d01e5"
+            },
+            {
+              "path": "v3/frontend/public/gift.html",
+              "bytes": 96,
+              "sha256": "8b2679ae4c988c798098e30b9aa3cbc8dca72bd6d12cc51d7fc1d11a167cd844"
+            },
+            {
+              "path": "v3/frontend/public/app.js",
+              "bytes": 22,
+              "sha256": "4e59d4ea17ff5e4fd3406edaf9f7db8cad57744a8ad7394a5ef87df405b54919"
+            },
+            {
+              "path": "v3/frontend/public/style.css",
+              "bytes": 58,
+              "sha256": "e92924a38fd824965331471da92526cf7e3e0fb96e33f8c85722662fae8dc951"
+            },
+            {
+              "path": "v3/frontend/public/icons/app_violet.svg",
+              "bytes": 115,
+              "sha256": "c8a1575ab93de28ef6e7862542d69d394523952463b6818186bdce2b6affc3d4"
+            },
+            {
+              "path": "v3/frontend/public/icons/app_orange.svg",
+              "bytes": 115,
+              "sha256": "e1c09644ac4029477857b9ce07aa05b2293afabef9e044d16e6a7cba869352a4"
+            },
+            {
+              "path": "v3/frontend/public/icons/app_green.svg",
+              "bytes": 115,
+              "sha256": "c816b39d068aec889701a57b7e853c4f6253fd1d0c6ece22d3da8493aa3be420"
+            },
+            {
+              "path": "v3/frontend/public/icons/app_white.svg",
+              "bytes": 115,
+              "sha256": "cef218c7218b4a770ad86d4c5ec02e3cd3ffcd8ba6d20905f23301bbd7f0a541"
+            },
+            {
+              "path": "v3/frontend/public/icons/app_pink.svg",
+              "bytes": 115,
+              "sha256": "92f3c27be3dc7d0dee0d7af71703aeb95b7a87233ebdb7a22a9fdd6330c4aee1"
+            },
+            {
+              "path": "v3/frontend/public/icons/app_purple.svg",
+              "bytes": 115,
+              "sha256": "9572342cc9a455c2fa48aff6635ec4385c981394be93374eb43fe766c31111ec"
+            },
+            {
+              "path": "content/data/taglines.json",
+              "bytes": 143,
+              "sha256": "e8e2bf3213a5e73dbe3ba30b68a11ce7377d5585e2e85941ab567de7f60432d2"
+            },
+            {
+              "path": "content/data/playlist_8.json",
+              "bytes": 200,
+              "sha256": "2b01c2d73162c24f5a4e26af355e7c42a9d125df63701d01a8410773d5086de4"
+            },
+            {
+              "path": "content/data/library.json",
+              "bytes": 243,
+              "sha256": "7e5835490c3cea4d8a142393b1ebe91cb2a527d3b1a087a1e9d28e01e196ae5e"
+            }
+          ]
+        },
+        {
+          "path": "debug.sh.txt",
+          "bytes": 1229,
+          "sha256": "6caffd2d036687920d1443db55817945d91c58b30e86106b24233991f0dc4de2"
+        },
+        {
+          "path": "deploy-surge.sh",
+          "bytes": 447,
+          "sha256": "6c68e6721096b1ebb932c48cf4aaa833dae2cd4dc37e23001fe316ff1860c741"
+        },
+        {
+          "path": "deploy.sh",
+          "bytes": 924,
+          "sha256": "7ee9923ef8d2e3fea0071f77aae8c71fac5d4e8567328854a589d41b11f02a0d"
+        },
+        {
+          "path": "devcontainer/devcontainer.json",
+          "bytes": 1382,
+          "sha256": "4851875b5f3ed7826ac7a452523315a00e278e642587fa4c2dd03cb9024f01f7"
+        },
+        {
+          "path": "diagnose-pwa.sh",
+          "bytes": 5857,
+          "sha256": "2580fcd5aa54869c62ad2f20f1bb812f84479e84ee345ea48c64ab85d19f77bb"
+        },
+        {
+          "path": "docker-compose.yml",
+          "bytes": 514,
+          "sha256": "38e4844a6898bc373db6e8b6695699b32655d8e92bbb21da5a8d90ef0587860e"
+        },
+        {
+          "path": "iOS-INSTALLATION.md",
+          "bytes": 4539,
+          "sha256": "b33e258664cf8c5a8435b7b51c8511d760f97ae2905feed7b9191ec06dab696f"
+        },
+        {
+          "path": "index.html",
+          "bytes": 73,
+          "sha256": "7912737aaf07966138c2a83e178ca194bd98847562dec430826aad995c65e7b0"
+        },
+        {
+          "path": "main.py",
+          "bytes": 1193,
+          "sha256": "978ff467c4e481e2412b112fc6f28daeb89e94c1f9ad02a22e32241ce3e812cb"
+        },
+        {
+          "path": "manifest.webmanifest",
+          "bytes": 190,
+          "sha256": "e7e566733db4e1edc15505638249185cadb38dd4fabf6c2a501b6ee5f79d7636"
+        },
+        {
+          "path": "mkdir deep_freezyE",
+          "bytes": 515,
+          "sha256": "83711226b5ce4e52f94567599f3abcbc44aba509172573f5bd5b9d00c9568466"
+        },
+        {
+          "path": "netlify.toml",
+          "bytes": 194,
+          "sha256": "eafbdc41b19ce8d8de8d1c0ea90ce218bac15d6507135a80ceded398e2e11ca7"
+        },
+        {
+          "path": "quick-pwa-test.sh",
+          "bytes": 2558,
+          "sha256": "89c871b837f22dfc6d3d6417c2d34a670aea05b2a7198ca5e595a19d09da4c16"
+        },
+        {
+          "path": "render-deploy.md",
+          "bytes": 696,
+          "sha256": "4dc306c6a8639f7551986443ff3a517eabde6aa900dae66c59a649d352bdf348"
+        },
+        {
+          "path": "render_dual.zip",
+          "bytes": 1527,
+          "sha256": "db436ea618b6bcd0c0c291a8f96b8b38459b92df2b2ea1e0d4237f8a25de95fa",
+          "members": [
+            {
+              "path": "render.yaml",
+              "bytes": 872,
+              "sha256": "736c1f76da6920480423b8f5faf4fa70137ac9fd6afa9d8e0ebd81becba64cbc"
+            },
+            {
+              "path": "README_RENDER_DUAL.txt",
+              "bytes": 415,
+              "sha256": "ca43b42400eef8104088ef5ff557456e135979532582bea8064aa02702ceea4c"
+            }
+          ]
+        },
+        {
+          "path": "requirements.txt",
+          "bytes": 30,
+          "sha256": "0dfe676170af0efc3b2a5f8fcbe6e725cca44ac6c38fcbea404a765a54c254d2"
+        },
+        {
+          "path": "requirements_v1.txt",
+          "bytes": 42,
+          "sha256": "af9a83cf7b605018362754468a0a145db7fdce10be8f79d846b7cb7322011686"
+        },
+        {
+          "path": "ripper.log",
+          "bytes": 4956,
+          "sha256": "ca12fc8645460fc10a2b49440fda8633cd46b8310c4a8861df6012c0ab2145ab"
+        },
+        {
+          "path": "setup-deployment.sh",
+          "bytes": 4715,
+          "sha256": "fde1bd16d4c8a4703e576116d9d032ef38412ec7ff630e4e193c9577e155741f"
+        },
+        {
+          "path": "test-download.sh",
+          "bytes": 2718,
+          "sha256": "45d6845a397b97918e8e2efda1565bffe9b68c279121ffc5b2bf0c7397071036"
+        },
+        {
+          "path": "test-pwa-direct.sh",
+          "bytes": 3203,
+          "sha256": "4b12ecf844e9b9faf8ec5301b38a23a53c47aaae262fd98fcdb4ab3b00210e5f"
+        },
+        {
+          "path": "test-pwa.sh",
+          "bytes": 2632,
+          "sha256": "40a4d64479786535e2784bd93ac77a71184fcbc6c50800f183c5d13b121d4f7b"
+        },
+        {
+          "path": "v3/CrateJuice_Friday_Drop_v3/README.md",
+          "bytes": 672,
+          "sha256": "f5516252a68d1c043f732a7d58de62765be7fcc426b33805fc4e1c15f8df0b57"
+        },
+        {
+          "path": "v3/CrateJuice_Friday_Drop_v3/netlify.toml",
+          "bytes": 275,
+          "sha256": "d005c027f58e66344d2fb8089fc0f99e80d19d8bde2f2f3b1dce0260c91989da"
+        },
+        {
+          "path": "v3/CrateJuice_Friday_Drop_v3/playlists/PlaylistAI_Vol1-15.csv",
+          "bytes": 153,
+          "sha256": "60de694ad67266e876fdaf61f918eb9eaf29d7982ab1baf18649eea165018880"
+        },
+        {
+          "path": "v3/CrateJuice_Friday_Drop_v3/playlists/PlaylistAI_Vol1-15.txt",
+          "bytes": 160,
+          "sha256": "5a5767f8b4840b7891af39e098f4c436a7cd88fff484018217a329f3e6857fa4"
+        },
+        {
+          "path": "v3/CrateJuice_Friday_Drop_v3/tools/README_TOOLS.md",
+          "bytes": 1403,
+          "sha256": "3c61ddfca061f6bf53725f833a44f97c8afed7bd492cc7bbd3c10f851edfcf35"
+        },
+        {
+          "path": "v3/CrateJuice_Friday_Drop_v3/tools/csv_to_mp3.py",
+          "bytes": 1355,
+          "sha256": "cffe722048307fc4d13c32236d4865a6a25f93b7e8262b940a79b2eb141c729d"
+        },
+        {
+          "path": "v3/CrateJuice_Friday_Drop_v3/tools/csv_to_mp3.sh",
+          "bytes": 2339,
+          "sha256": "1359d40032aca798bae99f1b9fd4d47c295f3bd2a94fbf43fbee63947d3135a9"
+        },
+        {
+          "path": "v3/CrateJuice_Friday_Drop_v3/tools/sc_extractor_bookmarklet.txt",
+          "bytes": 1197,
+          "sha256": "56adfe73da341f1af3d2379a6dc20c5706f618148130facea130de1af8561d5c"
+        },
+        {
+          "path": "v3/CrateJuice_Friday_Drop_v3/tools/sc_extractor_console.js",
+          "bytes": 989,
+          "sha256": "a8b971c27e37506006fb84b7cd15ee5943cd39abfc21d7a7e1b27ad877a9381c"
+        },
+        {
+          "path": "v3/CrateJuice_Friday_Drop_v3/v3/backend/README.md",
+          "bytes": 204,
+          "sha256": "1e493e569a1ea5da7f8062b6b6b43a427540915637c2a0cbf5d9181c76f88566"
+        },
+        {
+          "path": "v3/CrateJuice_Friday_Drop_v3/v3/backend/main.py",
+          "bytes": 8636,
+          "sha256": "1d06c9e6b6ff9962d3f3aec0b11e4269832142b4f690de170055ee7198bccf72"
+        },
+        {
+          "path": "v3/CrateJuice_Friday_Drop_v3/v3/backend/requirements.txt",
+          "bytes": 93,
+          "sha256": "6183b323f910146a258c9920db711571493837ccede5051a199141ffda136f1b"
+        },
+        {
+          "path": "v3/CrateJuice_Friday_Drop_v3/v3/frontend/app.js",
+          "bytes": 338,
+          "sha256": "c248ca1c348fdfb6d5c171bc45eb70eb57e38fe1d59495cf5eb687acac4afc0e"
+        },
+        {
+          "path": "v3/CrateJuice_Friday_Drop_v3/v3/frontend/assets/favicon.png",
+          "bytes": 73,
+          "sha256": "a9eb462ddac3667b1c5d02af79cb4400c967b12629dfc89050275a9406e6679f"
+        },
+        {
+          "path": "v3/CrateJuice_Friday_Drop_v3/v3/frontend/index.html",
+          "bytes": 1406,
+          "sha256": "6017bb524d4a9ac840f79624e1cb5c1f611666bd0f54925b49580b4ae9282a9a"
+        },
+        {
+          "path": "v3/CrateJuice_Friday_Drop_v3/v3/frontend/style.css",
+          "bytes": 1990,
+          "sha256": "c1a8655f0eb214243dd7657a9bb9415b760e08c3b38db91dc0c8a7e18384173a"
+        },
+        {
+          "path": "v3/CrateJuice_Friday_Drop_v3/v3/frontend/two-deck.html",
+          "bytes": 2106,
+          "sha256": "c65307fd5559f2b04f2418728cbfe76fbca4a594652e91dfa2fb1118f86107bf"
+        },
+        {
+          "path": "v3/CrateJuice_Friday_Drop_v3/v3/frontend/two_deck.js",
+          "bytes": 562,
+          "sha256": "213c3dbec75a8963b0263d5ab9d1a7e7d8fa7dcdfca38f0bb6c2cb84ffb2d48a"
+        },
+        {
+          "path": "v3/backend/Procfile",
+          "bytes": 22,
+          "sha256": "b1301d2fa8aa9d46902a668df830d3e831d47b7ec22e281adc7339953a80787b"
+        },
+        {
+          "path": "v3/backend/deploy-render.sh",
+          "bytes": 1321,
+          "sha256": "feff5223fd7c0e2d5ada221e6a40324f73701dd2d39394a71a949091f1b4c08a"
+        },
+        {
+          "path": "v3/backend/main.py",
+          "bytes": 14180,
+          "sha256": "de43c6a7cc9456e9d40ae7db375f86bd2b216c5cb4fb74fb7211c141dc25a6ab"
+        },
+        {
+          "path": "v3/backend/railway.json",
+          "bytes": 199,
+          "sha256": "f0bf1626bbed89fba057bebb566ea6780e0373bb347eae156aa9eb4ad3390ed3"
+        },
+        {
+          "path": "v3/backend/render.yaml",
+          "bytes": 438,
+          "sha256": "4c5b8db154bad6da55cc58a209bf8b7d2a72a69d0e9cec784a686783dffead28"
+        },
+        {
+          "path": "v3/backend/requirements.txt",
+          "bytes": 132,
+          "sha256": "3d8b05908d539505b42f9a520cd68c7b44728d6df7f412c0cb2f4a350dcfa373"
+        },
+        {
+          "path": "v3/backend/runtime.txt",
+          "bytes": 13,
+          "sha256": "b800f54eb407dc8a3822f7fafe551f4289f708790276d652968b182343b52f45"
+        },
+        {
+          "path": "v3/backend/verify.sh",
+          "bytes": 1085,
+          "sha256": "d469021ee2592b6b896ce9f21ece52bc06edf5dec00c2a5431c54d63c156d34e"
+        },
+        {
+          "path": "v3/backend/verify_frontend.sh",
+          "bytes": 583,
+          "sha256": "63b857e7512cc787d2bfeab82197c0664571f024743bb23a16c75e665b5f9ab4"
+        },
+        {
+          "path": "v3/cj_csv_bulk_rip/README.md",
+          "bytes": 2417,
+          "sha256": "63a957402479a32e490a107ab8996b5bb66a6e67695a10d34c906bfc9f117f09"
+        },
+        {
+          "path": "v3/cj_csv_bulk_rip/v3/backend/Procfile",
+          "bytes": 23,
+          "sha256": "cd495b2a7859e07bec4a78bbce133311ecebb27b25a9ae1ed944e4a29dd604a2"
+        },
+        {
+          "path": "v3/cj_csv_bulk_rip/v3/backend/main.py",
+          "bytes": 6252,
+          "sha256": "83eb6d13af437ff88babf9980dffd77eaab0963d34837e8d988683d69586abb8"
+        },
+        {
+          "path": "v3/cj_csv_bulk_rip/v3/backend/requirements.txt",
+          "bytes": 65,
+          "sha256": "0a68af300cb53b6ecf4c0771b6e51e32f6e377b7211856ec8fba225f3a9424a8"
+        },
+        {
+          "path": "v3/cj_csv_bulk_rip/v3/frontend/index.html",
+          "bytes": 7402,
+          "sha256": "9d99e6503bce531a3b7842dc5dc839ec0a9c908d1dd8196a454a22442a3ce8a2"
+        },
+        {
+          "path": "v3/cj_csv_bulk_rip/v3/frontend/sc_extractor.js",
+          "bytes": 7083,
+          "sha256": "87808d1f9f4ccc909aaffd95bb332f433262d587626016af14f4ec887b90ed26"
+        },
+        {
+          "path": "v3/cratejuice_2deck_v1/README.md",
+          "bytes": 169,
+          "sha256": "9ac8201c43dc7789f0caf069bd865da6fa6cf58f32d3d79db8127bef9e3d4076"
+        },
+        {
+          "path": "v3/cratejuice_2deck_v1/app.js",
+          "bytes": 1299,
+          "sha256": "2940fc264355f38219ed3e77986f93c569cd8a96b0ced2427d6ff44263c3e88c"
+        },
+        {
+          "path": "v3/cratejuice_2deck_v1/assets/icons/favicon.ico",
+          "bytes": 4990,
+          "sha256": "156b9250f87097879c2926b904afec57dbda3341db4a16989483dfdecd110b8c"
+        },
+        {
+          "path": "v3/cratejuice_2deck_v1/index.html",
+          "bytes": 2612,
+          "sha256": "8b79aa917e4a7f9f0d9846c297a38771a8df0c6e1b87250c1cfc848c5e593976"
+        },
+        {
+          "path": "v3/cratejuice_2deck_v1/style.css",
+          "bytes": 2844,
+          "sha256": "c3f5ca325784c00d54d51b6337a38fa78bfd34c98695d1b9c6a6be8118fcc546"
+        },
+        {
+          "path": "v3/cratejuice_2deck_v1/tools/sc_link_extractor.js",
+          "bytes": 470,
+          "sha256": "9ecf6b24657372744df623d6fe91d8f01751bcc403244621d9032500e0f9f3aa"
+        },
+        {
+          "path": "v3/frontend/app.js",
+          "bytes": 2923,
+          "sha256": "7252274df8473f3ee29a1b6a7b25ca002b987ca73a93476f9f80cb4640edff8e"
+        },
+        {
+          "path": "v3/frontend/assets/audio/Cbo.mp3",
+          "bytes": 1,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+        },
+        {
+          "path": "v3/frontend/assets/audio/cbo.mp3",
+          "bytes": 1,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+        },
+        {
+          "path": "v3/frontend/assets/audio/mimi.mp3",
+          "bytes": 1,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+        },
+        {
+          "path": "v3/frontend/assets/favicon.svg",
+          "bytes": 481,
+          "sha256": "dbf3b037b5a7b64063f9879d669b4db7e7da6acd154cab93a81be45754285255"
+        },
+        {
+          "path": "v3/frontend/assets/p",
+          "bytes": 1,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+        },
+        {
+          "path": "v3/frontend/cratejuice_2deck_v2/app.js",
+          "bytes": 2616,
+          "sha256": "8c8397b38f5a6bda8d4105c048175d8e61e65ba9aff061b7d12d38c83043be46"
+        },
+        {
+          "path": "v3/frontend/cratejuice_2deck_v2/assets/audio/keep.txt",
+          "bytes": 41,
+          "sha256": "fdf514f9fda99da3e82935e2e11c31b02a2bc75256327f5cf754746729eb185a"
+        },
+        {
+          "path": "v3/frontend/cratejuice_2deck_v2/assets/icons/favicon.png",
+          "bytes": 260,
+          "sha256": "b733d84508cb73330718621d4e09126127be5a3c91140af4a510d630e24f7abc"
+        },
+        {
+          "path": "v3/frontend/cratejuice_2deck_v2/index.html",
+          "bytes": 2854,
+          "sha256": "173801f1ead25bcaa0341510420d1d6924795052d4f0dfebb52271fa8611a2e0"
+        },
+        {
+          "path": "v3/frontend/cratejuice_2deck_v2/style.css",
+          "bytes": 2699,
+          "sha256": "5b4e69ed4b3366169cf928db798d69c2c866f03027abe238658a04d7c4384c39"
+        },
+        {
+          "path": "v3/frontend/cratejuice_2deck_v2/tools/sc_link_extractor.js",
+          "bytes": 414,
+          "sha256": "35542969b5b6bf1b172e031bf2d7deca64c021641becea73148a9a6c670f900c"
+        },
+        {
+          "path": "v3/frontend/health/index.html",
+          "bytes": 17,
+          "sha256": "12b34da73b0c67a0319e6eddbd3582af66e3b558b4d44e4a6860e0cec20d726f"
+        },
+        {
+          "path": "v3/frontend/index.html",
+          "bytes": 2929,
+          "sha256": "5bb65d7ca4aaa2bea5f9575778e59f194bd00580dd93e604ec9fea991a2857a9"
+        },
+        {
+          "path": "v3/frontend/netlify/functions/keep.txt",
+          "bytes": 12,
+          "sha256": "2f73349cfc4630255319c6c8dfc1b46a8996ace9d14d8e07563b165915918ec2"
+        },
+        {
+          "path": "v3/frontend/netlify/functions/ping.js",
+          "bytes": 191,
+          "sha256": "5cfb49270ce376a50e70cafe0443738042769de402d391f97baa763ba6164014"
+        },
+        {
+          "path": "v3/frontend/public/keep.txt",
+          "bytes": 15,
+          "sha256": "5455398953d7292a602ee09e9ed531e58311f76280d174f67b8541e563debf77"
+        },
+        {
+          "path": "v3/frontend/sc_extractor.js",
+          "bytes": 7612,
+          "sha256": "ab39e0315f4cc118d37baadc6be2f4b9aa9f1e9b002eeba8c0de59c0589839fd"
+        },
+        {
+          "path": "v3/frontend/style.css",
+          "bytes": 2629,
+          "sha256": "b71e651282610a9d0f1034df93dc0d2513148bbb0acc4cd45de290c7dde82dc9"
+        },
+        {
+          "path": "v3/netlify/functions/keep.txt",
+          "bytes": 12,
+          "sha256": "2f73349cfc4630255319c6c8dfc1b46a8996ace9d14d8e07563b165915918ec2"
+        },
+        {
+          "path": "v3/verify.sh",
+          "bytes": 1509,
+          "sha256": "94f802480a433ef4eb297e1068563edcb518c206294d8b3037cb7662873872b7"
+        },
+        {
+          "path": "vercel.json",
+          "bytes": 388,
+          "sha256": "24e46a4cc6d8dd3d3a789e3d91d828a873966c39c6ca1f9b8ba7822d4d1ad2e6"
+        },
+        {
+          "path": "verify.sh",
+          "bytes": 551,
+          "sha256": "712121adb7ea453ffd8ffd8a70e5cb44fe8e324f79b7dee5b9833ff409b9a0b0"
+        }
+      ]
+    },
+    {
+      "repository": "cratejuice-snaps",
+      "commit": "3d166cce51fd1e38ebf444d70f0e2b995ed8ee0d",
+      "files": [
+        {
+          "path": ".snapshots/config.json",
+          "bytes": 2855,
+          "sha256": "062cb76690bb6fc4a32b799b36968458628854b650937e90d91e2163f43a76b7"
+        },
+        {
+          "path": ".snapshots/readme.md",
+          "bytes": 409,
+          "sha256": "0ab695ae4c6c2bae966a796fa9c1c29fce82c4381dc5ca6fad2cdf38f5f8af64"
+        },
+        {
+          "path": ".snapshots/sponsors.md",
+          "bytes": 2391,
+          "sha256": "b255d6d45f4f0f2476c5294f04a2f5681a7e9bf7259b4e3f1f0899f12759bbc3"
+        },
+        {
+          "path": "README.md",
+          "bytes": 307,
+          "sha256": "a700103bfdd38441faf6b88f12dcc19e486b28eeed57d04a9d0b8ab98249e7e1"
+        },
+        {
+          "path": "app.js",
+          "bytes": 1349,
+          "sha256": "cbe16c8d2594f0d17db66a7d183405bd4a263cbf95925622d637a4b1add1c4de"
+        },
+        {
+          "path": "index.html",
+          "bytes": 157,
+          "sha256": "e2ca2c261f38eda3de69dc522a03c2cfb6da18d30bafee22b8206eae4ee8d18e"
+        },
+        {
+          "path": "style.css",
+          "bytes": 156,
+          "sha256": "c9ee7c73793f2598305e5c9047582c30845b82ca4ba52831b8e6f8ac9124d173"
+        }
+      ]
+    },
+    {
+      "repository": "cratejuice-v1",
+      "commit": "7823acce25bca9bbc363ba0bd668cdb972f5b967",
+      "files": [
+        {
+          "path": ".github/workflows/README.md",
+          "bytes": 2051,
+          "sha256": "527d45420e050b6ba224656cc6623ab5e5a6d749f18aee8c054a25fe55a16b32"
+        },
+        {
+          "path": ".github/workflows/create-deploy.yml",
+          "bytes": 4750,
+          "sha256": "45b492e6fa3fa7d2510f18986453e631a07d2f1c43d0c96c4ef2487e42aa90e1"
+        },
+        {
+          "path": ".github/workflows/deploy.yml",
+          "bytes": 625,
+          "sha256": "8cd1df54056445985439433ae4723c8bb41f71633c05a84e7eeea8c9cc6c6c57"
+        },
+        {
+          "path": ".github/workflows/deploy_fix.yml",
+          "bytes": 637,
+          "sha256": "7c2b869e2c0fa5d727c8fd55e472f10635940e1058e64bd4258b5b6b856faa15"
+        },
+        {
+          "path": "CrateJuice_MimiMassive_playlist.txt",
+          "bytes": 2964,
+          "sha256": "b08e30752489a08a343a7d843d08330c5828c121dd102f6a90452dcbd106fb7e"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards.zip",
+          "bytes": 2072726,
+          "sha256": "f0b7747287427cf14927c8d25187ca418af7e6f388d35cfb813353de3f3c84f0",
+          "members": [
+            {
+              "path": "vintage_postcards/backs/back3.jpg",
+              "bytes": 78810,
+              "sha256": "576176e7f3765dffd832bd32fdb1b4d6f5123f7e798b985daf7104ec354bfa6a"
+            },
+            {
+              "path": "vintage_postcards/backs/back6.jpg",
+              "bytes": 78038,
+              "sha256": "f17280812d8a9296542acd38a27f7c83f6bd393183097a53fa47867d9d8adbf6"
+            },
+            {
+              "path": "vintage_postcards/backs/back1.jpg",
+              "bytes": 79689,
+              "sha256": "257865d1d0f45e6d95bce761492766a3a9a055c3a0d743d0fd0f13ac15cf2445"
+            },
+            {
+              "path": "vintage_postcards/backs/back5.jpg",
+              "bytes": 79635,
+              "sha256": "59a8b92e30273037b8d98146b5bf0a850384c11eb0cf066dc27642cd50ec6c0d"
+            },
+            {
+              "path": "vintage_postcards/backs/back4.jpg",
+              "bytes": 78961,
+              "sha256": "37560af8a90f77365e027b18479985c7670c474f9f64815566a5a76cda2adc73"
+            },
+            {
+              "path": "vintage_postcards/backs/back7.jpg",
+              "bytes": 79213,
+              "sha256": "6a3deed1eb557ffe9ae814951d89356fcf466c84d4e611a7bb30271d3aa8015b"
+            },
+            {
+              "path": "vintage_postcards/backs/back8.jpg",
+              "bytes": 79813,
+              "sha256": "122ba90f8ce071b4160dd32a7185651926ef8a6d70041d4d88bec0185c0238f3"
+            },
+            {
+              "path": "vintage_postcards/backs/back2.jpg",
+              "bytes": 79441,
+              "sha256": "216e5420f50011513d6e30e941b2abe6303273210f99c32d14737f8d0db1df36"
+            },
+            {
+              "path": "vintage_postcards/fronts/front4.jpg",
+              "bytes": 114222,
+              "sha256": "3f8fa5ddae47891308e7054498c1429e0323cb5257331adaa348a5f6ffd4553f"
+            },
+            {
+              "path": "vintage_postcards/fronts/front2.jpg",
+              "bytes": 130549,
+              "sha256": "3e3bf2ca46cb28db3f3affbbf7e44e2ef47d5dd684eecbcfb3360aa4a33358c6"
+            },
+            {
+              "path": "vintage_postcards/fronts/front7.jpg",
+              "bytes": 253492,
+              "sha256": "4a608731d91965c4c71d33a663734dcc7138649c8523a9515815de76536a0618"
+            },
+            {
+              "path": "vintage_postcards/fronts/front6.jpg",
+              "bytes": 157452,
+              "sha256": "45c6c990fc48da3a2969ccf4bf09810d6ff6ac890da493eae33589e07787f533"
+            },
+            {
+              "path": "vintage_postcards/fronts/front8.jpg",
+              "bytes": 90204,
+              "sha256": "3594cbae529e8e6f1e864c7ced836ac3cd7c78c3bd8afc35d9038767def84e50"
+            },
+            {
+              "path": "vintage_postcards/fronts/front5.jpg",
+              "bytes": 113925,
+              "sha256": "af098068cf610ed658a147e79fca24eb2869ad884f8d602562e161b0d976edc8"
+            },
+            {
+              "path": "vintage_postcards/fronts/front1.jpg",
+              "bytes": 97694,
+              "sha256": "7096e79fdd631e071591e6353c6c5e24961e6dcb61e3179fe8ee1bea06390aa7"
+            },
+            {
+              "path": "vintage_postcards/fronts/front3.jpg",
+              "bytes": 101996,
+              "sha256": "8d3d1f100fb50ef192af5d6bff307f6ac8ec9800f924625573389af18df93325"
+            },
+            {
+              "path": "vintage_postcards/index.html",
+              "bytes": 3128,
+              "sha256": "a8623c190ca00cf9a294e707a671253c58cf4077bf1734f46e6241c4e86efa79"
+            },
+            {
+              "path": "vintage_audio/tone4.wav",
+              "bytes": 176444,
+              "sha256": "829b86cc2e64afc240ef7edf84b6473807376a83b7c5ab4c4fc773efc951e263"
+            },
+            {
+              "path": "vintage_audio/tone1.wav",
+              "bytes": 176444,
+              "sha256": "1dae4d7b5aaf74d8d58e9808956a0cf2d9c375f5aa144408391e7fd00a38dc3f"
+            },
+            {
+              "path": "vintage_audio/tone2.wav",
+              "bytes": 176444,
+              "sha256": "aa931f19a9844acf7c2fbca27eea5746eaebd9b9b01385b8f23612446de8c5f9"
+            },
+            {
+              "path": "vintage_audio/tone7.wav",
+              "bytes": 176444,
+              "sha256": "fa88e8a8ae9c3c6bc5c645b36b508d34df06006729639d1e6bee7ca6496215e0"
+            },
+            {
+              "path": "vintage_audio/tone3.wav",
+              "bytes": 176444,
+              "sha256": "68dc3d2f73e11417bd40cd65b0cdd65ec6bccb7371aeca3fb3e8c11e6de9fc53"
+            },
+            {
+              "path": "vintage_audio/tone6.wav",
+              "bytes": 176444,
+              "sha256": "6a82442c3cc4c7a2d581ecf131117ce9f27460dae7b165974b89da86ebe555ec"
+            },
+            {
+              "path": "vintage_audio/tone5.wav",
+              "bytes": 169502,
+              "sha256": "68203fd5dc20051baa887883705b97b77f6d137575958f7f5ee8e2efdfd90351"
+            },
+            {
+              "path": "vintage_audio/tone8.wav",
+              "bytes": 176444,
+              "sha256": "8c7a3d71741577c22d8b24d0e59b1fcb44792ae2902d93be4b0b8fe034093495"
+            }
+          ]
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_audio/tone1.wav",
+          "bytes": 176444,
+          "sha256": "1dae4d7b5aaf74d8d58e9808956a0cf2d9c375f5aa144408391e7fd00a38dc3f"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_audio/tone2.wav",
+          "bytes": 176444,
+          "sha256": "aa931f19a9844acf7c2fbca27eea5746eaebd9b9b01385b8f23612446de8c5f9"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_audio/tone3.wav",
+          "bytes": 176444,
+          "sha256": "68dc3d2f73e11417bd40cd65b0cdd65ec6bccb7371aeca3fb3e8c11e6de9fc53"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_audio/tone4.wav",
+          "bytes": 176444,
+          "sha256": "829b86cc2e64afc240ef7edf84b6473807376a83b7c5ab4c4fc773efc951e263"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_audio/tone5.wav",
+          "bytes": 169502,
+          "sha256": "68203fd5dc20051baa887883705b97b77f6d137575958f7f5ee8e2efdfd90351"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_audio/tone6.wav",
+          "bytes": 176444,
+          "sha256": "6a82442c3cc4c7a2d581ecf131117ce9f27460dae7b165974b89da86ebe555ec"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_audio/tone7.wav",
+          "bytes": 176444,
+          "sha256": "fa88e8a8ae9c3c6bc5c645b36b508d34df06006729639d1e6bee7ca6496215e0"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_audio/tone8.wav",
+          "bytes": 176444,
+          "sha256": "8c7a3d71741577c22d8b24d0e59b1fcb44792ae2902d93be4b0b8fe034093495"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_postcards/backs/back1.jpg",
+          "bytes": 79689,
+          "sha256": "257865d1d0f45e6d95bce761492766a3a9a055c3a0d743d0fd0f13ac15cf2445"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_postcards/backs/back2.jpg",
+          "bytes": 79441,
+          "sha256": "216e5420f50011513d6e30e941b2abe6303273210f99c32d14737f8d0db1df36"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_postcards/backs/back3.jpg",
+          "bytes": 78810,
+          "sha256": "576176e7f3765dffd832bd32fdb1b4d6f5123f7e798b985daf7104ec354bfa6a"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_postcards/backs/back4.jpg",
+          "bytes": 78961,
+          "sha256": "37560af8a90f77365e027b18479985c7670c474f9f64815566a5a76cda2adc73"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_postcards/backs/back5.jpg",
+          "bytes": 79635,
+          "sha256": "59a8b92e30273037b8d98146b5bf0a850384c11eb0cf066dc27642cd50ec6c0d"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_postcards/backs/back6.jpg",
+          "bytes": 78038,
+          "sha256": "f17280812d8a9296542acd38a27f7c83f6bd393183097a53fa47867d9d8adbf6"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_postcards/backs/back7.jpg",
+          "bytes": 79213,
+          "sha256": "6a3deed1eb557ffe9ae814951d89356fcf466c84d4e611a7bb30271d3aa8015b"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_postcards/backs/back8.jpg",
+          "bytes": 79813,
+          "sha256": "122ba90f8ce071b4160dd32a7185651926ef8a6d70041d4d88bec0185c0238f3"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_postcards/fronts/front1.jpg",
+          "bytes": 97694,
+          "sha256": "7096e79fdd631e071591e6353c6c5e24961e6dcb61e3179fe8ee1bea06390aa7"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_postcards/fronts/front2.jpg",
+          "bytes": 130549,
+          "sha256": "3e3bf2ca46cb28db3f3affbbf7e44e2ef47d5dd684eecbcfb3360aa4a33358c6"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_postcards/fronts/front3.jpg",
+          "bytes": 101996,
+          "sha256": "8d3d1f100fb50ef192af5d6bff307f6ac8ec9800f924625573389af18df93325"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_postcards/fronts/front4.jpg",
+          "bytes": 114222,
+          "sha256": "3f8fa5ddae47891308e7054498c1429e0323cb5257331adaa348a5f6ffd4553f"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_postcards/fronts/front5.jpg",
+          "bytes": 113925,
+          "sha256": "af098068cf610ed658a147e79fca24eb2869ad884f8d602562e161b0d976edc8"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_postcards/fronts/front6.jpg",
+          "bytes": 157452,
+          "sha256": "45c6c990fc48da3a2969ccf4bf09810d6ff6ac890da493eae33589e07787f533"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_postcards/fronts/front7.jpg",
+          "bytes": 253492,
+          "sha256": "4a608731d91965c4c71d33a663734dcc7138649c8523a9515815de76536a0618"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_postcards/fronts/front8.jpg",
+          "bytes": 90204,
+          "sha256": "3594cbae529e8e6f1e864c7ced836ac3cd7c78c3bd8afc35d9038767def84e50"
+        },
+        {
+          "path": "CrateJuice_Vintage_Postcards/vintage_postcards/index.html",
+          "bytes": 3128,
+          "sha256": "a8623c190ca00cf9a294e707a671253c58cf4077bf1734f46e6241c4e86efa79"
+        },
+        {
+          "path": "PDF document.pdf",
+          "bytes": 17361,
+          "sha256": "8d819f0e371bcca9ee119af89c32e7a950800893d174233b82c6e6df2a89fb23"
+        },
+        {
+          "path": "PLyr.html",
+          "bytes": 814,
+          "sha256": "6f045d51ce577185bba4a11c8f7cf0b61b2b9b92f590ccf28b980c9062c02086"
+        },
+        {
+          "path": "README.md",
+          "bytes": 20638,
+          "sha256": "7c649b77e3ced75ff7ff5794c6862637a65bc0c4237cc01b15fd84a52fe5e88d"
+        },
+        {
+          "path": "README.txt",
+          "bytes": 293,
+          "sha256": "3116dbe1464bc24cedd905e1ee5d957cbb58ed85aa3acd8b36b6f4f65dad13eb"
+        },
+        {
+          "path": "SEPT",
+          "bytes": 139088,
+          "sha256": "8ee1448c38cf839f8857e65044bf04ed53d18968e6be907eaac7c25e126b8fc7"
+        },
+        {
+          "path": "cratejuice_site_clean.zip",
+          "bytes": 2075684,
+          "sha256": "5c63ce7157229ea41c924b9400a90f159f59ef768b0c70e38cabc45c122fdfc6",
+          "members": [
+            {
+              "path": "home/oai/share/clean_site/vintage_audio/tone1.wav",
+              "bytes": 176444,
+              "sha256": "1dae4d7b5aaf74d8d58e9808956a0cf2d9c375f5aa144408391e7fd00a38dc3f"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_audio/tone3.wav",
+              "bytes": 176444,
+              "sha256": "68dc3d2f73e11417bd40cd65b0cdd65ec6bccb7371aeca3fb3e8c11e6de9fc53"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_audio/tone8.wav",
+              "bytes": 176444,
+              "sha256": "8c7a3d71741577c22d8b24d0e59b1fcb44792ae2902d93be4b0b8fe034093495"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_audio/tone7.wav",
+              "bytes": 176444,
+              "sha256": "fa88e8a8ae9c3c6bc5c645b36b508d34df06006729639d1e6bee7ca6496215e0"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_audio/tone2.wav",
+              "bytes": 176444,
+              "sha256": "aa931f19a9844acf7c2fbca27eea5746eaebd9b9b01385b8f23612446de8c5f9"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_audio/tone4.wav",
+              "bytes": 176444,
+              "sha256": "829b86cc2e64afc240ef7edf84b6473807376a83b7c5ab4c4fc773efc951e263"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_audio/tone5.wav",
+              "bytes": 169502,
+              "sha256": "68203fd5dc20051baa887883705b97b77f6d137575958f7f5ee8e2efdfd90351"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_audio/tone6.wav",
+              "bytes": 176444,
+              "sha256": "6a82442c3cc4c7a2d581ecf131117ce9f27460dae7b165974b89da86ebe555ec"
+            },
+            {
+              "path": "home/oai/share/clean_site/playlist.txt",
+              "bytes": 1794,
+              "sha256": "fc969b4927d73431077b05e0bab353ca4ae766f57d4fc25e67f44bda4673e11b"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_postcards/fronts/front3.jpg",
+              "bytes": 101996,
+              "sha256": "8d3d1f100fb50ef192af5d6bff307f6ac8ec9800f924625573389af18df93325"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_postcards/fronts/front5.jpg",
+              "bytes": 113925,
+              "sha256": "af098068cf610ed658a147e79fca24eb2869ad884f8d602562e161b0d976edc8"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_postcards/fronts/front7.jpg",
+              "bytes": 253492,
+              "sha256": "4a608731d91965c4c71d33a663734dcc7138649c8523a9515815de76536a0618"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_postcards/fronts/front2.jpg",
+              "bytes": 130549,
+              "sha256": "3e3bf2ca46cb28db3f3affbbf7e44e2ef47d5dd684eecbcfb3360aa4a33358c6"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_postcards/fronts/front4.jpg",
+              "bytes": 114222,
+              "sha256": "3f8fa5ddae47891308e7054498c1429e0323cb5257331adaa348a5f6ffd4553f"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_postcards/fronts/front1.jpg",
+              "bytes": 97694,
+              "sha256": "7096e79fdd631e071591e6353c6c5e24961e6dcb61e3179fe8ee1bea06390aa7"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_postcards/fronts/front8.jpg",
+              "bytes": 90204,
+              "sha256": "3594cbae529e8e6f1e864c7ced836ac3cd7c78c3bd8afc35d9038767def84e50"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_postcards/fronts/front6.jpg",
+              "bytes": 157452,
+              "sha256": "45c6c990fc48da3a2969ccf4bf09810d6ff6ac890da493eae33589e07787f533"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_postcards/backs/back8.jpg",
+              "bytes": 79813,
+              "sha256": "122ba90f8ce071b4160dd32a7185651926ef8a6d70041d4d88bec0185c0238f3"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_postcards/backs/back2.jpg",
+              "bytes": 79441,
+              "sha256": "216e5420f50011513d6e30e941b2abe6303273210f99c32d14737f8d0db1df36"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_postcards/backs/back4.jpg",
+              "bytes": 78961,
+              "sha256": "37560af8a90f77365e027b18479985c7670c474f9f64815566a5a76cda2adc73"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_postcards/backs/back6.jpg",
+              "bytes": 78038,
+              "sha256": "f17280812d8a9296542acd38a27f7c83f6bd393183097a53fa47867d9d8adbf6"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_postcards/backs/back7.jpg",
+              "bytes": 79213,
+              "sha256": "6a3deed1eb557ffe9ae814951d89356fcf466c84d4e611a7bb30271d3aa8015b"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_postcards/backs/back5.jpg",
+              "bytes": 79635,
+              "sha256": "59a8b92e30273037b8d98146b5bf0a850384c11eb0cf066dc27642cd50ec6c0d"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_postcards/backs/back1.jpg",
+              "bytes": 79689,
+              "sha256": "257865d1d0f45e6d95bce761492766a3a9a055c3a0d743d0fd0f13ac15cf2445"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_postcards/backs/back3.jpg",
+              "bytes": 78810,
+              "sha256": "576176e7f3765dffd832bd32fdb1b4d6f5123f7e798b985daf7104ec354bfa6a"
+            },
+            {
+              "path": "home/oai/share/clean_site/vintage_postcards/index.html",
+              "bytes": 3128,
+              "sha256": "a8623c190ca00cf9a294e707a671253c58cf4077bf1734f46e6241c4e86efa79"
+            }
+          ]
+        },
+        {
+          "path": "grit.html",
+          "bytes": 4086,
+          "sha256": "8ff9fd5c0eca43857f3c34d545950cb5216dc59416bebefb8fd2d9a6ba5f1226"
+        },
+        {
+          "path": "index.html",
+          "bytes": 8773,
+          "sha256": "35b4d3e755255ed23a4bf47ab3eac2bc0519189ac931a9a4832cd0da07d73879"
+        },
+        {
+          "path": "juju_deploy_flat.zip",
+          "bytes": 3298,
+          "sha256": "3e691bd2f9be576014d402b3e5c73ed25ecf15341121117cbf0fa808f52104f5",
+          "members": [
+            {
+              "path": "index.html",
+              "bytes": 94,
+              "sha256": "307baeabbf575f0ffa012577c25f40feed31b8e8ce812f6cac260755006ff8d1"
+            },
+            {
+              "path": "_redirects",
+              "bytes": 72,
+              "sha256": "d0b8262fc96a5e43cabe753e58d51c7b93d09b8505b7b7cd537bfeb0a6dbbb2a"
+            },
+            {
+              "path": "README_DEPLOY.txt",
+              "bytes": 55,
+              "sha256": "8e9d921ddf70c1214cce4a26ab81b3652a598c9d18d63899b92b6522cde70326"
+            },
+            {
+              "path": "cbo/index.html",
+              "bytes": 1101,
+              "sha256": "7b55caf03a58727dfa0d279c88b3e973a7306deebaa322d5027cfcf8db99da64"
+            },
+            {
+              "path": "cbo/archive.html",
+              "bytes": 790,
+              "sha256": "fda494394dac161a306a4dc2eff69518e1e0de32257ec71ec1eb7c3b5e109de3"
+            },
+            {
+              "path": "mmi/index.html",
+              "bytes": 1101,
+              "sha256": "80f96a9bdc677b0beb94b439f269a1adad7c5aa337808972302a159af071ceb2"
+            },
+            {
+              "path": "mmi/archive.html",
+              "bytes": 790,
+              "sha256": "cccbc19abe00a874e68a050186d98981bb29e5f9cc39bf07022e77f7a667f008"
+            }
+          ]
+        },
+        {
+          "path": "juju_whole_lot_v1to4.zip",
+          "bytes": 4736910,
+          "sha256": "2ef72945d11adc6caa040f2f352ed72a08e8431ff389153b58e1b71d00a1392c",
+          "members": [
+            {
+              "path": "README_WHOLE.txt",
+              "bytes": 788,
+              "sha256": "728bde984a253ab4dca0eb0274dd2941ec5ad54d32f7df4f391542dadf358494"
+            },
+            {
+              "path": "postcards_v1/README.txt",
+              "bytes": 757,
+              "sha256": "9e3df8f0d7d98d78c544669dc27ec0ac4246051086ab82623ba6dc5c5e34027a"
+            },
+            {
+              "path": "postcards_v1/fronts/front_cbo_01_A6_300dpi.jpg",
+              "bytes": 374885,
+              "sha256": "b0b55f76db7637df0d5a879e9ed3fed82027a409791aa9ffbfd024dd2085f972"
+            },
+            {
+              "path": "postcards_v1/fronts/front_cbo_02_A6_300dpi.jpg",
+              "bytes": 272688,
+              "sha256": "0c754dfe4abbc669721d1c8229820b360452e0675db465b6a7859cb4e25a6953"
+            },
+            {
+              "path": "postcards_v1/fronts/front_cbo_03_A6_300dpi.jpg",
+              "bytes": 334787,
+              "sha256": "3dd9ceb7dc7cc3451167d5daa3c0fc33422a45cabeec5f9a4c7d00addc2a193b"
+            },
+            {
+              "path": "postcards_v1/fronts/front_cbo_04_A6_300dpi.jpg",
+              "bytes": 238622,
+              "sha256": "9705902c1f27dc32e688386314ecf639f8f142dc95a7369399889a9704eef112"
+            },
+            {
+              "path": "postcards_v1/fronts/front_cbo_05_A6_300dpi.jpg",
+              "bytes": 319632,
+              "sha256": "cba995462ec0b703268665b0a61d21be3bc5419e29d1ede98f1930299e8e339f"
+            },
+            {
+              "path": "postcards_v1/fronts/front_cbo_06_A6_300dpi.jpg",
+              "bytes": 225778,
+              "sha256": "a29edbc5650f67b09cadb6e24b5567779fd972f1608bd0cbabfa175680c703a9"
+            },
+            {
+              "path": "postcards_v1/fronts/front_cbo_07_A6_300dpi.jpg",
+              "bytes": 257847,
+              "sha256": "9cb5955d709050fe2396aa7fcd59b7314d617aaa9f2cbebb86813bd2aaa169d2"
+            },
+            {
+              "path": "postcards_v1/fronts/front_cbo_08_A6_300dpi.jpg",
+              "bytes": 540907,
+              "sha256": "0dd73a4919bcfe4c6485f6261049d99421fd37f8dd43caab27adb72d17bc504d"
+            },
+            {
+              "path": "postcards_v1/fronts/front_mmi_01_A6_300dpi.jpg",
+              "bytes": 374856,
+              "sha256": "6190e5d2f89e3edd5c33814992c1140b1d1e94c6750a6706c8359b713d6a28e8"
+            },
+            {
+              "path": "postcards_v1/fronts/front_mmi_02_A6_300dpi.jpg",
+              "bytes": 272676,
+              "sha256": "cd3e556acb8e63b4187590203b253e36395ee4de5289ff76b36f40d36842fc22"
+            },
+            {
+              "path": "postcards_v1/fronts/front_mmi_03_A6_300dpi.jpg",
+              "bytes": 334828,
+              "sha256": "9b558a3c959a0058c494a854edb3c0f3f5a6425723490416b296aaeb9f099e63"
+            },
+            {
+              "path": "postcards_v1/fronts/front_mmi_04_A6_300dpi.jpg",
+              "bytes": 238618,
+              "sha256": "31b7c2364fc4c5502290f49c75180b73cf9a22050b070d41d57ea7449203be70"
+            },
+            {
+              "path": "postcards_v1/fronts/front_mmi_05_A6_300dpi.jpg",
+              "bytes": 319566,
+              "sha256": "6803cf6eb592bd90fa135fbe5f8e401516e5068394e2c2f38d949395fd2ba370"
+            },
+            {
+              "path": "postcards_v1/fronts/front_mmi_06_A6_300dpi.jpg",
+              "bytes": 225699,
+              "sha256": "48f03a8d8747d5077f7ca4fc7ce06e57db80ed8e8ceab8f9e47ab0b4da0e77f1"
+            },
+            {
+              "path": "postcards_v1/fronts/front_mmi_07_A6_300dpi.jpg",
+              "bytes": 257876,
+              "sha256": "0ae709608f0c9a130b72ae948416ebf20edbec9e7d32a48cb41b85452b38e630"
+            },
+            {
+              "path": "postcards_v1/fronts/front_mmi_08_A6_300dpi.jpg",
+              "bytes": 540964,
+              "sha256": "6c53386102e18df107f78094a1b9514f41bbf5f39da53fc151aacd3678ec5b6f"
+            },
+            {
+              "path": "postcards_v1/backs/back_cbo_A6_300dpi.jpg",
+              "bytes": 125861,
+              "sha256": "22c3aa214e0ee1d1c7488dd3b8354ea87615195964b865d87950385a51bdfb1c"
+            },
+            {
+              "path": "postcards_v1/backs/back_mmi_A6_300dpi.jpg",
+              "bytes": 125747,
+              "sha256": "6f9f111cb59767838f5d1290aaf23df889af53a36769096481a318c9a99bd466"
+            },
+            {
+              "path": "postcards_v1/web/index.html",
+              "bytes": 2968,
+              "sha256": "ce804aef8405a835dd1e142dc36357b2226805b9676baef613e9ccf93502810d"
+            },
+            {
+              "path": "patch_soundcloud_v2/README.txt",
+              "bytes": 211,
+              "sha256": "45a1605378b497bafe382e45a2ab93cc96f89ba1681c6fc5a8c847ad56aabfe5"
+            },
+            {
+              "path": "patch_soundcloud_v2/cbo/index.html",
+              "bytes": 1932,
+              "sha256": "ff1bc6525c80ac956fc52735adae53f4f442fa69e0e8f13e834a8f0bacbbcc09"
+            },
+            {
+              "path": "patch_soundcloud_v2/mmi/index.html",
+              "bytes": 1932,
+              "sha256": "df37f341c59cd187f1902d08161b57a8ae27bc441926b70d65ec98e3cd26c8cc"
+            },
+            {
+              "path": "embed_archive_v3/_redirects",
+              "bytes": 67,
+              "sha256": "b0cb09eb955c5461872f7e37d1ebdefbeb41bac100aed9becb7217339a10a0a8"
+            },
+            {
+              "path": "embed_archive_v3/README.txt",
+              "bytes": 710,
+              "sha256": "34fea4f5bf92d052887a3ba053309da1a1cd934f352b173579d23b710a849884"
+            },
+            {
+              "path": "embed_archive_v3/cbo/index.html",
+              "bytes": 3622,
+              "sha256": "3f8d401b0cfbdd9627cd6a837f4281d783a4130fac19e141c9c313a7307a8d8d"
+            },
+            {
+              "path": "embed_archive_v3/cbo/archive.html",
+              "bytes": 3883,
+              "sha256": "a4dfe71848568cdd2b05f12e9fd6fb44ec47ef152bfd55162bd212c25bf78bae"
+            },
+            {
+              "path": "embed_archive_v3/mmi/index.html",
+              "bytes": 3607,
+              "sha256": "f55d2bad792d8509140c9985fbaaf035c4aff1cc60c85d87945312761c554790"
+            },
+            {
+              "path": "embed_archive_v3/mmi/archive.html",
+              "bytes": 3883,
+              "sha256": "8e16d9448398056dd949a5ecbcf94b6ac7d6b23dd15f684f43fad0d1952dc485"
+            },
+            {
+              "path": "index_patch_v4/index.html",
+              "bytes": 168,
+              "sha256": "c4762c8eb4ec8861e8e19d29a964f6200b4365903025f41014d149ae527089dd"
+            },
+            {
+              "path": "index_patch_v4/_redirects",
+              "bytes": 84,
+              "sha256": "e0a63ab81a767ab182ca7356dec7cd838a722654bce276aac35f38b643446d1a"
+            },
+            {
+              "path": "index_patch_v4/README.txt",
+              "bytes": 334,
+              "sha256": "47dd6f42129e933c7d86b0ccd5788d388500543a94d0eb8356a371409c98291d"
+            }
+          ]
+        },
+        {
+          "path": "playlist.txt",
+          "bytes": 1794,
+          "sha256": "fc969b4927d73431077b05e0bab353ca4ae766f57d4fc25e67f44bda4673e11b"
+        },
+        {
+          "path": "start.py",
+          "bytes": 9329,
+          "sha256": "9215fef14d8873db5ad7630842d890112ee880387cbeded063ad3ae19b0c00f9"
+        },
+        {
+          "path": "zip oct",
+          "bytes": 20638,
+          "sha256": "7c649b77e3ced75ff7ff5794c6862637a65bc0c4237cc01b15fd84a52fe5e88d"
+        }
+      ]
+    }
+  ]
+}
