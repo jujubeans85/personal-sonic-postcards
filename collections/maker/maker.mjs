@@ -42,7 +42,8 @@ for(const field of ['title','recipient','message','signature']){
  text.parentElement.after(button,status);
  button.addEventListener('click',()=>{for(const s of speechSessions)if(s.field!==field)s.cancel();},true);
  const session=globalThis.JuiceFontsSpeech.attach({text,button,status,onInput:()=>{remember();project[field]=text.value;paint();}});session.field=field;speechSessions.push(session);
- text.addEventListener('input',()=>{remember();project[field]=text.value;paint();});
+ text.addEventListener('focus',stopSpeech);
+ text.addEventListener('input',()=>{stopSpeech();remember();project[field]=text.value;paint();});
 }
 $('font').addEventListener('change',stopSpeech);
 loadHandwriting().then(paint).catch(e=>say(e.message));
@@ -64,7 +65,7 @@ $('save').onclick=async()=>{stopSpeech();try{const saved={project:validateProjec
 $('open').onchange=async()=>{stopSpeech();const file=$('open').files[0];if(!file)return;const n=++generation;try{
  if(file.size>18*1024*1024)throw Error('Project exceeds the 18 MiB import limit.');const data=JSON.parse(await file.text());const next=validateProject(data.project);let blob=null,img=null;
  if(data.photo!==null){if(typeof data.photo!=='string'||!/^data:image\/(jpeg|png|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(data.photo))throw Error('Project photo must be an embedded supported image.');const [head,body]=data.photo.split(',');const bytes=Uint8Array.from(atob(body),c=>c.charCodeAt(0));blob=new Blob([bytes],{type:head.slice(5,head.indexOf(';'))});img=await decode(blob);}
- if(n!==generation)return;project=next;image=img;original=blob;prepared=null;history.length=0;$('undo').disabled=true;sync();paint();
+ if(n!==generation)return;stopSpeech();project=next;image=img;original=blob;prepared=null;history.length=0;$('undo').disabled=true;sync();paint();
  }catch(e){if(n===generation)say('Project not opened: '+e.message+' Current work kept.');}$('open').value='';};
 function rendered(p,side,bleed=0){const size=dimensions(p,300,bleed);if(size.width*size.height>13000000)throw Error('Output exceeds 13 megapixels. Reduce dimensions or bleed.');return renderCard(Object.assign(document.createElement('canvas'),size),p,photoFor(),side,qrFor(p),bleed);}
 const png=c=>new Promise((res,rej)=>c.toBlob(b=>b?res(b):rej(Error('PNG export failed.')),'image/png'));

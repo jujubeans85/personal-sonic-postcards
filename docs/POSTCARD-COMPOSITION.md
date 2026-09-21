@@ -34,8 +34,8 @@ Baseline: `7110f9ede1e0b3eee0c42d697854422bdcdb8d5a`. All 47 Batch 03 copied ass
 
 ## Validation
 
-- `npm test`: 14 checks across Batch 02, Batch 03, composition contract, vendor pins, URL/geometry validation and static privacy constraints.
-- `python3 tests/test_library_index.py`: 2 checks.
+- `npm test`: 15 checks across Batch 02, Batch 03, composition contract, vendor pins, URL/geometry validation and static privacy constraints.
+- `python3 tests/test_library_index.py`: 3 checks.
 - `npm run test:browser` against a local server on 8765: photo import, 15 presets, shared rendering, undo, front/back, QR, PNG/PDF, original-byte project round-trip, corrupt replacement/import retention, bad URL rejection, narrow viewport, reload clearing, preserved gallery routing. Storage writes are instrumented to fail and external requests recorded: none observed.
 - Local Chromium browser pass used a packaged Chromium executable after the standard download failed. No JS page errors. Desktop/mobile screenshots visually inspected.
 - Exported QR decoded independently with jsQR to the exact intended vintage URL. Exported PDF parsed independently: two A4 pages, each with an A6 trim box.
@@ -49,3 +49,10 @@ The maker reuses FONT_JUICE's exact `speech.js` and both original captured glyph
 Each text field has optional browser dictation; keyboard dictation works through normal input on iPad. Final speech results are editable text. Repeated results are deduplicated by the reused helper; typing, switching targets, opening a project, saving/exporting, page exit and hidden-page transitions stop active dictation. Unsupported captured characters block rendering with an actionable message instead of silently disappearing. Photos remain under the unchanged local boundary. Speech is opt-in and browser/OS recognition may use its speech service; no claim of offline or device-only recognition is made. The app does not record/persist audio.
 
 Browser regression uses a mock recogniser to verify text routing, duplicate suppression and late-result cancellation; it compares actual captured-font rendering against preset typography and verifies saved font identity. Microphone permissions, real recognition accuracy and physical Safari remain device acceptance checks.
+
+
+## September 22 audit and iPad bundle
+
+Focused fixes and current results are in [POSTCARD-QA.md](POSTCARD-QA.md). Preset typography now preserves explicit line breaks, matching handwriting. Back messages on cards too short for the reserved message/signature area are rejected instead of overlapping. Focusing or editing another field cancels browser dictation; successful asynchronous project import cancels any speech session started while loading. The pinned helper and captures remain unchanged.
+
+Run `python3 scripts/build-ipad-bundle.py /path/to/output.zip` to package the working source and assets with START_HERE.html and SHA256SUMS.txt. Serve the extracted folder through a static HTTP server and open its URL in Safari. Files Quick Look is not a supported JavaScript runtime. LAN HTTP does not establish that secure-context share or speech APIs work. No hosted test site is published by packaging.

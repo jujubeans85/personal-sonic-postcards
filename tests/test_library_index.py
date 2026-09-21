@@ -18,6 +18,15 @@ class IndexTests(unittest.TestCase):
    before=(out/'library.json').read_bytes()
    with self.assertRaises(FileExistsError):indexer.build(media,out)
    self.assertEqual(before,(out/'library.json').read_bytes())
+ def test_output_parent_alias_has_resolvable_relative_links(self):
+  import json
+  with tempfile.TemporaryDirectory() as d:
+   root=Path(d).resolve(); real=root/'real';real.mkdir()
+   alias=root/'alias';alias.symlink_to(real,target_is_directory=True)
+   media=root/'media';media.mkdir();(media/'song.wav').write_bytes(b'fixture')
+   out=alias/'catalogue';indexer.build(media,out)
+   track=json.loads((out/'playlist_all.json').read_text())[0]
+   self.assertEqual((out/unquote(track['file'])).read_bytes(),b'fixture')
  def test_symlink_escape(self):
   with tempfile.TemporaryDirectory() as d:
    r=Path(d);(r/'media').mkdir();(r/'outside.wav').write_bytes(b'fixture');(r/'media/escape.wav').symlink_to(r/'outside.wav')

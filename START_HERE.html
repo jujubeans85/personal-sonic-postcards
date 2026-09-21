@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JUICE Postcard Maker — iPad test</title>
+<body><main>
+<h1>JUICE Postcard Maker</h1>
+<p>This is the existing maker with its original assets and both authentic Adam handwriting captures.</p>
+<p><a href="collections/maker/">Open the postcard maker</a> · <a href="collections/">Original collection</a></p>
+<h2>Launch in Safari</h2>
+<p>Unzip the complete folder on a Mac or PC. In a terminal in that folder, run <code>python3 -m http.server 8765 --bind 0.0.0.0</code>. On an iPad on the same trusted Wi-Fi network, open <code>http://YOUR-COMPUTER-LAN-IP:8765/START_HERE.html</code> in Safari. Keep the computer awake. Stop the server with Control-C when finished. This serves the folder for testing; it does not publish it to the internet.</p>
+<p>If the computer has no Python 3, use an existing static-file server. Serve only this test folder. No app backend is required. Firewall/network isolation can prevent LAN access.</p>
+<p><strong>Files Quick Look is not a supported JavaScript launch path.</strong> Seeing this page there proves only that the HTML can be previewed. The maker uses JavaScript modules and needs a browser HTTP(S) origin. This ZIP is not an installed iPad app or a one-tap Files app.</p>
+<p>LAN HTTP is useful for photo/text/export checks. File sharing and browser speech may be unavailable without a secure context or browser support. Use keyboard dictation in a text field as the simple iPad path. A trusted HTTPS test origin is needed for secure-context testing; none is published by this bundle.</p>
+<h2>Brief device checklist</h2>
+<ol>
+<li>Choose a personal JPEG/PNG. Apply a treatment; rotate, frame and undo. Confirm the person remains recognisable.</li>
+<li>Try both “My handwriting” captures, front title and multiline back message. Check punctuation and small-card legibility. Unsupported glyphs should give an error; your typed text must remain editable.</li>
+<li>Use the iPad keyboard microphone. If testing optional browser Speak, explicitly start it, stop it, move to another field and type. Late speech must not change your edits. Check permission denial too.</li>
+<li>Save a .juicecard, clear/reload, then reopen it. Check original photo, text, font and settings. Export PNG and front/back PDF.</li>
+<li>Try Share on an appropriate secure origin. Record actual Safari/iPadOS version and results; desktop mocks do not prove microphone or share behaviour.</li>
+<li>Set an explicit QR destination you want recipients to visit. Scan the printed QR, proof actual dimensions, margins and front/back alignment. A local/LAN collection link will not work for recipients away from that network.</li>
+</ol>
+<p>Photo and working text remain session-only until explicit save/export. Browser/OS dictation may process speech remotely; the app stores no audio. QR codes link to the destination you enter and do not publish artwork.</p>
+<p>Automated checks and remaining device/print gates: <a href="docs/POSTCARD-QA.md">test evidence</a>. Merge and live publication remain pending approval.</p>
+</main></body></html>

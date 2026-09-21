@@ -38,3 +38,15 @@ test('maker disables network connections and contains no persistence or network 
  const src=readFileSync(new URL('../collections/maker/maker.mjs',import.meta.url),'utf8');assert.doesNotMatch(src,/localStorage|sessionStorage|indexedDB|fetch\(|XMLHttpRequest|sendBeacon|\.openStore\(|\.transact\(/);
  assert.match(src,/pagehide/);assert.match(src,/revokeObjectURL/);
 });
+
+test('preset lettering preserves deliberate line breaks and rejects overflowing short cards',async()=>{
+ const {renderCard}=await import('../shared/postcard-renderer.mjs');
+ globalThis.JuiceComposition={drawBackground(){}};
+ const calls=[],ctx={clearRect(){},measureText:s=>({width:s.length}),fillText:(...args)=>calls.push(args)};
+ const target={width:1480,height:1050,getContext:()=>ctx};
+ renderCard(target,{...defaults(),sides:'back',message:'FIRST\nSECOND'},null,'back');
+ assert.deepEqual(calls.map(c=>c[0]),['FIRST','SECOND']);
+ assert.ok(calls[1][2]>calls[0][2]);
+ assert.throws(()=>renderCard(target,{...defaults(),height:25,message:'HELLO'},null,'back'),/more height/);
+ delete globalThis.JuiceComposition;
+});

@@ -18,9 +18,16 @@ function treat(ctx,p,s){
  ctx.putImageData(data,0,0);
 }
 function lines(ctx,text,x,y,maxWidth,lineHeight,maxLines){
- const words=text.trim().split(/\s+/);let line='',rows=[];
- for(const word of words){const candidate=line?line+' '+word:word;if(ctx.measureText(candidate).width>maxWidth&&line){rows.push(line);line=word;}else line=candidate;}
- if(line)rows.push(line);
+ if(!text.trim())return;
+ const rows=[];
+ for(const paragraph of text.replace(/\r\n?/g,'\n').split('\n')){
+  let line='';
+  for(const word of paragraph.trim().split(/\s+/)){
+   const candidate=line?line+' '+word:word;
+   if(ctx.measureText(candidate).width>maxWidth&&line){rows.push(line);line=word;}else line=candidate;
+  }
+  rows.push(line);
+ }
  if(rows.length>maxLines)throw Error('Message is too long for this format. Shorten it or use a larger card.');
  for(const row of rows){if(ctx.measureText(row).width>maxWidth)throw Error('Text is too wide for this format. Shorten the long word or link.');ctx.fillText(row,x,y);y+=lineHeight;}
 }
@@ -51,6 +58,7 @@ export function renderCard(target,p,photo,side,qr=null,bleed=0){
   ctx.fillStyle=paper;
   if(side==='back'&&hasPhoto){ctx.globalAlpha=.94;ctx.fillRect(b+m,b+m,w-2*m,h-2*m);ctx.globalAlpha=1;}
   ctx.fillStyle=ink;ctx.textBaseline='top';
+  if(side==='back'&&p.message&&p.height-2*m/unit<28.5)throw Error('Back message needs more height or a smaller frame margin.');
   if(side==='front') {ctx.font=`${Math.min(5.5,p.height*.065)*unit}px ${s.font}`;write(ctx,p.title,b+m,b+h-m-band*.75,w-2*m-(qrHere?(qmm+3)*unit:0),8*unit,1);}
   else {
    const textWidth=w-2*m-(qrHere?(qmm+4)*unit:0);
