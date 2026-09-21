@@ -13,6 +13,17 @@
     "composition.js": "efc09d46fd414d6b6e40d3a6d8c0f4b8c8ece4ac959d5f40fccecc28033422bb",
     "qrcode.js": "18ae399f81182bc9de916e9c77b195df20cc58d6f2d55a62b085a299f1bf1780",
     "pdf-lib.LICENSE.md": "f2c9fc00fdb66eb99ac156ba52d734af66d8d309f65753ae809ad34ee2883bcb",
-    "qrcode_UTF8.js": "e522d64003b332e29271fdce4993ed3ae2934c8947f41654bd324ddcfa2de301"
+    "qrcode_UTF8.js": "e522d64003b332e29271fdce4993ed3ae2934c8947f41654bd324ddcfa2de301",
+    "speech.js": "2b2d0e7165bcc281b7877170d8452f054ea283928220d22e084f28350b3e7fb5",
+    "adam-hand-original.js": "b9cc17b0a0b325fc055abfb3e932bb5eb593321ef349a285ef40f41dbd1db286",
+    "adam-hand-capture03.js": "b28f4d48280ecb17044af3e76ae211d0ea3dcf64b2e6d9eadfaa4f2b263ba45f"
+  },
+  "handwriting_source": {
+    "repository": "jujubeans85/FONT_JUICE",
+    "commit": "ef4ef609794062e44ff4b403ef7da8f640a6ce7e",
+    "speech.js": "speech.js",
+    "adam-hand-original.js": "data/adam-hand-v1.b9cc17b0a0b3.js",
+    "adam-hand-capture03.js": "data/adam-hand-capture03.b28f4d48280e.js",
+    "adapter": "Mask conversion and normalisation extracted from working.js; consumer-owned deterministic layout."
   }
 }

@@ -1,3 +1,4 @@
+import {drawHandwriting} from './handwriting.mjs';
 import {styles,cropRect} from './postcard-project.mjs';
 const canvas=(w,h)=>Object.assign(document.createElement('canvas'),{width:Math.max(1,Math.round(w)),height:Math.max(1,Math.round(h))});
 export function preparedPhoto(image,p){
@@ -24,6 +25,7 @@ function lines(ctx,text,x,y,maxWidth,lineHeight,maxLines){
  for(const row of rows){if(ctx.measureText(row).width>maxWidth)throw Error('Text is too wide for this format. Shorten the long word or link.');ctx.fillText(row,x,y);y+=lineHeight;}
 }
 export function renderCard(target,p,photo,side,qr=null,bleed=0){
+ const write=(ctx,...args)=>p.font&&p.font!=='preset'?drawHandwriting(ctx,...args,p.font):lines(ctx,...args);
  const ctx=target.getContext('2d'),s=styles[p.style],unit=target.width/(p.width+2*bleed),b=bleed*unit,w=p.width*unit,h=p.height*unit;
  let paper=p.stock==='recycled'?'#f0e5ce':s.paper,ink=s.ink,accent=s.accent;
  if(p.bw){paper='#ffffff';ink='#111111';accent='#444444';}
@@ -49,12 +51,12 @@ export function renderCard(target,p,photo,side,qr=null,bleed=0){
   ctx.fillStyle=paper;
   if(side==='back'&&hasPhoto){ctx.globalAlpha=.94;ctx.fillRect(b+m,b+m,w-2*m,h-2*m);ctx.globalAlpha=1;}
   ctx.fillStyle=ink;ctx.textBaseline='top';
-  if(side==='front') {ctx.font=`${Math.min(5.5,p.height*.065)*unit}px ${s.font}`;lines(ctx,p.title,b+m,b+h-m-band*.75,w-2*m-(qrHere?(qmm+3)*unit:0),8*unit,1);}
+  if(side==='front') {ctx.font=`${Math.min(5.5,p.height*.065)*unit}px ${s.font}`;write(ctx,p.title,b+m,b+h-m-band*.75,w-2*m-(qrHere?(qmm+3)*unit:0),8*unit,1);}
   else {
    const textWidth=w-2*m-(qrHere?(qmm+4)*unit:0);
-   ctx.font=`bold ${Math.min(5,p.height*.075)*unit}px ${s.font}`;lines(ctx,p.recipient,b+m,b+m,textWidth,6*unit,1);
-   ctx.font=`${Math.min(4,p.height*.055)*unit}px ${s.font}`;lines(ctx,p.message,b+m,b+m+10*unit,textWidth,5.5*unit,Math.max(1,Math.floor((p.height-2*m/unit-23)/5.5)));
-   ctx.font=`italic ${3.5*unit}px ${s.font}`;lines(ctx,p.signature,b+m,b+h-m-5*unit,textWidth,5*unit,1);
+   ctx.font=`bold ${Math.min(5,p.height*.075)*unit}px ${s.font}`;write(ctx,p.recipient,b+m,b+m,textWidth,6*unit,1);
+   ctx.font=`${Math.min(4,p.height*.055)*unit}px ${s.font}`;write(ctx,p.message,b+m,b+m+10*unit,textWidth,5.5*unit,Math.max(1,Math.floor((p.height-2*m/unit-23)/5.5)));
+   ctx.font=`italic ${3.5*unit}px ${s.font}`;write(ctx,p.signature,b+m,b+h-m-5*unit,textWidth,5*unit,1);
   }
  }
  if(qrHere){

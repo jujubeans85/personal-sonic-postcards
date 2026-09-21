@@ -1,8 +1,9 @@
+import {loadHandwriting} from '../../shared/handwriting.mjs';
 import {defaults,styles,validateProject,qrDestination,outputSides,dimensions,VERSION,cropRect} from '../../shared/postcard-project.mjs';
 import {preparedPhoto,renderCard} from '../../shared/postcard-renderer.mjs';
 import {shareURL} from '../../shared/postcard-catalog.mjs';
 const $=id=>document.getElementById(id);
-let project=defaults(),image=null,original=null,prepared=null,generation=0,valid=false,busy=false;
+let project={...defaults(),font:'adam-capture03'},image=null,original=null,prepared=null,generation=0,valid=false,busy=false;
 const history=[];
 const say=m=>$('status').textContent=m;
 function remember(){history.push({...project});if(history.length>30)history.shift();$('undo').disabled=false;}
@@ -32,10 +33,22 @@ for(const [key,s] of Object.entries(styles)){
  const b=document.createElement('button');b.type='button';b.dataset.style=key;b.setAttribute('aria-pressed',String(key==='original'));
  const thumb=document.createElement('canvas');thumb.width=180;thumb.height=44;const ctx=thumb.getContext('2d');ctx.fillStyle=s.paper;ctx.fillRect(0,0,180,44);ctx.fillStyle=s.accent;ctx.fillRect(7,7,30,30);ctx.font=`18px ${s.font}`;ctx.fillStyle=s.ink;ctx.fillText('Aa / JUICE',46,29);b.append(thumb,document.createTextNode(s.label));b.onclick=()=>{remember();project.style=key;sync();paint();};$('styles').append(b);
 }
-for(const [k,v] of Object.entries(project)){const el=$(k);if(!el)continue;el.addEventListener('change',()=>{remember();project[k]=el.type==='checkbox'?el.checked:typeof v==='number'?Number(el.value):el.value;sync();paint();});}
+for(const [k,v] of Object.entries(project)){const el=$(k);if(!el||['title','recipient','message','signature'].includes(k))continue;el.addEventListener('change',()=>{remember();project[k]=el.type==='checkbox'?el.checked:typeof v==='number'?Number(el.value):el.value;sync();paint();});}
+const speechSessions=[];
+function stopSpeech(){for(const session of speechSessions)session.cancel();}
+for(const field of ['title','recipient','message','signature']){
+ const text=$(field),button=document.createElement('button'),status=document.createElement('p');
+ button.type='button';button.id='speak-'+field;button.textContent='🎙 Speak to add text';button.setAttribute('aria-label','Dictate '+field);status.className='hint';status.setAttribute('role','status');
+ text.parentElement.after(button,status);
+ button.addEventListener('click',()=>{for(const s of speechSessions)if(s.field!==field)s.cancel();},true);
+ const session=globalThis.JuiceFontsSpeech.attach({text,button,status,onInput:()=>{remember();project[field]=text.value;paint();}});session.field=field;speechSessions.push(session);
+ text.addEventListener('input',()=>{remember();project[field]=text.value;paint();});
+}
+$('font').addEventListener('change',stopSpeech);
+loadHandwriting().then(paint).catch(e=>say(e.message));
 $('format').onchange=()=>{if($('format').value==='custom')return;remember();[project.width,project.height]=$('format').value.split(',').map(Number);sync();paint();};
 $('view').onchange=paint;
-$('undo').onclick=()=>{if(history.length){project=history.pop();sync();paint();}$('undo').disabled=!history.length;};
+$('undo').onclick=()=>{stopSpeech();if(history.length){project=history.pop();sync();paint();}$('undo').disabled=!history.length;};
 function decode(file){return new Promise((resolve,reject)=>{
  if(!file||!['image/jpeg','image/png','image/webp','image/gif'].includes(file.type)||!file.size||file.size>12*1024*1024){reject(Error('Choose a JPEG, PNG, WebP or GIF up to 12 MiB.'));return;}
  const url=URL.createObjectURL(file),img=new Image();
@@ -47,15 +60,15 @@ $('clear').onclick=()=>{generation++;image=original=prepared=null;$('photo').val
 $('collection-link').onclick=()=>{remember();const u=new URL('../',location.href);const slug=new URL(location.href).searchParams.get('t');project.qrURL=slug?shareURL(u.href,slug):u.href;project.qrEnabled=true;project.qrSide=project.sides==='front'?'front':'back';sync();paint();};
 function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);}
 const dataURL=blob=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=()=>rej(Error('Could not read photo.'));r.readAsDataURL(blob);});
-$('save').onclick=async()=>{try{const saved={project:validateProject(project),photo:original?await dataURL(original):null};download(new Blob([JSON.stringify(saved)],{type:'application/json'}),'postcard.juicecard');say('Project exported with its original photo. Store it somewhere you can find again.');}catch(e){say(e.message);}};
-$('open').onchange=async()=>{const file=$('open').files[0];if(!file)return;const n=++generation;try{
+$('save').onclick=async()=>{stopSpeech();try{const saved={project:validateProject(project),photo:original?await dataURL(original):null};download(new Blob([JSON.stringify(saved)],{type:'application/json'}),'postcard.juicecard');say('Project exported with its original photo. Store it somewhere you can find again.');}catch(e){say(e.message);}};
+$('open').onchange=async()=>{stopSpeech();const file=$('open').files[0];if(!file)return;const n=++generation;try{
  if(file.size>18*1024*1024)throw Error('Project exceeds the 18 MiB import limit.');const data=JSON.parse(await file.text());const next=validateProject(data.project);let blob=null,img=null;
  if(data.photo!==null){if(typeof data.photo!=='string'||!/^data:image\/(jpeg|png|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(data.photo))throw Error('Project photo must be an embedded supported image.');const [head,body]=data.photo.split(',');const bytes=Uint8Array.from(atob(body),c=>c.charCodeAt(0));blob=new Blob([bytes],{type:head.slice(5,head.indexOf(';'))});img=await decode(blob);}
  if(n!==generation)return;project=next;image=img;original=blob;prepared=null;history.length=0;$('undo').disabled=true;sync();paint();
  }catch(e){if(n===generation)say('Project not opened: '+e.message+' Current work kept.');}$('open').value='';};
 function rendered(p,side,bleed=0){const size=dimensions(p,300,bleed);if(size.width*size.height>13000000)throw Error('Output exceeds 13 megapixels. Reduce dimensions or bleed.');return renderCard(Object.assign(document.createElement('canvas'),size),p,photoFor(),side,qrFor(p),bleed);}
 const png=c=>new Promise((res,rej)=>c.toBlob(b=>b?res(b):rej(Error('PNG export failed.')),'image/png'));
-async function guarded(fn){if(!valid||busy)return;busy=true;paint();const controls=[...document.querySelectorAll('.controls input,.controls select,.controls button,.controls textarea,#view,#undo,#save,#preview-photo')];const disabled=controls.map(el=>el.disabled);controls.forEach(el=>el.disabled=true);try{await fn({...project});}catch(e){if(e.name!=='AbortError')say(e.message);}finally{busy=false;controls.forEach((el,i)=>el.disabled=disabled[i]);for(const id of ['png','share','pdf','print'])$(id).disabled=!valid;}}
+async function guarded(fn){if(!valid||busy)return;stopSpeech();busy=true;paint();const controls=[...document.querySelectorAll('.controls input,.controls select,.controls button,.controls textarea,#view,#undo,#save,#preview-photo')];const disabled=controls.map(el=>el.disabled);controls.forEach(el=>el.disabled=true);try{await fn({...project});}catch(e){if(e.name!=='AbortError')say(e.message);}finally{busy=false;controls.forEach((el,i)=>el.disabled=disabled[i]);for(const id of ['png','share','pdf','print'])$(id).disabled=!valid;}}
 $('png').onclick=()=>guarded(async p=>{download(await png(rendered(p,$('view').value)),`postcard-${$('view').value}.png`);say('PNG saved. Use PDF when exact print dimensions matter.');});
 $('share').onclick=()=>guarded(async p=>{const file=new File([await png(rendered(p,$('view').value))],`postcard-${$('view').value}.png`,{type:'image/png'});if(navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file],title:'Postcard'});}catch(e){if(e.name==='AbortError')return;download(file,file.name);say('Sharing was unavailable; PNG downloaded instead.');}}else{download(file,file.name);say('File sharing is unavailable here; PNG downloaded instead.');}});
 async function pdfBytes(p){

@@ -41,3 +41,11 @@ Baseline: `7110f9ede1e0b3eee0c42d697854422bdcdb8d5a`. All 47 Batch 03 copied ass
 - Exported QR decoded independently with jsQR to the exact intended vintage URL. Exported PDF parsed independently: two A4 pages, each with an A6 trim box.
 - CI workflow runs the node/Python/browser gates; its hosted run is separate evidence.
 - Physical iPhone/iPad Safari share/print, actual printer/label output, commercial-service acceptance and Mac hardware remain unverified.
+
+## Voice → text → Adam handwriting
+
+The maker reuses FONT_JUICE's exact `speech.js` and both original captured glyph datasets, all pinned and hashed in the vendor manifest. `shared/handwriting.mjs` extracts the upstream mask conversion and uppercase/punctuation normalisation unchanged, adding a bounded deterministic card-layout adapter. It draws actual captured letter masks rather than substituting a handwriting-like system font. Current layout uses the first captured variant per character. Font IDs belong to the project model and survive explicit save/reopen; old project files without a font retain preset typography. The registry can gain a curated capture later; that option is visibly unavailable until supplied.
+
+Each text field has optional browser dictation; keyboard dictation works through normal input on iPad. Final speech results are editable text. Repeated results are deduplicated by the reused helper; typing, switching targets, opening a project, saving/exporting, page exit and hidden-page transitions stop active dictation. Unsupported captured characters block rendering with an actionable message instead of silently disappearing. Photos remain under the unchanged local boundary. Speech is opt-in and browser/OS recognition may use its speech service; no claim of offline or device-only recognition is made. The app does not record/persist audio.
+
+Browser regression uses a mock recogniser to verify text routing, duplicate suppression and late-result cancellation; it compares actual captured-font rendering against preset typography and verifies saved font identity. Microphone permissions, real recognition accuracy and physical Safari remain device acceptance checks.
