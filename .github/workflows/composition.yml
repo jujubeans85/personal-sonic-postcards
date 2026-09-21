@@ -1,0 +1,31 @@
+name: Postcard composition regression
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  composition:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: npm ci --ignore-scripts
+      - run: npm test
+      - run: python3 tests/test_library_index.py
+      - run: npx playwright install --with-deps chromium
+      - name: Browser composition and local-photo boundary
+        run: |
+          python3 -m http.server 8765 >/tmp/postcard-http.log 2>&1 &
+          server=$!
+          trap 'kill "$server"' EXIT
+          for attempt in $(seq 1 20); do curl --fail --silent http://127.0.0.1:8765/collections/maker/ >/dev/null && break; sleep 0.25; done
+          npm run test:browser

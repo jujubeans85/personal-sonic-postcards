@@ -1,0 +1,18 @@
+{
+  "source": "https://github.com/jujubeans85/FONT_JUICE",
+  "commit": "ef4ef609794062e44ff4b403ef7da8f640a6ce7e",
+  "path": "composition.js",
+  "sha256": "efc09d46fd414d6b6e40d3a6d8c0f4b8c8ece4ac959d5f40fccecc28033422bb",
+  "policy": "Byte-identical pinned copy. FONT_JUICE is canonical. Never edit this copy; update the pin and run regression checks. No runtime cross-site dependency.",
+  "dependencies": {
+    "qrcode-generator": "1.4.4",
+    "pdf-lib": "1.17.1"
+  },
+  "files": {
+    "pdf-lib.min.js": "0f9a5cad07941f0826586c94e089d89b918c46e5c17cf2d5a3c6f666e3bc694f",
+    "composition.js": "efc09d46fd414d6b6e40d3a6d8c0f4b8c8ece4ac959d5f40fccecc28033422bb",
+    "qrcode.js": "18ae399f81182bc9de916e9c77b195df20cc58d6f2d55a62b085a299f1bf1780",
+    "pdf-lib.LICENSE.md": "f2c9fc00fdb66eb99ac156ba52d734af66d8d309f65753ae809ad34ee2883bcb",
+    "qrcode_UTF8.js": "e522d64003b332e29271fdce4993ed3ae2934c8947f41654bd324ddcfa2de301"
+  }
+}
