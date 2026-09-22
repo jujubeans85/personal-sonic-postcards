@@ -69,11 +69,15 @@ export function renderCard(target,p,photo,side,qr=null,bleed=0,previewErrors=nul
  const ctx=target.getContext('2d'),s=styles[p.style],unit=target.width/(p.width+2*bleed),b=bleed*unit,w=p.width*unit,h=p.height*unit;
  const auto=(label,text,x,y,width,height,startMM,maxRows=Infinity)=>attempt(()=>{
   if(!text.trim())return;const family=styles[p.style].font,scale=(300/25.4)/unit;let last;
+  // Ignore accidental outer whitespace; reclaim empty paragraph rows only if needed.
+  const trimmed=text.trim(),compact=trimmed.replace(/\r\n?/g,'\n').replace(/\n[ \t]*\n+/g,'\n');
+  for(const fitted of [...new Set([trimmed,compact])]){
   for(let step=0;step<=12;step++){
    const mm=startMM-(startMM-2.82)*step/12,lh=mm*1.4*unit,rows=Math.min(maxRows,Math.floor(height/lh));
    if(rows<1)continue;ctx.font=`${mm*unit*scale}px ${family}`;
-   try{raw(ctx,text,0,0,width*scale,lh*scale,rows,true);}catch(e){last=e;if(/no capture|Loading/.test(e.message))throw e;continue;}
-   ctx.font=`${mm*unit}px ${family}`;write(ctx,text,x,y,width,lh,rows);target.textFits.push(`${label}: ${(mm*72/25.4).toFixed(1)} pt`);return;
+   try{raw(ctx,fitted,0,0,width*scale,lh*scale,rows,true);}catch(e){last=e;if(/no capture|Loading/.test(e.message))throw e;continue;}
+   ctx.font=`${mm*unit}px ${family}`;write(ctx,fitted,x,y,width,lh,rows);target.textFits.push(`${label}: ${(mm*72/25.4).toFixed(1)} pt`);return;
+  }
   }
   throw Error(`${label} does not fit at the 8 pt minimum. Shorten it or choose a larger format. ${last?.message||''}`);
  });
