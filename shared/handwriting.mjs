@@ -85,6 +85,6 @@ export function drawHandwriting(ctx,text,x,y,width,lineHeight,maxLines,font,meas
   if(used&&used+total>width)next();for(;at<end;at++){rows.at(-1).push(items[at]);used+=items[at].advance;}
  }
  if(rows.length>maxLines)throw Error('Your handwritten text needs more room. Shorten it or choose a larger card.');
- if(measureOnly)return;
- for(const row of rows){let xx=x;for(const item of row){if(item.mask){const tint=document.createElement('canvas');tint.width=item.mask.width;tint.height=item.mask.height;const c=tint.getContext('2d');c.drawImage(item.mask,0,0);c.globalCompositeOperation='source-in';c.fillStyle=ctx.fillStyle;c.fillRect(0,0,tint.width,tint.height);ctx.drawImage(tint,xx,y+ascent*shrink-item.h+item.baseline,item.w,item.h);}xx+=item.advance;}y+=lineHeight;}
+ if(measureOnly)return rows.length;
+ for(const row of rows){let xx=x+(ctx.textAlign==='center'?(width-row.reduce((n,i)=>n+i.advance,0))/2:0);for(const item of row){if(item.mask){const tint=document.createElement('canvas');tint.width=item.mask.width;tint.height=item.mask.height;const c=tint.getContext('2d');c.drawImage(item.mask,0,0);c.globalCompositeOperation='source-in';c.fillStyle=ctx.fillStyle;c.fillRect(0,0,tint.width,tint.height);ctx.drawImage(tint,xx,y+ascent*shrink-item.h+item.baseline,item.w,item.h);}xx+=item.advance;}y+=lineHeight;}
 }

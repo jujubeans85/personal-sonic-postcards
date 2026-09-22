@@ -1,5 +1,5 @@
-import {drawFinishedLettering} from './lettering-finishes.mjs';
-import {drawHandwriting} from './handwriting.mjs?v=back5';
+import {drawFinishedLettering} from './lettering-finishes.mjs?v=titlefit1';
+import {drawHandwriting} from './handwriting.mjs?v=titlefit1';
 import {styles,cropRect} from './postcard-project.mjs?v=back5';
 import {treatPixels,floydBits} from './photo-treatments.mjs';
 const canvas=(w,h)=>Object.assign(document.createElement('canvas'),{width:Math.max(1,Math.round(w)),height:Math.max(1,Math.round(h))});
@@ -53,7 +53,8 @@ function lines(ctx,text,x,y,maxWidth,lineHeight,maxLines,measureOnly=false){
   rows.push(line);
  }
  if(rows.length>maxLines)throw Error('Message is too long for this format. Shorten it or use a larger card.');
- for(const row of rows){if(ctx.measureText(row).width>maxWidth)throw Error('Text is too wide for this format. Shorten the long word or link.');if(!measureOnly)ctx.fillText(row,x,y);y+=lineHeight;}
+ for(const row of rows){if(ctx.measureText(row).width>maxWidth)throw Error('Text is too wide for this format. Shorten the long word or link.');if(!measureOnly)ctx.fillText(row,x+(ctx.textAlign==='center'?maxWidth/2:0),y);y+=lineHeight;}
+ return rows.length;
 }
 export function postalGeometry(p){
  if(p.width<138||p.width>240||p.height<88||p.height>130||p.width/p.height<1.414)throw Error('Postal back needs landscape 150 × 105 mm, or 138–240 × 88–130 mm with width/height at least 1.414.');
@@ -67,7 +68,7 @@ export function renderCard(target,p,photo,side,qr=null,bleed=0,previewErrors=nul
  const plain=(...args)=>attempt(()=>lines(...args));
  const write=(ctx,text,x,y,width,lineHeight,maxLines)=>{const ink=ctx.fillStyle;ctx.fillStyle=p.bw?'#222':'#67412e';try{attempt(()=>drawFinishedLettering(ctx,text,x,y,width,lineHeight,maxLines,p.lettering,unit,raw));}finally{ctx.fillStyle=ink;}};
  const ctx=target.getContext('2d'),s=styles[p.style],unit=target.width/(p.width+2*bleed),b=bleed*unit,w=p.width*unit,h=p.height*unit;
- const auto=(label,text,x,y,width,height,startMM,maxRows=Infinity)=>attempt(()=>{
+ const auto=(label,text,x,y,width,height,startMM,maxRows=Infinity,measureOnly=false)=>attempt(()=>{
   if(!text.trim())return;const family=styles[p.style].font,scale=(300/25.4)/unit;let last;
   // Ignore accidental outer whitespace; reclaim empty paragraph rows only if needed.
   const trimmed=text.trim(),compact=trimmed.replace(/\r\n?/g,'\n').replace(/\n[ \t]*\n+/g,'\n');
@@ -75,8 +76,9 @@ export function renderCard(target,p,photo,side,qr=null,bleed=0,previewErrors=nul
   for(let step=0;step<=12;step++){
    const mm=startMM-(startMM-2.82)*step/12,lh=mm*1.4*unit,rows=Math.min(maxRows,Math.floor(height/lh));
    if(rows<1)continue;ctx.font=`${mm*unit*scale}px ${family}`;
-   try{raw(ctx,fitted,0,0,width*scale,lh*scale,rows,true);}catch(e){last=e;if(/no capture|Loading/.test(e.message))throw e;continue;}
-   ctx.font=`${mm*unit}px ${family}`;write(ctx,fitted,x,y,width,lh,rows);target.textFits.push(`${label}: ${(mm*72/25.4).toFixed(1)} pt`);return;
+   let usedRows;try{usedRows=raw(ctx,fitted,0,0,width*scale,lh*scale,rows,true);}catch(e){last=e;if(/no capture|Loading/.test(e.message))throw e;continue;}
+   ctx.font=`${mm*unit}px ${family}`;const fit={text:fitted,font:ctx.font,lineHeight:lh,rows:usedRows,height:usedRows*lh,report:`${label}: ${(mm*72/25.4).toFixed(1)} pt`};
+   if(!measureOnly){write(ctx,fitted,x,y,width,lh,usedRows);target.textFits.push(fit.report);}return fit;
   }
   }
   throw Error(`${label} does not fit at the 8 pt minimum. Shorten it or choose a larger format. ${last?.message||''}`);
@@ -84,15 +86,20 @@ export function renderCard(target,p,photo,side,qr=null,bleed=0,previewErrors=nul
  const postal=p.postal?postalGeometry(p):null;
  ctx.clearRect(0,0,target.width,target.height);
  globalThis.JuiceComposition.drawBackground(ctx,{transparent:true});
- const m=Math.max(3,p.border)*unit,band=side==='front'&&p.title?Math.min(h*.3,20*unit):0;
+ const m=Math.max(3,p.border)*unit;
+ const qrHere=qr&&p.qrSide===side,qmm=qrHere?Math.max(22,(qr.getModuleCount()+8)*.4):0;
+ const titleWidth=w-2*m-(qrHere?(qmm+3)*unit:0);
+ const title=side==='front'&&p.title.trim()?auto('Title',p.title,0,0,titleWidth,Math.min(h*.3,20*unit),5.5,2,true):null;
+ const band=title?title.height+unit:0;
+ target.titleBandMM=band/unit;
  if(photo&&(p.photoSide===side||p.photoSide==='both')){
   const wm=Math.max(1,p.width-2*m/unit),hm=Math.max(1,p.height-2*m/unit-band/unit);
   ctx.drawImage(photoLayer(photo,p,wm,hm),b+m,b+m,wm*unit,hm*unit);
  }
- const qrHere=qr&&p.qrSide===side,qmm=qrHere?Math.max(22,(qr.getModuleCount()+8)*.4):0;
+
  if(qrHere&&(qmm+6>p.height||qmm+6>p.width*.48))throw Error('QR is too large for this card/label. Use a larger format or a shorter link.');
- ctx.fillStyle='#222';ctx.textBaseline='top';
- if(side==='front'&&p.title)auto('Title',p.title,b+m,b+h-m-band,w-2*m-(qrHere?(qmm+3)*unit:0),band,5.5,2);
+ ctx.fillStyle='#222';ctx.textBaseline='top';ctx.textAlign='left';
+ if(title){ctx.font=title.font;ctx.textAlign='center';write(ctx,title.text,b+m,b+h-m-title.height,titleWidth,title.lineHeight,title.rows);ctx.textAlign='left';target.textFits.push(title.report);}
  let qrX=b+w-3*unit-qmm*unit,qrY=b+h-3*unit-qmm*unit;
  if(side==='back'&&postal){
   const {divider,addressX,addressWidth,bottom}=postal,mm=v=>b+v*unit;
