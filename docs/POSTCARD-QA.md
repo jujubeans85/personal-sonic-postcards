@@ -1,3 +1,5 @@
+> Historical Batch 04 checks. Current image treatments, keyboard dictation and explicit link-index storage are documented in POSTCARD-REFINEMENT.md. Browser checks have been updated accordingly.
+
 # Postcard audit — 22 September 2026
 
 Starting branch: `feat/postcard-composition`, clean at `91bd9b817143769e0770c5664aa48d56dd9717dd`, matching draft PR #1. Read README, ARCHITECTURE and POSTCARD-COMPOSITION; no repository AGENTS.md was present.

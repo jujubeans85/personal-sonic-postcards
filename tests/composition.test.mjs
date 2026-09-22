@@ -50,3 +50,23 @@ test('preset lettering preserves deliberate line breaks and rejects overflowing 
  assert.throws(()=>renderCard(target,{...defaults(),height:25,message:'HELLO'},null,'back'),/more height/);
  delete globalThis.JuiceComposition;
 });
+
+test('four public recipes and postal geometry reserve the address and lower clear zone',async()=>{
+ const {visibleStyles}=await import('../shared/postcard-project.mjs');
+ assert.deepEqual(visibleStyles,['deco','urban','floyde','worn']);
+ const {postalGeometry}=await import('../shared/postcard-renderer.mjs');
+ const g=postalGeometry({...defaults(),width:150});assert.equal(g.bottom,90);assert.equal(g.addressX,85);assert.equal(g.addressWidth,50);
+ assert.throws(()=>postalGeometry({...defaults(),width:100,height:50}),/Postal back/);
+});
+test('Floyd diffusion and strength preserve determinism, endpoints and alpha',async()=>{
+ const {floydBits,treatPixels}=await import('../shared/photo-treatments.mjs');
+ const a=floydBits(new Float32Array(100).fill(128),10,10);assert.ok(a.includes(0)&&a.includes(255));assert.deepEqual(a,floydBits(new Float32Array(100).fill(128),10,10));
+ const raw=new Uint8ClampedArray([100,140,180,255,20,20,20,0]);
+ for(const style of ['urban','deco','worn']){assert.deepEqual(treatPixels({data:raw.slice()},style,0).data,raw);const full=treatPixels({data:raw.slice()},style,100).data;assert.notDeepEqual(full,raw);assert.deepEqual(full.slice(4),raw.slice(4));}
+});
+test('index backups whitelist metadata and per-person send history does not affect other recipients',async()=>{
+ const {validateIndex,suggestions,mergeIndexes}=await import('../shared/link-index.mjs');
+ const raw={schema:'juice-links/1',profiles:[{id:'p1',name:'Mark'},{id:'p2',name:'Mimi'}],links:[{id:'l1',url:'https://example.org',title:'Music',note:'For you',category:'other',profileIds:['p1','p2'],photo:'do not persist'}],sent:[{linkId:'l1',profileId:'p1',at:'2026-09-22T00:00:00Z'}],photo:'secret'};
+ const clean=validateIndex(raw);assert.ok(!JSON.stringify(clean).includes('photo'));assert.equal(suggestions(clean,{profileId:'p1'}).length,0);assert.equal(suggestions(clean,{profileId:'p2'}).length,1);
+ assert.deepEqual(mergeIndexes(clean,clean),clean);assert.throws(()=>validateIndex({...raw,links:[{...raw.links[0],url:'javascript:alert(1)'}]}));
+});
