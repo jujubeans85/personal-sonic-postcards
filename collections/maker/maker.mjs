@@ -1,4 +1,5 @@
-import {saveProject,listProjects,getProject,removeProject} from './project-shelf.mjs';
+import {documentIdentity,nextDocument,documentFilename,shelfLabel} from '../../shared/project-document.mjs?v=identity1';
+import {saveProject,listProjects,getProject,removeProject} from './project-shelf.mjs?v=identity1';
 import {clearLetteringCache} from '../../shared/lettering-finishes.mjs';
 import {mountLinkLibrary} from './link-library.mjs';
 import {loadHandwriting} from '../../shared/handwriting.mjs?v=back5';
@@ -71,13 +72,26 @@ $('collection-link').onclick=()=>{remember();const u=new URL('../',location.href
 mountLinkLibrary({getURL:()=>project.qrURL,useURL:url=>{remember();Object.assign(project,{qrEnabled:true,qrURL:url,qrSide:'back',sides:'both'});$('view').value='back';sync();paint();}});
 function download(blob,name){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);}
 const dataURL=blob=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=()=>rej(Error('Could not read photo.'));r.readAsDataURL(blob);});
-let shelfId=null;
-async function refreshShelf(){try{const rows=await listProjects();$('saved-projects').replaceChildren(new Option('Choose a saved project',''),...rows.map(r=>new Option(r.name+' · '+new Date(r.updated).toLocaleDateString(),r.id)));if(shelfId)$('saved-projects').value=shelfId;}catch(e){$('shelf-status').textContent='Project shelf unavailable: '+e.message;}}
-$('save').onclick=async()=>{stopSpeech();$('save').disabled=true;try{const saved={project:validateProject(project),photo:original?await dataURL(original):null},blob=new Blob([JSON.stringify(saved)],{type:'application/json'});download(blob,'postcard.juicecard');try{shelfId=await saveProject({id:shelfId,name:$('project-name').value.trim()||project.title||project.recipient||'Untitled postcard',blob});await refreshShelf();say('Saved to this device’s project shelf and downloaded a backup.');}catch(e){say('Backup downloaded, but the device shelf could not save: '+e.message);}}catch(e){say(e.message);}finally{$('save').disabled=false;}};
+let shelfId=null,currentDocument=null;
+async function refreshShelf(){try{const rows=await listProjects();$('saved-projects').replaceChildren(new Option('Choose a saved project',''),...rows.map(r=>new Option(shelfLabel(r),r.id)));if(shelfId)$('saved-projects').value=shelfId;}catch(e){$('shelf-status').textContent='Project shelf unavailable: '+e.message;}}
+async function saveVersion(newCopy=false){
+ if(busy)return;stopSpeech();busy=true;
+ const controls=[...document.querySelectorAll('main input,main select,main textarea,main button,#undo')],disabled=controls.map(e=>e.disabled);controls.forEach(e=>e.disabled=true);
+ try{
+  const saved={project:validateProject(project),photo:original?await dataURL(original):null};
+  const name=$('project-name').value.trim()||currentDocument?.name||project.title||project.recipient||'Untitled postcard';
+  const document=nextDocument(currentDocument,name,{newCopy});saved.document=document;
+  const blob=new Blob([JSON.stringify(saved)],{type:'application/json'});download(blob,documentFilename(document));currentDocument=document;
+  try{shelfId=await saveProject({id:document.revision,name:document.name,blob,document});await refreshShelf();say('New version saved to this browser’s project shelf and downloaded. Put the file in iCloud Drive / CRATE JUICE / POSTCARDS / PROJECTS to use it on your other devices. Earlier versions are kept.');}
+  catch(e){say('Version downloaded, but this browser’s shelf could not save: '+e.message);}
+ }catch(e){say(e.message);}finally{busy=false;controls.forEach((e,i)=>e.disabled=disabled[i]);}
+}
+$('save').onclick=()=>saveVersion();$('save-copy').onclick=()=>saveVersion(true);
 async function openProject(file,id=null,name=''){stopSpeech();const n=++generation;try{
  if(file.size>18*1024*1024)throw Error('Project exceeds the 18 MiB import limit.');const data=JSON.parse(await file.text());const next=validateProject(data.project);let blob=null,img=null;
  if(data.photo!==null){if(typeof data.photo!=='string'||!/^data:image\/(jpeg|png|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(data.photo))throw Error('Project photo must be an embedded supported image.');const [head,body]=data.photo.split(',');const bytes=Uint8Array.from(atob(body),c=>c.charCodeAt(0));blob=new Blob([bytes],{type:head.slice(5,head.indexOf(';'))});img=await decode(blob);}
- if(n!==generation)return;stopSpeech();project=next;image=img;original=blob;prepared=null;shelfId=id;$('project-name').value=name;history.length=0;$('undo').disabled=true;sync();paint();
+ const identity=await documentIdentity(data,name||file.name?.replace(/\.juicecard(?:\.json)?$/i,''));
+ if(n!==generation)return;stopSpeech();project=next;image=img;original=blob;prepared=null;shelfId=id;currentDocument=identity;$('project-name').value=identity.name;history.length=0;$('undo').disabled=true;sync();paint();
  }catch(e){if(n===generation)say('Project not opened: '+e.message+' Current work kept.');}}
 $('open').onchange=async()=>{const file=$('open').files[0];if(file)await openProject(file);$('open').value='';};
 $('reopen-project').onclick=async()=>{try{const row=await getProject($('saved-projects').value);if(row)await openProject(row.blob,row.id,row.name);else $('shelf-status').textContent='Choose a saved project first.';}catch(e){$('shelf-status').textContent=e.message;}};
@@ -85,7 +99,7 @@ $('remove-project').onclick=async()=>{const id=$('saved-projects').value;if(!id)
 refreshShelf();
 function rendered(p,side,bleed=0){const size=dimensions(p,300,bleed);if(size.width*size.height>13000000)throw Error('Output exceeds 13 megapixels. Reduce dimensions or bleed.');return renderCard(Object.assign(document.createElement('canvas'),size),p,photoFor(),side,qrFor(p),bleed);}
 const png=c=>new Promise((res,rej)=>c.toBlob(b=>b?res(b):rej(Error('PNG export failed.')),'image/png'));
-async function guarded(fn){if(!valid||busy)return;cancelAnimationFrame(paintFrame);paint();if(!valid)return;stopSpeech();busy=true;paint();const controls=[...document.querySelectorAll('.controls input,.controls select,.controls button,.controls textarea,#view,#view-front,#view-back,#undo,#save,#preview-photo')];const disabled=controls.map(el=>el.disabled);controls.forEach(el=>el.disabled=true);try{await fn({...project});}catch(e){if(e.name!=='AbortError')say(e.message);}finally{busy=false;controls.forEach((el,i)=>el.disabled=disabled[i]);for(const id of ['png','share','pdf','print'])$(id).disabled=!valid;}}
+async function guarded(fn){if(!valid||busy)return;cancelAnimationFrame(paintFrame);paint();if(!valid)return;stopSpeech();busy=true;paint();const controls=[...document.querySelectorAll('.controls input,.controls select,.controls button,.controls textarea,#view,#view-front,#view-back,#undo,#save,#save-copy,#preview-photo')];const disabled=controls.map(el=>el.disabled);controls.forEach(el=>el.disabled=true);try{await fn({...project});}catch(e){if(e.name!=='AbortError')say(e.message);}finally{busy=false;controls.forEach((el,i)=>el.disabled=disabled[i]);for(const id of ['png','share','pdf','print'])$(id).disabled=!valid;}}
 $('png').onclick=()=>guarded(async p=>{download(await png(rendered(p,$('view').value)),`postcard-${$('view').value}.png`);say('PNG saved. Use PDF when exact print dimensions matter.');});
 $('share').onclick=()=>guarded(async p=>{const file=new File([await png(rendered(p,$('view').value))],`postcard-${$('view').value}.png`,{type:'image/png'});if(navigator.canShare?.({files:[file]})){try{await navigator.share({files:[file],title:'Postcard'});}catch(e){if(e.name==='AbortError')return;download(file,file.name);say('Sharing was unavailable; PNG downloaded instead.');}}else{download(file,file.name);say('File sharing is unavailable here; PNG downloaded instead.');}});
 async function pdfBytes(p){
@@ -109,6 +123,6 @@ $('print').onclick=()=>guarded(async p=>{
  let loaded=0;for(const side of sides){const c=rendered(p,side),img=win.document.createElement('img');img.alt='Postcard '+side;img.dataset.side=side;img.style.width=p.width+'mm';img.style.height=p.height+'mm';img.onload=()=>{if(++loaded===sides.length){win.focus();win.print();}};img.src=c.toDataURL('image/png');win.document.body.append(img);}
 
 });
-window.addEventListener('pagehide',()=>{clearLetteringCache();cancelAnimationFrame(paintFrame);generation++;thumbKey='';lastPreviewSide=null;previewNeedsText=false;image=original=prepared=null;history.length=0;project=defaults();$('preview').width=0;for(const c of $('styles').querySelectorAll('canvas'))c.width=0;});
+window.addEventListener('pagehide',()=>{clearLetteringCache();cancelAnimationFrame(paintFrame);generation++;thumbKey='';lastPreviewSide=null;previewNeedsText=false;image=original=prepared=null;history.length=0;currentDocument=null;shelfId=null;project=defaults();$('preview').width=0;for(const c of $('styles').querySelectorAll('canvas'))c.width=0;});
 window.addEventListener('pageshow',()=>{sync();paint();});
 sync();paint();
