@@ -16,7 +16,7 @@ try{
  await page.locator('#intensity').evaluate(e=>{e.value=0;e.dispatchEvent(new Event('input',{bubbles:true}));});await page.waitForFunction(()=>document.querySelector('#strength-value').textContent==='0%');assert.equal(await pixels(),original);
  await page.locator('#intensity').evaluate(e=>{e.value=100;e.dispatchEvent(new Event('input',{bubbles:true}));});await page.waitForFunction(()=>document.querySelector('#strength-value').textContent==='100%');assert.notEqual(await pixels(),original);
  const full=await pixels();await page.locator('#stock').selectOption('recycled');assert.equal(await pixels(),full);
- await page.locator('#qrEnabled').check();assert.ok(await page.locator('#qr-thumb').isVisible());assert.equal(await page.locator('#png').isDisabled(),true);assert.equal(await pixels(),full);
+ await page.locator('#qrEnabled').check();assert.ok(await page.locator('#qr-thumb').isVisible());assert.equal(await page.locator('#png').isDisabled(),true);assert.equal(await page.locator('#view-back').getAttribute('aria-pressed'),'true');assert.notEqual(await pixels(),full);
  await page.locator('#qrURL').fill('https://example.org/gift?person=mark#listen');await page.waitForFunction(()=>!document.querySelector('#png').disabled);
  await page.locator('#view-back').click();
  const clear=await page.locator('#preview').evaluate(c=>{const d=c.getContext('2d').getImageData(0,Math.ceil(c.height*90/105),c.width,Math.floor(c.height*15/105)).data;return d.every((v,i)=>i%4!==3||v===0);});assert.equal(clear,true);

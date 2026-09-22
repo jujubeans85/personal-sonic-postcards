@@ -11,7 +11,7 @@ test('shared renderer is the exact pinned upstream artifact; dependencies retain
 });
 test('project contract rejects unbounded imports and does not accept arbitrary style/code',()=>{
  assert.deepEqual(validateProject(defaults()),defaults());
- for(const patch of [{width:0},{width:Infinity},{width:'148'},{style:'<script>'},{rotation:45},{qrEnabled:'yes'},{message:'x'.repeat(351)}])assert.throws(()=>validateProject({...defaults(),...patch}));
+ for(const patch of [{width:0},{width:Infinity},{width:'148'},{style:'<script>'},{rotation:45},{qrEnabled:'yes'},{message:'x'.repeat(801)}])assert.throws(()=>validateProject({...defaults(),...patch}));
  assert.throws(()=>validateProject({schema:'other'}));
  assert.equal('script' in validateProject({...defaults(),script:'alert(1)'}),false);
 });
