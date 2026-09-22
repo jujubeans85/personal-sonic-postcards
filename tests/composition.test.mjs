@@ -11,7 +11,7 @@ test('shared renderer is the exact pinned upstream artifact; dependencies retain
 });
 test('project contract rejects unbounded imports and does not accept arbitrary style/code',()=>{
  assert.deepEqual(validateProject(defaults()),defaults());
- for(const patch of [{width:0},{width:Infinity},{width:'148'},{style:'<script>'},{rotation:45},{qrEnabled:'yes'},{message:'x'.repeat(351)}])assert.throws(()=>validateProject({...defaults(),...patch}));
+ for(const patch of [{width:0},{width:Infinity},{width:'148'},{style:'<script>'},{rotation:45},{qrEnabled:'yes'},{message:'x'.repeat(801)}])assert.throws(()=>validateProject({...defaults(),...patch}));
  assert.throws(()=>validateProject({schema:'other'}));
  assert.equal('script' in validateProject({...defaults(),script:'alert(1)'}),false);
 });
@@ -33,7 +33,7 @@ test('upstream renderer executes cover, contain, wash and transparency without s
  scope.JuiceComposition.drawBackground(ctx,{image:{width:100,height:100},fit:'contain'});assert.deepEqual(calls[1].slice(1),[50,0,100,100]);
  scope.JuiceComposition.drawBackground(ctx,{transparent:true});assert.equal(calls.length,2);
 });
-test('maker disables network connections and contains no persistence or network photo path',()=>{
+test('maker disables network connections and keeps photo storage behind the explicit project shelf',()=>{
  const html=readFileSync(new URL('../collections/maker/index.html',import.meta.url),'utf8');assert.match(html,/connect-src 'none'/);
  const src=readFileSync(new URL('../collections/maker/maker.mjs',import.meta.url),'utf8');assert.doesNotMatch(src,/localStorage|sessionStorage|indexedDB|fetch\(|XMLHttpRequest|sendBeacon|\.openStore\(|\.transact\(/);
  assert.match(src,/pagehide/);assert.match(src,/revokeObjectURL/);

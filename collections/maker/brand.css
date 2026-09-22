@@ -1,4 +1,4 @@
 /* Cans identity source: jujubeans85/chlomim studio/styles.css and IMG_0511.jpeg.
    Central tokens for this consumer. The train is interface-only, never print artwork. */
-:root{--cream:#fff2df;--copper:#bd7046;--rust:#eaae79;--glass:rgba(53,29,18,.88);--line:#bd805b;--muted:#ead2ba;--heading:'Marker Felt','Chalkboard SE',cursive;--touch:58px}
-.train-bg{position:fixed;inset:0;z-index:-1;background:linear-gradient(#22130955,#22130988),url('assets/train.jpeg') center/cover no-repeat;pointer-events:none}
+:root{--cream:#fff2df;--copper:#bd7046;--rust:#eaae79;--glass:rgba(19,25,27,.57);--line:#c5b39c;--muted:#eee4d6;--heading:'Marker Felt','Chalkboard SE',cursive;--touch:58px}
+.train-bg{position:fixed;inset:0;z-index:-1;background:linear-gradient(#10151922,#10151966),url('assets/train.jpeg') center/cover no-repeat;pointer-events:none}

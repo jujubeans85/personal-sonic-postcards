@@ -29,7 +29,7 @@ export function validateProject(input) {
   if(choices[k]) {if(!choices[k].includes(input[k]))throw Error(`Invalid ${k}.`);p[k]=input[k];}
   else if(ranges[k]) {const n=input[k];if(typeof n!=='number'||!Number.isFinite(n)||n<ranges[k][0]||n>ranges[k][1])throw Error(`Invalid ${k}.`);p[k]=n;}
   else if(typeof v==='boolean') {if(typeof input[k]!=='boolean')throw Error(`Invalid ${k}.`);p[k]=input[k];}
-  else {if(typeof input[k]!=='string'||input[k].length>(k==='qrURL'?1500:['message','address','returnAddress'].includes(k)?350:100))throw Error(`Invalid ${k}.`);p[k]=input[k];}
+  else {if(typeof input[k]!=='string'||input[k].length>(k==='qrURL'?1500:k==='message'?800:['message','address','returnAddress'].includes(k)?350:100))throw Error(`Invalid ${k}.`);p[k]=input[k];}
  }
  if(p.rotation%90)throw Error('Rotation must be a quarter turn.');
  return p;
