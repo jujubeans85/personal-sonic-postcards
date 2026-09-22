@@ -1,6 +1,6 @@
 import {drawFinishedLettering} from './lettering-finishes.mjs';
-import {drawHandwriting} from './handwriting.mjs';
-import {styles,cropRect} from './postcard-project.mjs';
+import {drawHandwriting} from './handwriting.mjs?v=back5';
+import {styles,cropRect} from './postcard-project.mjs?v=back5';
 import {treatPixels,floydBits} from './photo-treatments.mjs';
 const canvas=(w,h)=>Object.assign(document.createElement('canvas'),{width:Math.max(1,Math.round(w)),height:Math.max(1,Math.round(h))});
 const caches=new WeakMap();

@@ -1,9 +1,9 @@
 import {saveProject,listProjects,getProject,removeProject} from './project-shelf.mjs';
 import {clearLetteringCache} from '../../shared/lettering-finishes.mjs';
 import {mountLinkLibrary} from './link-library.mjs';
-import {loadHandwriting} from '../../shared/handwriting.mjs';
-import {defaults,styles,visibleStyles,validateProject,qrDestination,outputSides,dimensions,VERSION,cropRect} from '../../shared/postcard-project.mjs';
-import {preparedPhoto,renderCard,drawQR} from '../../shared/postcard-renderer.mjs?v=back4';
+import {loadHandwriting} from '../../shared/handwriting.mjs?v=back5';
+import {defaults,styles,visibleStyles,validateProject,qrDestination,outputSides,dimensions,VERSION,cropRect} from '../../shared/postcard-project.mjs?v=back5';
+import {preparedPhoto,renderCard,drawQR} from '../../shared/postcard-renderer.mjs?v=back5';
 import {shareURL} from '../../shared/postcard-catalog.mjs';
 const $=id=>document.getElementById(id);
 let project={...defaults(),font:'adam-capture03',lettering:'outline',width:150,postal:true,sides:'both'},image=null,original=null,prepared=null,generation=0,valid=false,busy=false;
@@ -105,7 +105,7 @@ $('pdf').onclick=()=>guarded(async p=>{download(new Blob([await pdfBytes(p)],{ty
 $('print').onclick=()=>guarded(async p=>{
  // A separate local document isolates print dimensions from the gallery and UI.
  if(p.width>190||p.height>277)throw Error('This card does not fit home A4 with margins. Save the custom-page PDF instead.');const win=window.open('','_blank');if(!win){throw Error('Pop-up blocked. Save the print PDF and print it instead.');}
- const sides=outputSides(p);win.document.open();win.document.write('<!doctype html><title>Print postcard</title><link rel="stylesheet" href="'+new URL('print.css?v=back4',location.href).href+'"><p>Print at actual size / 100%. Front and back are separate pages; proof duplex alignment first.</p>');win.document.close();
+ const sides=outputSides(p);win.document.open();win.document.write('<!doctype html><title>Print postcard</title><link rel="stylesheet" href="'+new URL('print.css?v=back5',location.href).href+'"><p>Print at actual size / 100%. Front and back are separate pages; proof duplex alignment first.</p>');win.document.close();
  let loaded=0;for(const side of sides){const c=rendered(p,side),img=win.document.createElement('img');img.alt='Postcard '+side;img.dataset.side=side;img.style.width=p.width+'mm';img.style.height=p.height+'mm';img.onload=()=>{if(++loaded===sides.length){win.focus();win.print();}};img.src=c.toDataURL('image/png');win.document.body.append(img);}
 
 });
