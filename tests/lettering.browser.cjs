@@ -8,6 +8,21 @@ try{
  const renders=[];for(const name of ['original','outline','inflated','worn']){await page.locator(`[data-lettering=${name}]`).click();renders.push(await page.locator('#preview').evaluate(c=>c.toDataURL()));}assert.equal(new Set(renders).size,4);
  await page.locator('#view-front').click();const before=await page.locator('#preview').evaluate(c=>c.toDataURL());await page.locator('#message').fill('HELLO 🦄');await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('no capture'));assert.equal(await page.locator('#preview').evaluate(c=>c.toDataURL()),before);assert.match(await page.locator('#status').innerText(),/Back text/);assert.ok(await page.locator('#png').isDisabled());
  await page.locator('#view-back').click();assert.match(await page.locator('#preview-state').innerText(),/Back draft/);await page.locator('#message').fill('LOVE YOU');await page.waitForFunction(()=>!document.querySelector('#png').disabled);assert.match(await page.locator('#preview-state').innerText(),/Back preview/);
+ // Postal handwriting must reclaim accidental blank rows before declaring overflow.
+ const fitting=await page.evaluate(async()=>{
+  const {renderCard}=await import('/shared/postcard-renderer.mjs?v=textfit1');
+  const {defaults}=await import('/shared/postcard-project.mjs?v=back5');
+  const message='\nYou have always been a hero to me. This is a small keepsake to remind you that you have been and still are a hero to countless others !!!\n\nLove you\n\nAlex\n';
+  const p={...defaults(),width:150,height:105,postal:true,font:'adam-capture03',lettering:'inflated',message,recipient:'My friend',signature:'23-09-26',qrSide:'back'};
+  const qr={getModuleCount:()=>57,isDark:(r,c)=>(r+c)%2===0};
+  return [900,1772].map(width=>{
+   const c=Object.assign(document.createElement('canvas'),{width,height:Math.round(width*105/150)}),errors=[];
+   renderCard(c,p,null,'back',qr,0,errors);const withMessage=c.toDataURL(),fits=c.textFits;
+   renderCard(c,{...p,message:''},null,'back',qr);
+   return {errors,fits,hasInk:withMessage!==c.toDataURL(),unchanged:p.message===message};
+  });
+ });
+ for(const result of fitting){assert.deepEqual(result.errors,[]);assert.ok(result.hasInk);assert.ok(result.unchanged);assert.ok(result.fits.some(x=>x.startsWith('Message:')));}
  const bounds=await page.locator('#view-back').boundingBox();assert.ok(bounds.height>=64);assert.ok(bounds.width>120);
  await page.locator('#qrEnabled').check();await page.locator('#qrURL').fill('https://example.org');await page.waitForFunction(()=>!document.querySelector('#png').disabled);
  const goodBack=await page.locator('#preview').evaluate(c=>{const x=c.getContext('2d');return Array.from(x.getImageData(0,c.height*.6,c.width*.45,c.height*.25).data);});await page.locator('#message').fill('HELLO 🦄');await page.waitForFunction(()=>document.querySelector('#preview-state').textContent.includes('Back draft'));assert.deepEqual(await page.locator('#preview').evaluate(c=>Array.from(c.getContext('2d').getImageData(0,c.height*.6,c.width*.45,c.height*.25).data)),goodBack);assert.ok(await page.locator('#png').isDisabled());await page.locator('#message').fill('LOVE YOU');await page.waitForFunction(()=>!document.querySelector('#png').disabled);

@@ -4,7 +4,7 @@ import {clearLetteringCache} from '../../shared/lettering-finishes.mjs';
 import {mountLinkLibrary} from './link-library.mjs';
 import {loadHandwriting} from '../../shared/handwriting.mjs?v=back5';
 import {defaults,styles,visibleStyles,validateProject,qrDestination,outputSides,dimensions,VERSION,cropRect} from '../../shared/postcard-project.mjs?v=back5';
-import {preparedPhoto,renderCard,drawQR} from '../../shared/postcard-renderer.mjs?v=back5';
+import {preparedPhoto,renderCard,drawQR} from '../../shared/postcard-renderer.mjs?v=textfit1';
 import {shareURL} from '../../shared/postcard-catalog.mjs';
 const $=id=>document.getElementById(id);
 let project={...defaults(),font:'adam-capture03',lettering:'outline',width:150,postal:true,sides:'both'},image=null,original=null,prepared=null,generation=0,valid=false,busy=false;
