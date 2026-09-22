@@ -1,3 +1,4 @@
+import {drawFinishedLettering} from './lettering-finishes.mjs';
 import {drawHandwriting} from './handwriting.mjs';
 import {styles,cropRect} from './postcard-project.mjs';
 import {treatPixels,floydBits} from './photo-treatments.mjs';
@@ -60,7 +61,8 @@ export function postalGeometry(p){
  return {divider:p.width-80,addressX:p.width-65,addressWidth:50,bottom:p.height-15};
 }
 export function renderCard(target,p,photo,side,qr=null,bleed=0){
- const write=(ctx,...args)=>p.font&&p.font!=='preset'?drawHandwriting(ctx,...args,p.font):lines(ctx,...args);
+ const raw=(ctx,...args)=>p.font&&p.font!=='preset'?drawHandwriting(ctx,...args,p.font):lines(ctx,...args);raw.face=p.font;
+ const write=(ctx,text,x,y,width,lineHeight,maxLines)=>{const ink=ctx.fillStyle;ctx.fillStyle=p.bw?'#222':'#67412e';drawFinishedLettering(ctx,text,x,y,width,lineHeight,maxLines,p.lettering,unit,raw);ctx.fillStyle=ink;};
  const ctx=target.getContext('2d'),s=styles[p.style],unit=target.width/(p.width+2*bleed),b=bleed*unit,w=p.width*unit,h=p.height*unit;
  const postal=p.postal?postalGeometry(p):null;
  ctx.clearRect(0,0,target.width,target.height);
@@ -72,7 +74,7 @@ export function renderCard(target,p,photo,side,qr=null,bleed=0){
  }
  const qrHere=qr&&p.qrSide===side,qmm=qrHere?Math.max(22,(qr.getModuleCount()+8)*.4):0;
  if(qrHere&&(qmm+6>p.height||qmm+6>p.width*.48))throw Error('QR is too large for this card/label. Use a larger format or a shorter link.');
- ctx.fillStyle=p.bw?'#111':s.ink;ctx.textBaseline='top';
+ ctx.fillStyle='#222';ctx.textBaseline='top';
  if(side==='front'&&p.title){ctx.font=`${Math.min(5.5,p.height*.065)*unit}px ${s.font}`;write(ctx,p.title,b+m,b+h-m-band*.75,w-2*m-(qrHere?(qmm+3)*unit:0),8*unit,1);}
  let qrX=b+w-3*unit-qmm*unit,qrY=b+h-3*unit-qmm*unit;
  if(side==='back'&&postal){
