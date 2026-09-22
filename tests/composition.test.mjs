@@ -70,3 +70,12 @@ test('index backups whitelist metadata and per-person send history does not affe
  const clean=validateIndex(raw);assert.ok(!JSON.stringify(clean).includes('photo'));assert.equal(suggestions(clean,{profileId:'p1'}).length,0);assert.equal(suggestions(clean,{profileId:'p2'}).length,1);
  assert.deepEqual(mergeIndexes(clean,clean),clean);assert.throws(()=>validateIndex({...raw,links:[{...raw.links[0],url:'javascript:alert(1)'}]}));
 });
+
+test('lettering finishes hollow the interior, distress deterministically, and preserve original masks',async()=>{
+ const {finishAlpha}=await import('../shared/lettering-finishes.mjs');
+ const w=30,a=new Uint8ClampedArray(w*w);for(let y=7;y<23;y++)for(let x=7;x<23;x++)a[y*w+x]=255;
+ const orig=finishAlpha(a,w,w,'original'),outline=finishAlpha(a,w,w,'outline'),inflated=finishAlpha(a,w,w,'inflated'),worn=finishAlpha(a,w,w,'worn');
+ assert.deepEqual(orig,a);assert.equal(outline[15*w+15],0);assert.equal(inflated[15*w+15],0);assert.ok(inflated[5*w+15]>0);assert.equal(outline[5*w+15],0);
+ assert.ok(outline.reduce((a,b)=>a+b,0)<orig.reduce((a,b)=>a+b,0));assert.ok(worn.reduce((a,b)=>a+b,0)<orig.reduce((a,b)=>a+b,0));assert.deepEqual(worn,finishAlpha(a,w,w,'worn'));
+ assert.throws(()=>validateProject({...defaults(),lettering:'random'}));
+});

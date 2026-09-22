@@ -1,0 +1,1 @@
+main.proof{display:block;max-width:1160px}#proofs{display:grid;grid-template-columns:1fr 1fr;gap:22px}#proofs canvas{width:100%;background:#e4d6b6;border-radius:8px}#proofs section{margin:0}#proofs h2{margin-bottom:16px}@media(max-width:700px){#proofs{grid-template-columns:1fr}}

@@ -35,7 +35,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=r
  await page.locator('#sides').selectOption('both');await page.locator('#recipient').fill('For Mimi');await page.locator('#recipient').dispatchEvent('change');
  await page.locator('#message').fill('Some words arrive before you are ready for them.');await page.locator('#message').dispatchEvent('change');
  await page.locator('#qrEnabled').check();await page.locator('#collection-link').click();assert.equal(await page.locator('#qrURL').inputValue(),base+'/collections/?t=vintage-3');
- await page.locator('#view').selectOption('back');assert.equal(await page.locator('#status').innerText(),'');
+ await page.locator('#view-back').click();assert.equal(await page.locator('#status').innerText(),'');
  async function download(id,name){const wait=page.waitForEvent('download');await page.locator('#'+id).click();const d=await wait;const out=path.join(process.env.QA_OUTPUT||'/tmp',name);await d.saveAs(out);return out;}
  const saved=await download('save','postcard-test.juicecard'),savedData=JSON.parse(await fs.readFile(saved,'utf8'));assert.equal(savedData.project.style,'deco');assert.equal(savedData.project.font,'adam-capture03');assert.deepEqual(Buffer.from(savedData.photo.split(',')[1],'base64'),await fs.readFile(photo));
  const beforeReopen=await page.locator('#preview').evaluate(c=>c.toDataURL());
@@ -61,7 +61,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=r
  await page.locator('#photo').setInputFiles({name:'bad.png' ,mimeType:'image/png',buffer:Buffer.from('bad')});await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Previous photo kept'));assert.match(await page.locator('#quality').innerText(),/DPI/);
  await page.locator('#open').setInputFiles({name:'bad.juicecard',mimeType:'application/json',buffer:Buffer.from(JSON.stringify({project:{schema:'other'}}))});await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Current work kept'));
  await page.locator('#qrURL').fill('javascript:alert(1)');await page.locator('#qrURL').dispatchEvent('change');await page.waitForFunction(()=>document.querySelector('#png').disabled);assert.equal(await page.locator('#png').isDisabled(),true);
- await page.locator('#collection-link').click();await page.locator('#view').selectOption('front');
+ await page.locator('#collection-link').click();await page.locator('#view-front').click();
  await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:path.join(process.env.QA_OUTPUT||'/tmp','postcard-desktop.png')});
  await page.setViewportSize({width:390,height:844});await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:path.join(process.env.QA_OUTPUT||'/tmp','postcard-mobile.png')});assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
  await page.reload();assert.match(await page.locator('#quality').innerText(),/No photo/);assert.equal(await page.locator('#recipient').inputValue(),'');

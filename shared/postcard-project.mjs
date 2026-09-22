@@ -18,8 +18,8 @@ export const styles = {
  worn: {label:'Worn', paper:'#e9d8b6', ink:'#4a4235', accent:'#968567', sat:.5, sepia:.55, contrast:.85, grain:.25, font:'Georgia'}
 };
 export const visibleStyles = ['deco','urban','floyde','worn'];
-export const defaults = () => ({schema:VERSION, font:'preset', style:'original', intensity:80, width:148, height:105, sides:'front', photoSide:'front', fit:'cover', rotation:0, zoom:1, panX:0, panY:0, border:5, title:'', recipient:'', message:'', signature:'', qrEnabled:false, qrURL:'', qrSide:'back', output:'a4', bleed:0, bw:false, stock:'white', marks:true, postal:false, address:'', returnAddress:''});
-const choices={font:['preset','adam-original','adam-capture03'],style:Object.keys(styles),sides:['front','back','both'],photoSide:['front','back','both'],fit:['cover','contain'],qrSide:['front','back'],output:['a4','card','label'],stock:['white','recycled']};
+export const defaults = () => ({schema:VERSION, font:'preset', lettering:'original', style:'original', intensity:80, width:148, height:105, sides:'front', photoSide:'front', fit:'cover', rotation:0, zoom:1, panX:0, panY:0, border:5, title:'', recipient:'', message:'', signature:'', qrEnabled:false, qrURL:'', qrSide:'back', output:'a4', bleed:0, bw:false, stock:'white', marks:true, postal:false, address:'', returnAddress:''});
+const choices={lettering:['original','outline','inflated','worn'],font:['preset','adam-original','adam-capture03'],style:Object.keys(styles),sides:['front','back','both'],photoSide:['front','back','both'],fit:['cover','contain'],qrSide:['front','back'],output:['a4','card','label'],stock:['white','recycled']};
 const ranges={intensity:[0,100],width:[25,297],height:[25,297],rotation:[0,270],zoom:[1,3],panX:[-100,100],panY:[-100,100],border:[0,15],bleed:[0,5]};
 export function validateProject(input) {
  if(!input || input.schema!==VERSION) throw Error('This is not a supported JUICE postcard project.');

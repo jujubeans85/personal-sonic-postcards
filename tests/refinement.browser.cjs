@@ -18,7 +18,7 @@ try{
  const full=await pixels();await page.locator('#stock').selectOption('recycled');assert.equal(await pixels(),full);
  await page.locator('#qrEnabled').check();assert.ok(await page.locator('#qr-thumb').isVisible());assert.equal(await page.locator('#png').isDisabled(),true);assert.equal(await pixels(),full);
  await page.locator('#qrURL').fill('https://example.org/gift?person=mark#listen');await page.waitForFunction(()=>!document.querySelector('#png').disabled);
- await page.locator('#view').selectOption('back');
+ await page.locator('#view-back').click();
  const clear=await page.locator('#preview').evaluate(c=>{const d=c.getContext('2d').getImageData(0,Math.ceil(c.height*90/105),c.width,Math.floor(c.height*15/105)).data;return d.every((v,i)=>i%4!==3||v===0);});assert.equal(clear,true);
  if(process.env.QR_DECODER_MODULE){const jsQR=require(process.env.QR_DECODER_MODULE);const data=await page.locator('#qr-thumb').evaluate(c=>{const copy=document.createElement('canvas');copy.width=c.width;copy.height=c.height;const x=copy.getContext('2d');x.fillStyle='white';x.fillRect(0,0,copy.width,copy.height);x.drawImage(c,0,0);return {pixels:Array.from(x.getImageData(0,0,c.width,c.height).data),w:c.width,h:c.height};});assert.equal(jsQR(Uint8ClampedArray.from(data.pixels),data.w,data.h).data,'https://example.org/gift?person=mark#listen');}
  assert.equal(await page.evaluate(()=>localStorage.length),0);
