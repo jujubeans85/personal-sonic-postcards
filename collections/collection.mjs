@@ -14,6 +14,7 @@ function show(slug) {
   $('status').textContent = current ? '' : 'That postcard is not in this collection. Choose one below.';
   if (!current) { choice.value = ''; $('audio').removeAttribute('src'); $('audio').load(); return; }
   choice.value = current.slug;
+  $('make-card').href = 'maker/?t=' + encodeURIComponent(current.slug);
   $('card-title').textContent = current.title;
   $('front').src = current.front; $('back').src = current.back; $('audio').src = current.audio;
 }

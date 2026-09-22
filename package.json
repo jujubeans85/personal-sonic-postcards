@@ -1,0 +1,9 @@
+{
+  "name": "personal-sonic-postcards",
+  "private": true,
+  "scripts": {
+    "test": "node --test tests/batch-02.test.cjs tests/batch-03.test.mjs tests/composition.test.mjs",
+    "test:browser": "node tests/composition.browser.cjs"
+  },
+  "devDependencies": { "playwright": "1.62.1" }
+}

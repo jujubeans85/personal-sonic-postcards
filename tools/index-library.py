@@ -19,6 +19,8 @@ def build(source, output):
         raise ValueError('Media directory does not exist')
     if output.exists() or output.is_symlink():
         raise FileExistsError('Choose a new output directory; existing catalogues are never overwritten')
+    # Resolve parent aliases (macOS /var -> /private/var) before computing relative URLs.
+    output = output.parent.resolve() / output.name
     if not output.parent.is_dir():
         raise ValueError('Output parent directory must already exist')
     tracks = []
